@@ -193,40 +193,100 @@ a{color:#2F5BEA}a:hover{color:#1E40AF}
 <div style="display: flex; flex-direction: column; gap: 6px">
 <label for="{{ f.id }}" style="font-size: 13px; font-weight: 600; color: #2A313C">{{ f.label }}</label>
 <sc-if value="{{ f.isDate }}" hint-placeholder-val="{{ false }}"><input id="{{ f.id }}" type="date" value="{{ f.value }}" onChange="{{ f.set }}" style="width: 100%; min-height: 44px; padding: 0 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"></sc-if>
-<sc-if value="{{ f.isDept }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>All departments</option><option>Electrical</option><option>Plumbing</option><option>AC &amp; HVAC</option><option>Civil &amp; Carpentry</option><option>Lift</option><option>Fire Safety</option><option>CCTV &amp; Access Control</option><option>BMS</option><option>Generator &amp; UPS</option><option>Housekeeping &amp; General</option></select></sc-if>
-<sc-if value="{{ f.isCat }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>All categories</option><option>Electrical</option><option>Plumbing</option><option>AC &amp; HVAC</option><option>Civil &amp; Carpentry</option><option>Lift</option><option>Fire Safety</option><option>CCTV &amp; Access Control</option><option>BMS</option><option>Generator &amp; UPS</option><option>Housekeeping &amp; General</option></select></sc-if>
-<sc-if value="{{ f.isPrio }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>All priorities</option><option>High</option><option>Medium</option><option>Low</option></select></sc-if>
-<sc-if value="{{ f.isTech }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>All technicians</option><option>Ramesh Patel</option><option>Imran Shaikh</option><option>Suresh Rathod</option><option>Vikram Solanki</option><option>Mahesh Parmar</option><option>Arjun Desai</option><option>Kalpesh Joshi</option><option>Nilesh Chauhan</option></select></sc-if>
-<sc-if value="{{ f.isMonth }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>November 2026</option><option>October 2026</option><option>September 2026</option><option>August 2026</option></select></sc-if>
-<sc-if value="{{ f.isEquip }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>PAC-1 precision AC, Server Room</option><option>DG set 250 kVA</option><option>Lift L1 (passenger)</option><option>Lift L2 (passenger)</option><option>AHU-1</option><option>UPS 40 kVA</option></select></sc-if>
-<sc-if value="{{ f.isVendor }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>All vendors</option><option>Kesar Cooling Services</option><option>Sabar Lift Engineers</option><option>Agnirakshak Fire Systems</option><option>Sudarshan Power Systems</option><option>Netra Security Systems</option><option>Sahyog BMS Services</option><option>Jalseva Plumbing Works</option><option>Vishwakarma Civil Works</option></select></sc-if>
+<sc-if value="{{ f.isDept }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" value="{{ f.value }}" onChange="{{ f.set }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>All departments</option><option>Electrical</option><option>Plumbing</option><option>AC &amp; HVAC</option><option>Civil &amp; Carpentry</option><option>Lift</option><option>Fire Safety</option><option>CCTV &amp; Access Control</option><option>BMS</option><option>Generator &amp; UPS</option><option>Housekeeping &amp; General</option></select></sc-if>
+<sc-if value="{{ f.isCat }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" value="{{ f.value }}" onChange="{{ f.set }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>All categories</option><option>Electrical</option><option>Plumbing</option><option>AC &amp; HVAC</option><option>Civil &amp; Carpentry</option><option>Lift</option><option>Fire Safety</option><option>CCTV &amp; Access Control</option><option>BMS</option><option>Generator &amp; UPS</option><option>Housekeeping &amp; General</option></select></sc-if>
+<sc-if value="{{ f.isPrio }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" value="{{ f.value }}" onChange="{{ f.set }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>All priorities</option><option>High</option><option>Medium</option><option>Low</option></select></sc-if>
+<sc-if value="{{ f.isTech }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" value="{{ f.value }}" onChange="{{ f.set }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>All technicians</option><option>Ramesh Patel</option><option>Imran Shaikh</option><option>Suresh Rathod</option><option>Vikram Solanki</option><option>Mahesh Parmar</option><option>Arjun Desai</option><option>Kalpesh Joshi</option><option>Nilesh Chauhan</option></select></sc-if>
+<sc-if value="{{ f.isMonth }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" value="{{ f.value }}" onChange="{{ f.set }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>November 2026</option><option>October 2026</option><option>September 2026</option><option>August 2026</option></select></sc-if>
+<sc-if value="{{ f.isEquip }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" value="{{ f.value }}" onChange="{{ f.set }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>PAC-1 precision AC, Server Room</option><option>DG set 250 kVA</option><option>Lift L1 (passenger)</option><option>Lift L2 (passenger)</option><option>AHU-1</option><option>UPS 40 kVA</option></select></sc-if>
+<sc-if value="{{ f.isVendor }}" hint-placeholder-val="{{ false }}"><select id="{{ f.id }}" value="{{ f.value }}" onChange="{{ f.set }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21"><option>All vendors</option><option>Kesar Cooling Services</option><option>Sabar Lift Engineers</option><option>Agnirakshak Fire Systems</option><option>Sudarshan Power Systems</option><option>Netra Security Systems</option><option>Sahyog BMS Services</option><option>Jalseva Plumbing Works</option><option>Vishwakarma Civil Works</option></select></sc-if>
 </div>
 </sc-for>
 </div>
-<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px">
 <button type="button" onClick="{{ generate }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 1px solid #2F5BEA; border-radius: 10px; background: #2F5BEA; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer">{{ generateLabel }}</button>
+<sc-if value="{{ selStale }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; font-weight: 500; color: #8A5A00">Filters changed. Generate again to update the report below.</span></sc-if>
 </div>
-<sc-if value="{{ selGenerated }}" hint-placeholder-val="{{ false }}">
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 18px 20px; border: 1px solid #B9E1C8; border-radius: 12px; background: #EEF8F2">
-<span aria-hidden="true" style="flex: none; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: #D5EFDF; color: #1C6B3F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
-<div style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 2px">
-<span style="font-weight: 700; color: #1C4D31">Report ready</span>
-<span style="font-size: 13px; color: #1C4D31">{{ sel.name }} · generated 24 Nov 2026, 16:05</span>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 8px">
-<button type="button" onClick="{{ exportPdf }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 14px; font-weight: 600; cursor: pointer">Download PDF</button>
-<button type="button" onClick="{{ exportExcel }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 14px; font-weight: 600; cursor: pointer">Download Excel</button>
-</div>
-</div>
-</sc-if>
 <sc-if value="{{ selNotGenerated }}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 240px; padding: 24px; border: 1px dashed #CDD3DB; border-radius: 12px; background: #F7F8FA; color: #5B6472; text-align: center">
 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5M9 13h6M9 17h6"></path></svg>
 <span style="font-weight: 600; color: #3D4757">Set the filters and generate the report</span>
-<span style="font-size: 13px">It will be ready to download as PDF or Excel.</span>
+<span style="font-size: 13px">The report will appear here, ready to print or export as PDF or Excel.</span>
 </div>
 </sc-if>
 </section>
+
+<sc-if value="{{ selGenerated }}" hint-placeholder-val="{{ false }}">
+<article aria-label="{{ doc.title }} preview" style="display: flex; flex-direction: column; gap: {{ ui.docGap }}; padding: {{ ui.docPad }}; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+
+<header style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 2px solid #11161D">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #5B6472">[Facility name]</span>
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 24px; font-weight: 600; line-height: 1.2; color: #11161D">{{ doc.title }}</h2>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: auto auto; gap: 4px 16px; font-size: 13px">
+<sc-for list="{{ doc.meta }}" as="m" hint-placeholder-count="4"><dt style="color: #5B6472">{{ m.k }}</dt><dd style="margin: 0; font-weight: 600">{{ m.v }}</dd></sc-for>
+</dl>
+</header>
+
+<sc-if value="{{ doc.hasData }}" hint-placeholder-val="{{ true }}">
+<section aria-label="Summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(110px, 100%), 1fr)); gap: 12px">
+<sc-for list="{{ doc.kpis }}" as="k" hint-placeholder-count="5">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 14px; border-radius: 10px; background: {{ k.bg }}"><span style="font-size: 12.5px; font-weight: 600; color: {{ k.labelFg }}">{{ k.label }}</span><span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 26px; font-weight: 600; line-height: 1.1; color: {{ k.valueFg }}">{{ k.value }}</span></div>
+</sc-for>
+</section>
+
+<sc-for list="{{ doc.sections }}" as="s" hint-placeholder-count="2">
+<section aria-labelledby="{{ s.id }}" style="display: flex; flex-direction: column; gap: 10px">
+<h3 id="{{ s.id }}" style="margin: 0; font-size: 15px; font-weight: 700; color: #11161D">{{ s.title }}</h3>
+<sc-if value="{{ s.hasNote }}" hint-placeholder-val="{{ false }}"><p style="margin: -4px 0 0; font-size: 12.5px; color: #5B6472">{{ s.note }}</p></sc-if>
+<div style="overflow-x: auto">
+<div style="min-width: {{ s.minW }}; border: 1px solid #E3E6EB; border-radius: 10px; overflow: hidden">
+<div style="display: grid; grid-template-columns: {{ s.cols }}; gap: 12px; padding: 9px 14px; background: #F7F8FA; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #5B6472">
+<sc-for list="{{ s.head }}" as="h" hint-placeholder-count="5"><span style="text-align: {{ h.align }}">{{ h.t }}</span></sc-for>
+</div>
+<sc-for list="{{ s.rows }}" as="r" hint-placeholder-count="6">
+<div style="display: grid; grid-template-columns: {{ s.cols }}; gap: 12px; align-items: center; padding: 9px 14px; border-top: 1px solid #EEF0F3; font-size: 13.5px">
+<sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="5">
+<sc-if value="{{ c.isText }}" hint-placeholder-val="{{ true }}"><span style="min-width: 0; text-align: {{ c.align }}; color: {{ c.fg }}; font-weight: {{ c.fw }}; font-family: {{ c.ff }}; font-size: {{ c.fs }}">{{ c.t }}<sc-if value="{{ c.hasSub }}" hint-placeholder-val="{{ false }}"><span style="display: block; margin-top: 2px; font-family: Inter, system-ui, sans-serif; font-size: 12.5px; font-weight: 400; color: #5B6472">{{ c.sub }}</span></sc-if></span></sc-if>
+<sc-if value="{{ c.isLink }}" hint-placeholder-val="{{ false }}"><span style="min-width: 0"><a href="{{ c.href }}" style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px; font-weight: 600; text-decoration: none">{{ c.t }}</a><sc-if value="{{ c.hasSub }}" hint-placeholder-val="{{ false }}"><span style="display: block; margin-top: 2px; font-size: 12.5px; color: #5B6472">{{ c.sub }}</span></sc-if></span></sc-if>
+<sc-if value="{{ c.isPill }}" hint-placeholder-val="{{ false }}"><span style="justify-self: start; display: inline-flex; align-items: center; min-height: 24px; padding: 0 9px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; border: 1px solid {{ c.pillBorder }}; background: {{ c.pillBg }}; color: {{ c.pillFg }}">{{ c.t }}</span></sc-if>
+</sc-for>
+</div>
+</sc-for>
+<sc-if value="{{ s.isEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding: 18px 14px; border-top: 1px solid #EEF0F3; font-size: 13.5px; color: #5B6472; text-align: center">{{ s.emptyText }}</div></sc-if>
+<sc-if value="{{ s.hasTotal }}" hint-placeholder-val="{{ true }}">
+<div style="display: grid; grid-template-columns: {{ s.cols }}; gap: 12px; padding: 10px 14px; border-top: 2px solid #11161D; font-size: 13.5px; font-weight: 700">
+<sc-for list="{{ s.total }}" as="t" hint-placeholder-count="5"><span style="text-align: {{ t.align }}">{{ t.t }}</span></sc-for>
+</div>
+</sc-if>
+</div>
+</div>
+</section>
+</sc-for>
+
+<footer style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 32px; padding-top: 8px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span aria-hidden="true" style="display: block; height: 40px; border-bottom: 1px solid #98A1AE"></span>
+<span style="font-size: 13px; font-weight: 600">Prepared by · Maintenance Supervisor</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span aria-hidden="true" style="display: block; height: 40px; border-bottom: 1px solid #98A1AE"></span>
+<span style="font-size: 13px; font-weight: 600">Verified by · Facility Manager</span>
+</div>
+</footer>
+</sc-if>
+
+<sc-if value="{{ doc.noData }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 220px; text-align: center; color: #5B6472">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>
+<span style="font-weight: 600; color: #3D4757">{{ doc.emptyText }}</span>
+<button type="button" onClick="{{ doc.reset }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 0; border-radius: 10px; background: transparent; color: #2F5BEA; font-size: 14px; font-weight: 600; cursor: pointer">{{ doc.resetLabel }}</button>
+</div>
+</sc-if>
+
+</article>
+</sc-if>
 </sc-if>
 
 </div>
@@ -325,6 +385,15 @@ class Component extends DCLogic {
       { key: 'pm', name: 'Preventive Maintenance Schedule', desc: 'Planned against completed PM tasks for a period.', params: [['Month', 'month'], ['Category', 'cat']] },
       { key: 'material', name: 'Material Consumption Report', desc: 'Spare parts issued by job, category or period.', params: [['From', 'date', '2026-11-01'], ['To', 'date', '2026-11-24'], ['Category', 'cat']] }
     ];
+    const DEFAULTS = {
+      dept: 'All departments',
+      cat: 'All categories',
+      prio: 'All priorities',
+      tech: 'All technicians',
+      month: 'November 2026',
+      equip: 'PAC-1 precision AC, Server Room',
+      vendor: 'All vendors'
+    };
     const reports = defs.map((d) => {
       const on = d.key === selKey;
       return {
@@ -339,27 +408,43 @@ class Component extends DCLogic {
       };
     });
     const selDef = defs.find((d) => d.key === selKey) || defs[0];
+    // Filter values are keyed by their label; Generate stores a snapshot of them,
+    // and the report preview is built from that snapshot.
+    const fields = selDef.params.map(([label, kind, value], i) => ({
+      id: 'rp-' + selDef.key + '-' + i,
+      label,
+      kind,
+      def: value || DEFAULTS[kind] || ''
+    }));
+    const current = {};
+    fields.forEach((f) => { current[f.label] = params[f.id] || f.def; });
+    const snap = generated[selKey];
     const sel = {
       name: selDef.name,
       desc: selDef.desc,
-      params: selDef.params.map(([label, kind, value], i) => {
-        const id = 'rp-' + selDef.key + '-' + i;
-        return {
-          id,
-          label,
-          value: params[id] || value || '',
-          set: (e) => this.setState({ params: Object.assign({}, params, { [id]: e.target.value }) }),
-          isDate: kind === 'date',
-          isDept: kind === 'dept',
-          isCat: kind === 'cat',
-          isPrio: kind === 'prio',
-          isTech: kind === 'tech',
-          isMonth: kind === 'month',
-          isEquip: kind === 'equip',
-          isVendor: kind === 'vendor'
-        };
-      })
+      params: fields.map((f) => ({
+        id: f.id,
+        label: f.label,
+        value: current[f.label],
+        set: (e) => this.setState({ params: Object.assign({}, params, { [f.id]: e.target.value }) }),
+        isDate: f.kind === 'date',
+        isDept: f.kind === 'dept',
+        isCat: f.kind === 'cat',
+        isPrio: f.kind === 'prio',
+        isTech: f.kind === 'tech',
+        isMonth: f.kind === 'month',
+        isEquip: f.kind === 'equip',
+        isVendor: f.kind === 'vendor'
+      }))
     };
+    const resetTo = (vals) => {
+      const np = Object.assign({}, params);
+      fields.forEach((f) => { if (Object.prototype.hasOwnProperty.call(vals, f.label)) np[f.id] = vals[f.label]; });
+      this.setState({ params: np, generated: Object.assign({}, generated, { [selKey]: Object.assign({}, snap, vals) }) });
+    };
+    const doc = snap
+      ? this.reportDoc(selDef, snap, fmt, resetTo)
+      : { title: '', meta: [], hasData: false, noData: false, kpis: [], sections: [], emptyText: '', resetLabel: '', reset: null };
     const isDailyType = selKey === 'daily';
     const hasData = date === '2026-11-24';
 
@@ -434,11 +519,13 @@ class Component extends DCLogic {
       catRows,
       techRows,
       openRows,
-      selGenerated: !!generated[selKey],
-      selNotGenerated: !generated[selKey],
-      generateLabel: generated[selKey] ? 'Generate again' : 'Generate report',
+      selGenerated: !!snap,
+      selNotGenerated: !snap,
+      selStale: !!snap && fields.some((f) => snap[f.label] !== current[f.label]),
+      doc,
+      generateLabel: snap ? 'Generate again' : 'Generate report',
       generate: () => {
-        this.setState({ generated: Object.assign({}, generated, { [selKey]: true }) });
+        this.setState({ generated: Object.assign({}, generated, { [selKey]: Object.assign({}, current) }) });
         toast(selDef.name + ' generated.');
       },
       printReport: () => exportMsg(' sent to the printer.'),
@@ -451,6 +538,470 @@ class Component extends DCLogic {
         this.setState({ toast: '' });
       }
     };
+  }
+  // Builds the preview for every report type except Daily (which has its own
+  // hand-laid template above). `v` is the filter snapshot taken on Generate.
+  reportDoc(def, v, fmt, resetTo) {
+    const dev = this.props.device;
+    const CD = (dev === 'phone' ? 'Phone' : (dev === 'tablet' ? 'Tablet' : '')) + 'ComplaintDetail.dc.html';
+    const MONO = "'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace";
+    const TODAY = '2026-11-24';
+    const MONTH = 'November 2026';
+    const RED = '#A3330A';
+    const PILL = {
+      'Registered': ['#FFFFFF', '#3D4757', '#CDD3DB'],
+      'Assigned': ['#E8EEFD', '#2346B8', '#E8EEFD'],
+      'In Progress': ['#FDF3DC', '#8A5A00', '#FDF3DC'],
+      'Completed': ['#E3F4EA', '#1C6B3F', '#E3F4EA'],
+      'Verified': ['#DCE3EA', '#1E2A38', '#DCE3EA'],
+      'Done': ['#E3F4EA', '#1C6B3F', '#E3F4EA'],
+      'Due today': ['#FDF3DC', '#8A5A00', '#FDF3DC'],
+      'Overdue': ['#FFF4ED', '#A3330A', '#F6C9B0'],
+      'Upcoming': ['#FFFFFF', '#3D4757', '#CDD3DB'],
+      'In stock': ['#E3F4EA', '#1C6B3F', '#E3F4EA'],
+      'Reorder': ['#FFF4ED', '#A3330A', '#F6C9B0'],
+      'Out of stock': ['#FFF4ED', '#A3330A', '#F6C9B0']
+    };
+    const PRIO = { High: '#A3330A', Medium: '#8A5A00', Low: '#5B6472' };
+
+    // ---- cell, tile and section helpers ----
+    // A text or link cell can carry a muted second line (`sub`), which keeps
+    // the tables to five or six columns so they fit the report card on desktop.
+    const cell = (t, o) => Object.assign({ isText: true, isLink: false, isPill: false, t: String(t), sub: '', hasSub: false, align: 'left', fg: '#161A21', fw: '400', ff: 'inherit', fs: '13.5px' }, o || {});
+    const num = (t, o) => cell(t, Object.assign({ align: 'right' }, o || {}));
+    const dim = (t) => cell(t, { fg: '#5B6472' });
+    const code = (t, sub) => cell(t, { ff: MONO, fs: '12.5px', fw: '600', fg: '#3D4757', sub: sub || '', hasSub: !!sub });
+    const two = (t, sub, o) => cell(t, Object.assign({ sub: sub || '', hasSub: !!sub }, o || {}));
+    const ref = (no, sub) => (/^CMP-/.test(no) ? { isText: false, isLink: true, isPill: false, t: no, href: CD, sub: sub || '', hasSub: !!sub } : code(no, sub));
+    const pill = (label) => {
+      const p = PILL[label] || PILL.Registered;
+      return { isText: false, isLink: false, isPill: true, t: label, pillBg: p[0], pillFg: p[1], pillBorder: p[2] };
+    };
+    const tot = (t, align) => ({ t: String(t), align: align || 'right' });
+    const kpi = (label, value, alert) => ({
+      label,
+      value: String(value),
+      bg: alert ? '#FFF4ED' : '#F4F5F7',
+      labelFg: alert ? '#8F2D08' : '#5B6472',
+      valueFg: alert ? '#C2410C' : '#161A21'
+    });
+    let secN = 0;
+    const section = (title, cols, minW, head, rows, total, emptyText, note) => ({
+      id: 'rp-doc-' + def.key + '-' + (secN++),
+      title,
+      cols,
+      minW,
+      note: note || '',
+      hasNote: !!note,
+      head: head.map((h) => (typeof h === 'string' ? { t: h, align: 'left' } : { t: h[0], align: h[1] })),
+      rows: rows.map((cells) => ({ cells })),
+      isEmpty: rows.length === 0,
+      emptyText: emptyText || 'Nothing matches these filters.',
+      hasTotal: !!total && rows.length > 0,
+      total: total || []
+    });
+    const dur = (mins) => {
+      const m = Math.round(mins);
+      return m < 60 ? m + 'm' : Math.floor(m / 60) + 'h ' + String(m % 60).padStart(2, '0') + 'm';
+    };
+    const inr = (n) => '₹' + Math.round(n).toLocaleString('en-IN');
+    const pct = (a, b) => (b > 0 ? Math.round((a / b) * 100) + '%' : '—');
+    const sum = (arr, f) => arr.reduce((a, x) => a + f(x), 0);
+    const day = (iso) => fmt(iso).replace(/ \d{4}$/, '');
+    const all = (val) => /^All /.test(val);
+    const uniq = (arr) => arr.filter((x, i) => arr.indexOf(x) === i);
+    const meta = (pairs) => pairs.concat([['Prepared by', 'Hitesh Mehta, Maintenance Supervisor'], ['Generated', '24 Nov 2026, 16:05']]).map(([k, val]) => ({ k, v: val }));
+    const doc = (pairs, kpis, sections) => ({ title: def.name, meta: meta(pairs), hasData: true, noData: false, kpis, sections, emptyText: '', resetLabel: '', reset: null });
+    const none = (pairs, emptyText, resetLabel, vals) => ({ title: def.name, meta: meta(pairs), hasData: false, noData: true, kpis: [], sections: [], emptyText, resetLabel, reset: () => resetTo(vals) });
+
+    // ---- shared data (matches the Complaints, Preventive, Vendors and Stock pages) ----
+    const CMPS = [
+      ['CMP-26-0436', '14:40', 'Electrical', '3rd Floor · Conference Room 3B', 'Ceiling LED panels: 2 of 6 panels not working', 'Unassigned', 'Medium', 'Registered'],
+      ['CMP-26-0435', '14:05', 'Lift', 'Ground Floor · Lift lobby', 'Lift L2: stuck between 2nd and 3rd floor, no one inside', 'Kalpesh Joshi', 'High', 'Assigned'],
+      ['CMP-26-0434', '13:55', 'Housekeeping & General', 'Ground Floor · Reception', 'Notice board: frame loose on the wall', 'Nilesh Chauhan', 'Low', 'Completed'],
+      ['CMP-26-0433', '13:20', 'AC & HVAC', '5th Floor · Server Room', 'PAC-1 precision AC: tripping on high-pressure alarm', 'Vikram Solanki', 'High', 'In Progress'],
+      ['CMP-26-0432', '13:05', 'Electrical', '6th Floor · Corridor', 'Emergency light: not charging', 'Ramesh Patel', 'Medium', 'Completed'],
+      ['CMP-26-0431', '12:45', 'Plumbing', '4th Floor · Gents washroom', 'Urinal flush valve: water running continuously', 'Suresh Rathod', 'Medium', 'In Progress'],
+      ['CMP-26-0430', '12:30', 'Plumbing', '2nd Floor · Pantry', 'Sink drain: choked', 'Suresh Rathod', 'Medium', 'Completed'],
+      ['CMP-26-0429', '12:10', 'CCTV & Access Control', 'Basement B1 · Parking', 'CCTV camera B1-07: offline on NVR since morning', 'Arjun Desai', 'Medium', 'In Progress'],
+      ['CMP-26-0428', '11:50', 'AC & HVAC', '3rd Floor · Cabin 305', 'Split AC 1.5 TR: not cooling, filter clogged', 'Vikram Solanki', 'Medium', 'Completed'],
+      ['CMP-26-0427', '11:30', 'Civil & Carpentry', '2nd Floor · Cabin 214', 'Door closer: leaking oil, door slams', 'Mahesh Parmar', 'Low', 'Assigned'],
+      ['CMP-26-0426', '11:15', 'Electrical', '4th Floor · Workstation bay', 'Raw power points: no power at 4 desks, MCB tripped', 'Imran Shaikh', 'High', 'Completed'],
+      ['CMP-26-0425', '11:00', 'Civil & Carpentry', '5th Floor · Meeting Room 5A', 'Ceiling tile: stained and sagging', 'Mahesh Parmar', 'Low', 'Completed'],
+      ['CMP-26-0424', '10:50', 'Electrical', '1st Floor · Pantry', '16 A power socket: loose, plug falls out', 'Imran Shaikh', 'Medium', 'In Progress'],
+      ['CMP-26-0423', '10:35', 'Fire Safety', '4th Floor · Lift lobby', 'Fire extinguisher FE-4-02: pressure gauge in red zone', 'Kalpesh Joshi', 'Medium', 'Verified'],
+      ['CMP-26-0422', '10:20', 'Plumbing', 'Terrace · Overhead tank', 'Float valve 25 mm: tank overflowing', 'Suresh Rathod', 'High', 'Verified'],
+      ['CMP-26-0421', '10:05', 'Electrical', 'Ground Floor · LT panel room', 'APFC panel: capacitor bank alarm', 'Ramesh Patel', 'Medium', 'Verified'],
+      ['CMP-26-0420', '09:50', 'BMS', '5th Floor · Server Room', 'BMS controller DDC-3: temperature sensor not updating', 'Arjun Desai', 'Medium', 'Verified'],
+      ['CMP-26-0419', '09:40', 'AC & HVAC', '1st Floor · Training Room', 'Cassette AC: water dripping from the unit', 'Vikram Solanki', 'Medium', 'Verified'],
+      ['CMP-26-0418', '09:30', 'Electrical', '2nd Floor · Corridor', 'LED tube light: tube fused', 'Imran Shaikh', 'Low', 'Verified'],
+      ['CMP-26-0417', '09:15', 'Generator & UPS', 'Basement B1 · DG room', 'DG set 250 kVA: low battery voltage on DG panel', 'Kalpesh Joshi', 'Medium', 'Verified'],
+      ['CMP-26-0416', '09:05', 'CCTV & Access Control', 'Ground Floor · Main entrance', 'Access card reader: not reading cards', 'Arjun Desai', 'Medium', 'Verified'],
+      ['CMP-26-0415', '08:55', 'Plumbing', '3rd Floor · Ladies washroom', 'Wash basin tap: dripping', 'Suresh Rathod', 'Low', 'Verified'],
+      ['CMP-26-0414', '08:40', 'Civil & Carpentry', '1st Floor · Cabin 108', 'Pedestal drawer lock: jammed', 'Mahesh Parmar', 'Low', 'Verified'],
+      ['CMP-26-0413', '08:25', 'AC & HVAC', 'Ground Floor · Reception', 'AHU-1: reception area too warm', 'Vikram Solanki', 'Medium', 'Verified'],
+      ['CMP-26-0412', '08:10', 'Electrical', 'Basement B1 · Parking', 'Parking light poles: 2 lights not working', 'Ramesh Patel', 'Low', 'Verified']
+    ].map(([no, time, dept, where, issue, staff, prio, status]) => ({ no, time, dept, where, issue, staff, prio, status }));
+
+    const PMS = [
+      ['DG set 250 kVA', 'No-load run, battery and fuel check', 'Generator & UPS', 'Weekly', 'Kalpesh Joshi', 4, 3, TODAY, 'Due today'],
+      ['Lift L1 and L2', 'Monthly AMC service', 'Lift', 'Monthly', 'Sabar Lift Engineers', 1, 0, TODAY, 'Due today'],
+      ['AHU-1 to AHU-4', 'Pre-filter cleaning', 'AC & HVAC', 'Fortnightly', 'Vikram Solanki', 2, 1, TODAY, 'Due today'],
+      ['Fire extinguishers', 'Pressure, seal and tag check', 'Fire Safety', 'Monthly', 'Kalpesh Joshi', 1, 0, '2026-11-20', 'Overdue'],
+      ['Main LT panel', 'Thermal scan and torque check', 'Electrical', 'Quarterly', 'Ramesh Patel', 1, 0, '2026-11-26', 'Upcoming'],
+      ['Overhead and UG water tanks', 'Cleaning and disinfection', 'Plumbing', 'Half-yearly', 'Jalseva Plumbing Works', 1, 0, '2026-11-27', 'Upcoming'],
+      ['CCTV NVR and cameras', 'Footage backup and lens cleaning', 'CCTV & Access Control', 'Monthly', 'Arjun Desai', 1, 0, '2026-11-28', 'Upcoming'],
+      ['UPS 40 kVA', 'Battery health test', 'Generator & UPS', 'Quarterly', 'Sudarshan Power Systems', 1, 0, '2026-11-29', 'Upcoming'],
+      ['Water pumps P-1 and P-2', 'Gland, bearing and vibration check', 'Plumbing', 'Monthly', 'Suresh Rathod', 1, 1, '2026-12-23', 'Done'],
+      ['BMS controllers DDC-1 to DDC-4', 'Sensor calibration check', 'BMS', 'Quarterly', 'Arjun Desai', 1, 1, '2027-02-22', 'Done']
+    ].map(([asset, task, cat, freq, who, planned, done, next, status]) => ({
+      asset, task, cat, freq, who, planned, done, next, status,
+      due: status === 'Upcoming' ? planned - 1 : planned
+    }));
+    // Compliance = done ÷ tasks due up to today (upcoming tasks are not yet due).
+    const pmByCat = (list) => uniq(list.map((p) => p.cat)).map((c) => {
+      const l = list.filter((p) => p.cat === c);
+      const P = sum(l, (p) => p.planned);
+      const D = sum(l, (p) => p.done);
+      return [cell(c), num(P), num(D), num(P - D, { fw: '600' }), num(pct(D, sum(l, (p) => p.due)))];
+    });
+    const pmTotal = (list) => [tot('Total', 'left'), tot(sum(list, (p) => p.planned)), tot(sum(list, (p) => p.done)), tot(sum(list, (p) => p.planned - p.done)), tot(pct(sum(list, (p) => p.done), sum(list, (p) => p.due)))];
+    const PM_COLS = 'minmax(0, 1.6fr) 80px 70px 80px 110px';
+    const PM_HEAD = ['Category', ['Planned', 'right'], ['Done', 'right'], ['Pending', 'right'], ['Compliance', 'right']];
+    const PM_NOTE = 'Compliance counts only the tasks due up to 24 Nov.';
+
+    const VENDORS = [
+      ['Kesar Cooling Services', 'AC & HVAC', 'AMC, non-comprehensive', '2027-03-31', 96],
+      ['Sabar Lift Engineers', 'Lift', 'AMC, comprehensive', '2026-11-30', 100],
+      ['Agnirakshak Fire Systems', 'Fire Safety', 'AMC, comprehensive', '2026-12-31', 100],
+      ['Sudarshan Power Systems', 'Generator & UPS', 'AMC, non-comprehensive', '2026-11-28', 92],
+      ['Netra Security Systems', 'CCTV & Access Control', 'AMC, non-comprehensive', '2027-06-30', 95],
+      ['Sahyog BMS Services', 'BMS', 'AMC, non-comprehensive', '2027-09-30', 100],
+      ['Jalseva Plumbing Works', 'Plumbing', 'On-call rate contract', '', 88],
+      ['Vishwakarma Civil Works', 'Civil & Carpentry', 'On-call rate contract', '', 90]
+    ].map(([name, cat, contract, valid, sla]) => ({
+      name, cat, contract, valid, sla,
+      days: valid ? Math.round((Date.parse(valid) - Date.parse(TODAY)) / 86400000) : null
+    }));
+    const CALLS = [
+      ['2026-11-24', 'CMP-26-0433', 'Kesar Cooling Services', 'PAC-1 precision AC tripping on high-pressure alarm', 100, 'In Progress'],
+      ['2026-11-24', 'CMP-26-0435', 'Sabar Lift Engineers', 'Lift L2 stuck between 2nd and 3rd floor', 35, 'Assigned'],
+      ['2026-11-21', 'CMP-26-0391', 'Jalseva Plumbing Works', 'Basement drain line choked', 280, 'Verified'],
+      ['2026-11-20', 'CMP-26-0380', 'Netra Security Systems', 'NVR hard disk error', 140, 'Verified'],
+      ['2026-11-19', 'CMP-26-0371', 'Vishwakarma Civil Works', 'Terrace waterproofing patch above 6th floor', 420, 'Verified'],
+      ['2026-11-18', 'CMP-26-0365', 'Kesar Cooling Services', 'Cassette AC in Training Room: compressor not starting', 170, 'Verified'],
+      ['2026-11-18', 'CMP-26-0352', 'Agnirakshak Fire Systems', 'Extinguisher refills, 4 cylinders', 120, 'Verified'],
+      ['2026-11-16', 'CMP-26-0341', 'Sahyog BMS Services', 'DDC-2 controller offline', 110, 'Verified'],
+      ['2026-11-14', 'CMP-26-0326', 'Jalseva Plumbing Works', 'Overhead tank level controller faulty', 370, 'Verified'],
+      ['2026-11-13', 'CMP-26-0318', 'Sudarshan Power Systems', 'UPS fan failure alarm', 270, 'Verified'],
+      ['2026-11-11', 'CMP-26-0301', 'Kesar Cooling Services', 'Split AC 2 TR in Cabin 512: gas leak', 210, 'Verified'],
+      ['2026-11-09', 'CMP-26-0287', 'Sabar Lift Engineers', 'Lift L1 door sensor fault', 55, 'Verified'],
+      ['2026-11-07', 'CMP-26-0270', 'Vishwakarma Civil Works', 'Main glass door hinge broken', 340, 'Verified'],
+      ['2026-11-06', 'CMP-26-0262', 'Netra Security Systems', 'Boom barrier not lifting', 180, 'Verified'],
+      ['2026-11-05', 'CMP-26-0255', 'Jalseva Plumbing Works', 'Pipe leak above 2nd floor ceiling', 295, 'Verified'],
+      ['2026-11-04', 'CMP-26-0248', 'Kesar Cooling Services', 'AHU-2 chilled-water valve stuck', 185, 'Verified']
+    ].map(([d, no, vendor, issue, resp, status]) => ({ d, no, vendor, issue, resp, status }));
+    const avgResp = (calls) => (calls.length ? dur(sum(calls, (c) => c.resp) / calls.length) : '—');
+    const slaOf = (name) => (VENDORS.find((x) => x.name === name) || { sla: 0 }).sla;
+
+    // ---- Pending Complaint Report ----
+    if (def.key === 'pending') {
+      const asOf = v['As of date'];
+      const pairs = [['As of', fmt(asOf)], ['Department', v.Department], ['Priority', v.Priority]];
+      if (asOf < TODAY) return none(pairs, 'No complaints were open on ' + fmt(asOf) + '.', 'Show 24 Nov 2026', { 'As of date': TODAY });
+      const days = Math.round((Date.parse(asOf) - Date.parse(TODAY)) / 86400000);
+      const ageMin = (c) => { const p = c.time.split(':'); return 16 * 60 + 5 - (parseInt(p[0], 10) * 60 + parseInt(p[1], 10)); };
+      const age = (c) => (days > 0 ? days + (days === 1 ? ' day' : ' days') : dur(ageMin(c)));
+      const RANK = { High: 0, Medium: 1, Low: 2 };
+      const list = CMPS
+        .filter((c) => ['Registered', 'Assigned', 'In Progress'].indexOf(c.status) >= 0)
+        .filter((c) => (all(v.Department) || c.dept === v.Department) && (all(v.Priority) || c.prio === v.Priority))
+        .sort((a, b) => RANK[a.prio] - RANK[b.prio] || ageMin(b) - ageMin(a));
+      const cnt = (p) => list.filter((c) => c.prio === p).length;
+      const high = cnt('High');
+      const unassigned = list.filter((c) => c.staff === 'Unassigned').length;
+      const oldest = list.length ? age(list.reduce((a, c) => (ageMin(c) > ageMin(a) ? c : a))) : '—';
+      const byDept = uniq(list.map((c) => c.dept)).map((d) => {
+        const l = list.filter((c) => c.dept === d);
+        const n = (p) => l.filter((c) => c.prio === p).length;
+        return [cell(d), num(l.length, { fw: '600' }), num(n('High'), { fg: n('High') ? RED : '#5B6472' }), num(n('Medium')), num(n('Low'))];
+      });
+      return doc(pairs,
+        [kpi('Open', list.length), kpi('High priority', high, high > 0), kpi('Unassigned', unassigned, unassigned > 0), kpi('In progress', list.filter((c) => c.status === 'In Progress').length), kpi('Oldest', oldest)],
+        [
+          section('Open complaints', '108px minmax(0, 1fr) 64px 112px 96px', '600px',
+            ['Complaint', 'Problem', 'Priority', 'Assigned to', 'Status'],
+            list.map((c) => [ref(c.no, 'Open ' + age(c)), two(c.issue, c.where), cell(c.prio, { fg: PRIO[c.prio], fw: '600' }), cell(c.staff, { fg: c.staff === 'Unassigned' ? RED : '#161A21' }), pill(c.status)]),
+            null, 'No open complaints match these filters.'),
+          section('Open complaints by department', 'minmax(0, 1.6fr) 80px 80px 90px 80px', '480px',
+            ['Department', ['Open', 'right'], ['High', 'right'], ['Medium', 'right'], ['Low', 'right']],
+            byDept, byDept.length > 1 ? [tot('Total', 'left'), tot(list.length), tot(high), tot(cnt('Medium')), tot(cnt('Low'))] : null,
+            'No open complaints match these filters.')
+        ]);
+    }
+
+    // ---- Technician-wise Work Report ----
+    if (def.key === 'technician') {
+      const from = v.From;
+      const to = v.To;
+      const pairs = [['Period', fmt(from) + ' – ' + fmt(to)], ['Technician', v.Technician]];
+      const reset = { From: '2026-11-01', To: TODAY };
+      if (from > to) return none(pairs, 'The From date is after the To date.', 'Show 1–24 Nov 2026', reset);
+      if (to < '2026-11-01' || from > TODAY) return none(pairs, 'No work was logged between ' + fmt(from) + ' and ' + fmt(to) + '.', 'Show 1–24 Nov 2026', reset);
+      const TECHS = [
+        ['Ramesh Patel', 'Electrical', 48, 48, 3690],
+        ['Imran Shaikh', 'Electrical', 44, 43, 3120],
+        ['Suresh Rathod', 'Plumbing', 51, 50, 4050],
+        ['Vikram Solanki', 'AC & HVAC', 46, 45, 5280],
+        ['Mahesh Parmar', 'Civil & Carpentry', 33, 32, 3570],
+        ['Arjun Desai', 'CCTV, Access & BMS', 29, 28, 2460],
+        ['Kalpesh Joshi', 'Lift, Fire & DG', 31, 30, 2790],
+        ['Nilesh Chauhan', 'General repairs', 38, 38, 2040]
+      ].map(([name, trade, jobs, done, mins]) => ({ name, trade, jobs, done, mins }));
+      const list = TECHS.filter((t) => all(v.Technician) || t.name === v.Technician);
+      const J = sum(list, (t) => t.jobs);
+      const D = sum(list, (t) => t.done);
+      const M = sum(list, (t) => t.mins);
+      const sections = [
+        section('Technician-wise summary', 'minmax(0, 1fr) 44px 48px 44px 76px 68px 84px', '600px',
+          ['Technician', ['Jobs', 'right'], ['Done', 'right'], ['Open', 'right'], ['Time', 'right'], ['Per job', 'right'], ['Completion', 'right']],
+          list.map((t) => [two(t.name, t.trade, { fw: '500' }), num(t.jobs), num(t.done), num(t.jobs - t.done, { fw: '600', fg: t.jobs - t.done ? RED : '#5B6472' }), num(dur(t.mins)), num(dur(t.mins / t.jobs)), num(pct(t.done, t.jobs), { fw: '600' })]),
+          list.length > 1 ? [tot('Total', 'left'), tot(J), tot(D), tot(J - D), tot(dur(M)), tot(dur(M / J)), tot(pct(D, J))] : null)
+      ];
+      if (!all(v.Technician) && from <= TODAY && to >= TODAY) {
+        const jobs = CMPS.filter((c) => c.staff === v.Technician);
+        sections.push(section('Jobs on 24 Nov 2026', '108px minmax(0, 1fr) 96px', '480px',
+          ['Complaint', 'Problem', 'Status'],
+          jobs.map((c) => [ref(c.no, 'Logged ' + c.time), two(c.issue, c.where), pill(c.status)]),
+          null, 'No jobs on 24 Nov 2026.'));
+      }
+      return doc(pairs, [kpi('Jobs', J), kpi('Completed', D), kpi('Open', J - D), kpi('Time spent', Math.round(M / 60) + ' h'), kpi('Completion', pct(D, J))], sections);
+    }
+
+    // ---- Monthly Maintenance Report ----
+    if (def.key === 'monthly') {
+      const pairs = [['Month', v.Month === MONTH ? 'November 2026 (1–24 Nov)' : v.Month], ['Department', v.Department]];
+      if (v.Month !== MONTH) return none(pairs, 'No maintenance records found for ' + v.Month + '.', 'Show November 2026', { Month: MONTH });
+      const CATS = [
+        ['Electrical', 93, 91, 110],
+        ['Plumbing', 51, 50, 145],
+        ['AC & HVAC', 46, 45, 220],
+        ['Civil & Carpentry', 33, 32, 250],
+        ['CCTV & Access Control', 17, 16, 125],
+        ['BMS', 12, 12, 95],
+        ['Lift', 9, 8, 80],
+        ['Fire Safety', 8, 8, 150],
+        ['Generator & UPS', 14, 14, 135],
+        ['Housekeeping & General', 38, 38, 65]
+      ].map(([name, rec, done, avg]) => ({ name, rec, done, avg }));
+      const match = (cat) => all(v.Department) || cat === v.Department;
+      const cats = CATS.filter((c) => match(c.name));
+      const pms = PMS.filter((p) => match(p.cat));
+      const vs = VENDORS.filter((x) => match(x.cat));
+      const calls = CALLS.filter((c) => vs.some((x) => x.name === c.vendor));
+      const R = sum(cats, (c) => c.rec);
+      const C = sum(cats, (c) => c.done);
+      return doc(pairs,
+        [kpi('Complaints', R), kpi('Completed', C), kpi('Open', R - C), kpi('PM done', sum(pms, (p) => p.done) + ' / ' + sum(pms, (p) => p.planned)), kpi('Vendor calls', calls.length)],
+        [
+          section('Complaints by category', 'minmax(0, 1.6fr) 84px 96px 64px 128px', '560px',
+            ['Category', ['Received', 'right'], ['Completed', 'right'], ['Open', 'right'], ['Avg resolution', 'right']],
+            cats.map((c) => [cell(c.name), num(c.rec), num(c.done), num(c.rec - c.done, { fw: '600', fg: c.rec - c.done ? RED : '#5B6472' }), num(dur(c.avg))]),
+            cats.length > 1 ? [tot('Total', 'left'), tot(R), tot(C), tot(R - C), tot(dur(R ? sum(cats, (c) => c.avg * c.rec) / R : 0))] : null),
+          section('Preventive maintenance', PM_COLS, '520px', PM_HEAD, pmByCat(pms), pms.length > 1 ? pmTotal(pms) : null,
+            'No preventive maintenance is scheduled for this department.', PM_NOTE),
+          section('Vendor calls', 'minmax(0, 1fr) 52px 104px 72px', '480px',
+            ['Vendor', ['Calls', 'right'], ['Avg response', 'right'], ['SLA met', 'right']],
+            vs.map((x) => { const l = calls.filter((c) => c.vendor === x.name); return [two(x.name, x.cat, { fw: '500' }), num(l.length), num(avgResp(l)), num(x.sla + '%')]; }),
+            vs.length > 1 ? [tot('Total', 'left'), tot(calls.length), tot(avgResp(calls)), tot(calls.length ? Math.round(sum(calls, (c) => slaOf(c.vendor)) / calls.length) + '%' : '—')] : null,
+            'No vendor handles this department.')
+        ]);
+    }
+
+    // ---- Equipment-wise History ----
+    if (def.key === 'equipment') {
+      const EQUIP = {
+        'PAC-1 precision AC, Server Room': ['5th Floor · Server Room', 'Kesar Cooling Services (AMC)', [
+          ['2026-11-24', 'CMP-26-0433', 'Complaint', 'Tripping on high-pressure alarm. Condenser coil cleaned, 2 kg R-410A topped up.', 'Vikram Solanki', 'In Progress'],
+          ['2026-11-12', 'PM-26-118', 'Preventive', 'Quarterly AMC service: filters, belts and refrigerant pressure checked.', 'Kesar Cooling Services', 'Done'],
+          ['2026-10-03', 'CMP-26-0204', 'Complaint', 'Humidity alarm. Humidifier canister replaced.', 'Vikram Solanki', 'Verified'],
+          ['2026-08-12', 'PM-26-071', 'Preventive', 'Quarterly AMC service.', 'Kesar Cooling Services', 'Done'],
+          ['2026-06-21', 'CMP-26-0098', 'Complaint', 'Fan motor noise. Bearings greased.', 'Vikram Solanki', 'Verified'],
+          ['2026-05-12', 'PM-26-032', 'Preventive', 'Quarterly AMC service.', 'Kesar Cooling Services', 'Done']
+        ]],
+        'DG set 250 kVA': ['Basement B1 · DG room', 'Sudarshan Power Systems (AMC)', [
+          ['2026-11-24', 'PM-26-131', 'Preventive', 'Weekly no-load run, battery and fuel check.', 'Kalpesh Joshi', 'Due today'],
+          ['2026-11-24', 'CMP-26-0417', 'Complaint', 'Low battery voltage on DG panel. Terminals cleaned, charger reset.', 'Kalpesh Joshi', 'Verified'],
+          ['2026-11-17', 'PM-26-124', 'Preventive', 'Weekly no-load run, battery and fuel check.', 'Kalpesh Joshi', 'Done'],
+          ['2026-11-10', 'PM-26-116', 'Preventive', 'Weekly no-load run, battery and fuel check.', 'Kalpesh Joshi', 'Done'],
+          ['2026-09-22', 'PM-26-089', 'Preventive', 'Half-yearly AMC service: oil, filters and coolant changed.', 'Sudarshan Power Systems', 'Done'],
+          ['2026-07-30', 'CMP-26-0121', 'Complaint', 'Failed to auto-start on mains failure. AMF relay replaced.', 'Sudarshan Power Systems', 'Verified']
+        ]],
+        'Lift L1 (passenger)': ['Ground Floor · Lift lobby', 'Sabar Lift Engineers (AMC)', [
+          ['2026-11-24', 'PM-26-132', 'Preventive', 'Monthly AMC service.', 'Sabar Lift Engineers', 'Due today'],
+          ['2026-11-09', 'CMP-26-0287', 'Complaint', 'Door sensor fault. Sensor replaced by the AMC vendor.', 'Sabar Lift Engineers', 'Verified'],
+          ['2026-10-24', 'PM-26-109', 'Preventive', 'Monthly AMC service.', 'Sabar Lift Engineers', 'Done'],
+          ['2026-10-06', 'CMP-26-0207', 'Complaint', 'Door not closing fully at 3rd floor. Door track cleaned and realigned.', 'Kalpesh Joshi', 'Verified'],
+          ['2026-09-24', 'PM-26-093', 'Preventive', 'Monthly AMC service.', 'Sabar Lift Engineers', 'Done'],
+          ['2026-07-18', 'CMP-26-0109', 'Complaint', 'Car stopping 2 cm below floor level at 1st floor. Levelling adjusted.', 'Sabar Lift Engineers', 'Verified']
+        ]],
+        'Lift L2 (passenger)': ['Ground Floor · Lift lobby', 'Sabar Lift Engineers (AMC)', [
+          ['2026-11-24', 'CMP-26-0435', 'Complaint', 'Stuck between 2nd and 3rd floor, no one inside.', 'Kalpesh Joshi', 'Assigned'],
+          ['2026-11-24', 'PM-26-132', 'Preventive', 'Monthly AMC service.', 'Sabar Lift Engineers', 'Due today'],
+          ['2026-10-24', 'PM-26-109', 'Preventive', 'Monthly AMC service.', 'Sabar Lift Engineers', 'Done'],
+          ['2026-09-24', 'PM-26-093', 'Preventive', 'Monthly AMC service.', 'Sabar Lift Engineers', 'Done'],
+          ['2026-08-29', 'CMP-26-0158', 'Complaint', 'Emergency alarm bell not working. Alarm battery replaced.', 'Kalpesh Joshi', 'Verified']
+        ]],
+        'AHU-1': ['Terrace · AHU area', 'In-house · Vikram Solanki', [
+          ['2026-11-24', 'PM-26-133', 'Preventive', 'Fortnightly pre-filter cleaning.', 'Vikram Solanki', 'Due today'],
+          ['2026-11-24', 'CMP-26-0413', 'Complaint', 'Reception area too warm. Chilled-water valve actuator reset.', 'Vikram Solanki', 'Verified'],
+          ['2026-11-10', 'PM-26-117', 'Preventive', 'Fortnightly pre-filter cleaning. 4 pre-filters replaced.', 'Vikram Solanki', 'Done'],
+          ['2026-10-27', 'PM-26-110', 'Preventive', 'Fortnightly pre-filter cleaning.', 'Vikram Solanki', 'Done'],
+          ['2026-09-08', 'CMP-26-0176', 'Complaint', 'Belt slipping with a squealing noise. V-belt replaced.', 'Vikram Solanki', 'Verified']
+        ]],
+        'UPS 40 kVA': ['Basement B1 · UPS room', 'Sudarshan Power Systems (AMC)', [
+          ['2026-10-02', 'CMP-26-0201', 'Complaint', 'Battery backup dropped to 9 minutes. 4 cells replaced.', 'Sudarshan Power Systems', 'Verified'],
+          ['2026-08-29', 'PM-26-084', 'Preventive', 'Quarterly battery health test. 4 weak cells flagged.', 'Sudarshan Power Systems', 'Done'],
+          ['2026-07-16', 'CMP-26-0104', 'Complaint', 'On bypass after an overload alarm. Load redistributed across phases.', 'Sudarshan Power Systems', 'Verified'],
+          ['2026-05-29', 'PM-26-041', 'Preventive', 'Quarterly battery health test.', 'Sudarshan Power Systems', 'Done']
+        ]]
+      };
+      const name = EQUIP[v.Equipment] ? v.Equipment : 'PAC-1 precision AC, Server Room';
+      const e = EQUIP[name];
+      const from = v.From;
+      const to = v.To;
+      const pairs = [['Equipment', name], ['Location', e[0]], ['Maintained by', e[1]], ['Period', fmt(from) + ' – ' + fmt(to)]];
+      if (from > to) return none(pairs, 'The From date is after the To date.', 'Show 1 Apr – 24 Nov 2026', { From: '2026-04-01', To: TODAY });
+      const list = e[2]
+        .map(([d, no, type, work, by, status]) => ({ d, no, type, work, by, status }))
+        .filter((h) => h.d >= from && h.d <= to);
+      const pm = list.filter((h) => h.type === 'Preventive');
+      const lastPm = pm.filter((h) => h.status === 'Done')[0];
+      const openN = list.filter((h) => ['Registered', 'Assigned', 'In Progress', 'Due today', 'Overdue'].indexOf(h.status) >= 0).length;
+      return doc(pairs,
+        [kpi('Complaints', list.length - pm.length), kpi('PM tasks', pm.length), kpi('Open items', openN), kpi('Last PM', lastPm ? day(lastPm.d) : '—')],
+        [section('Maintenance history', '92px 108px minmax(0, 1fr) 92px', '540px',
+          ['Date', 'Ref', 'Work done', 'Status'],
+          list.map((h) => [dim(fmt(h.d)), ref(h.no), two(h.work, h.type + ' · ' + h.by), pill(h.status)]),
+          null, 'Nothing was recorded against this equipment in this period.')]);
+    }
+
+    // ---- Vendor-wise Maintenance Report ----
+    if (def.key === 'vendor') {
+      const pairs = [['Vendor', v.Vendor], ['Month', v.Month === MONTH ? 'November 2026 (1–24 Nov)' : v.Month]];
+      if (v.Month !== MONTH) return none(pairs, 'No vendor calls found for ' + v.Month + '.', 'Show November 2026', { Month: MONTH });
+      const vs = VENDORS.filter((x) => all(v.Vendor) || x.name === v.Vendor);
+      const calls = CALLS.filter((c) => vs.some((x) => x.name === c.vendor));
+      const renewals = vs.filter((x) => x.days !== null && x.days <= 30).length;
+      const sla = calls.length ? Math.round(sum(calls, (c) => slaOf(c.vendor)) / calls.length) + '%' : '—';
+      return doc(pairs,
+        [kpi('Vendors', vs.length), kpi('Calls', calls.length), kpi('Open calls', calls.filter((c) => ['Completed', 'Verified'].indexOf(c.status) < 0).length), kpi('SLA met', sla), kpi('Renewals due', renewals, renewals > 0)],
+        [
+          section('Vendor-wise summary', 'minmax(0, 1fr) 44px 80px 60px 112px', '560px',
+            ['Vendor', ['Calls', 'right'], ['Response', 'right'], ['SLA', 'right'], 'Valid to'],
+            vs.map((x) => {
+              const l = calls.filter((c) => c.vendor === x.name);
+              const due = x.days !== null && x.days <= 30;
+              return [two(x.name, x.cat + ' · ' + x.contract, { fw: '500' }), num(l.length), num(avgResp(l)), num(x.sla + '%', { fw: '600', fg: x.sla < 90 ? RED : '#161A21' }),
+                two(x.valid ? fmt(x.valid) : 'Open-ended', due ? x.days + ' days left' : '', { fg: due ? RED : '#5B6472', fw: due ? '600' : '400' })];
+            }),
+            vs.length > 1 ? [tot('Total', 'left'), tot(calls.length), tot(avgResp(calls)), tot(sla), tot('')] : null,
+            null, 'Response is the average time from call to the vendor reaching site.'),
+          section('Call log', '92px 108px minmax(0, 1fr) 68px 96px', '560px',
+            ['Date', 'Complaint', 'Issue', ['Response', 'right'], 'Status'],
+            calls.map((c) => [dim(fmt(c.d)), ref(c.no), two(c.issue, c.vendor), num(dur(c.resp)), pill(c.status)]),
+            null, 'No calls to this vendor in November 2026.')
+        ]);
+    }
+
+    // ---- Preventive Maintenance Schedule ----
+    if (def.key === 'pm') {
+      const pairs = [['Month', v.Month === MONTH ? 'November 2026 (as of 24 Nov)' : v.Month], ['Category', v.Category]];
+      if (v.Month !== MONTH) return none(pairs, 'No preventive maintenance records found for ' + v.Month + '.', 'Show November 2026', { Month: MONTH });
+      const list = PMS.filter((p) => all(v.Category) || p.cat === v.Category);
+      const n = (st) => list.filter((p) => p.status === st).length;
+      return doc(pairs,
+        [kpi('Planned', sum(list, (p) => p.planned)), kpi('Completed', sum(list, (p) => p.done)), kpi('Due today', n('Due today')), kpi('Overdue', n('Overdue'), n('Overdue') > 0), kpi('Upcoming', n('Upcoming'))],
+        [
+          section('PM schedule', 'minmax(0, 1.3fr) minmax(0, 1fr) 52px 92px 92px', '600px',
+            ['Asset', 'Assigned to', ['Done', 'right'], 'Next due', 'Status'],
+            list.map((p) => [two(p.asset, p.task, { fw: '500' }), two(p.who, p.freq), num(p.done + ' / ' + p.planned), cell(fmt(p.next), { fg: p.status === 'Overdue' ? RED : '#161A21', fw: p.status === 'Overdue' ? '600' : '400' }), pill(p.status)]),
+            null, 'No PM tasks are scheduled in this category.'),
+          section('Category-wise compliance', PM_COLS, '520px', PM_HEAD, pmByCat(list), list.length > 1 ? pmTotal(list) : null,
+            'No PM tasks are scheduled in this category.', PM_NOTE)
+        ]);
+    }
+
+    // ---- Material Consumption Report ----
+    if (def.key === 'material') {
+      const from = v.From;
+      const to = v.To;
+      const pairs = [['Period', fmt(from) + ' – ' + fmt(to)], ['Category', v.Category]];
+      if (from > to) return none(pairs, 'The From date is after the To date.', 'Show 1–24 Nov 2026', { From: '2026-11-01', To: TODAY });
+      // code: [name, category, unit, rate ₹, in stock, minimum]
+      const ITEMS = {
+        'SP-EL-016': ['MCB 16 A SP, C-curve', 'Electrical', 'Nos', 210, 3, 10],
+        'SP-EL-036': ['LED panel driver 36 W', 'Electrical', 'Nos', 560, 12, 6],
+        'SP-EL-104': ['LED tube 20 W', 'Electrical', 'Nos', 240, 46, 20],
+        'SP-EL-130': ['LED street light 30 W', 'Electrical', 'Nos', 1850, 4, 4],
+        'SP-EL-210': ['SMF battery 6 V 4.5 Ah', 'Electrical', 'Nos', 650, 5, 4],
+        'SP-PL-021': ['Flush valve washer kit', 'Plumbing', 'Sets', 380, 2, 5],
+        'SP-PL-031': ['Float valve 25 mm', 'Plumbing', 'Nos', 1150, 2, 2],
+        'SP-PL-045': ['Pillar tap 15 mm', 'Plumbing', 'Nos', 690, 7, 4],
+        'SP-HV-410': ['Refrigerant R-410A', 'AC & HVAC', 'kg', 950, 6, 10],
+        'SP-HV-207': ['Condenser coil cleaner', 'AC & HVAC', 'Litres', 420, 3, 2],
+        'SP-HV-112': ['AHU pre-filter 24 × 24 in', 'AC & HVAC', 'Nos', 780, 16, 8],
+        'SP-FS-006': ['ABC extinguisher refill, 6 kg', 'Fire Safety', 'Nos', 450, 0, 4],
+        'SP-CV-032': ['Door closer, medium duty', 'Civil & Carpentry', 'Nos', 1450, 3, 2],
+        'SP-CC-008': ['CCTV dome camera 2 MP', 'CCTV & Access Control', 'Nos', 2900, 1, 1]
+      };
+      const qty = (q, unit) => (unit === 'kg' ? q + ' kg' : unit === 'Litres' ? q + ' L' : unit === 'Sets' ? q + (q === 1 ? ' set' : ' sets') : q + (q === 1 ? ' no.' : ' nos.'));
+      const list = [
+        ['2026-11-24', 'CMP-26-0433', 'SP-HV-410', 2, 'Vikram Solanki'],
+        ['2026-11-24', 'CMP-26-0433', 'SP-HV-207', 1, 'Vikram Solanki'],
+        ['2026-11-24', 'CMP-26-0432', 'SP-EL-210', 1, 'Ramesh Patel'],
+        ['2026-11-24', 'CMP-26-0431', 'SP-PL-021', 1, 'Suresh Rathod'],
+        ['2026-11-24', 'CMP-26-0426', 'SP-EL-016', 1, 'Imran Shaikh'],
+        ['2026-11-24', 'CMP-26-0422', 'SP-PL-031', 1, 'Suresh Rathod'],
+        ['2026-11-24', 'CMP-26-0418', 'SP-EL-104', 1, 'Imran Shaikh'],
+        ['2026-11-24', 'CMP-26-0412', 'SP-EL-130', 2, 'Ramesh Patel'],
+        ['2026-11-21', 'CMP-26-0395', 'SP-EL-036', 2, 'Imran Shaikh'],
+        ['2026-11-19', 'CMP-26-0374', 'SP-PL-045', 1, 'Suresh Rathod'],
+        ['2026-11-18', 'CMP-26-0352', 'SP-FS-006', 4, 'Agnirakshak Fire Systems'],
+        ['2026-11-15', 'CMP-26-0333', 'SP-EL-104', 6, 'Nilesh Chauhan'],
+        ['2026-11-12', 'CMP-26-0306', 'SP-CV-032', 1, 'Mahesh Parmar'],
+        ['2026-11-10', 'PM-26-117', 'SP-HV-112', 4, 'Vikram Solanki'],
+        ['2026-11-08', 'CMP-26-0279', 'SP-EL-016', 2, 'Ramesh Patel'],
+        ['2026-11-06', 'CMP-26-0265', 'SP-HV-410', 3, 'Vikram Solanki'],
+        ['2026-11-02', 'CMP-26-0236', 'SP-CC-008', 1, 'Arjun Desai']
+      ].map(([d, no, c, q, who]) => {
+        const it = ITEMS[c];
+        return { d, no, code: c, q, who, name: it[0], cat: it[1], unit: it[2], value: q * it[3] };
+      }).filter((i) => i.d >= from && i.d <= to && (all(v.Category) || i.cat === v.Category));
+      const items = uniq(list.map((i) => i.code)).map((c) => {
+        const it = ITEMS[c];
+        const l = list.filter((i) => i.code === c);
+        return { code: c, name: it[0], unit: it[2], q: sum(l, (i) => i.q), value: sum(l, (i) => i.value), stock: it[4], min: it[5] };
+      }).sort((a, b) => b.value - a.value);
+      const stockStatus = (x) => (x.stock === 0 ? 'Out of stock' : (x.stock < x.min ? 'Reorder' : 'In stock'));
+      const reorder = items.filter((x) => x.stock < x.min).length;
+      const V = sum(list, (i) => i.value);
+      return doc(pairs,
+        [kpi('Issues', list.length), kpi('Items', items.length), kpi('Total value', inr(V)), kpi('To reorder', reorder, reorder > 0)],
+        [
+          section('Spare parts issued', '92px 108px minmax(0, 1fr) 60px 76px', '560px',
+            ['Date', 'Job', 'Item', ['Qty', 'right'], ['Value', 'right']],
+            list.map((i) => [dim(fmt(i.d)), ref(i.no), two(i.name, i.cat + ' · ' + i.who), num(qty(i.q, i.unit)), num(inr(i.value))]),
+            [tot('Total', 'left'), tot(''), tot(''), tot(''), tot(inr(V))],
+            'No spare parts were issued in this period.'),
+          section('Item-wise consumption', 'minmax(0, 1fr) 68px 76px 64px 104px', '540px',
+            ['Item', ['Issued', 'right'], ['Value', 'right'], ['In stock', 'right'], 'Status'],
+            items.map((x) => [two(x.name, x.code), num(qty(x.q, x.unit)), num(inr(x.value)), num(x.stock, { fw: '600', fg: x.stock < x.min ? RED : '#161A21' }), pill(stockStatus(x))]),
+            null, 'No spare parts were issued in this period.')
+        ]);
+    }
+
+    return { title: def.name, meta: meta([]), hasData: false, noData: false, kpis: [], sections: [], emptyText: '', resetLabel: '', reset: null };
   }
 }
 </script>
