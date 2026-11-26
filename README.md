@@ -58,3 +58,10 @@ To view a page, start a local web server in this folder (for example `python3 -m
 
 The export never includes hidden files (files whose names start with a dot) or
 files the editor keeps for its own use.
+
+## Deployment
+
+Live at https://daily-maintenance-system.vercel.app (the root URL redirects to the Sign In page).
+
+The Vercel project `daily-maintenance-system` is connected to this repository:
+every push to `main` deploys to production, and pushes to other branches get preview URLs.
