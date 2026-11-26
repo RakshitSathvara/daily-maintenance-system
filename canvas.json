@@ -1,0 +1,361 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1840,
+      "title": "01 · Dashboard",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    {
+      "file": "Sidebar.dc.html",
+      "x": -328,
+      "y": 0,
+      "w": 248,
+      "h": 840,
+      "title": "Component · Sidebar navigation",
+      "is_interactive": true
+    },
+    {
+      "file": "WorkEntry.dc.html",
+      "x": 1520,
+      "y": 0,
+      "w": 1440,
+      "h": 1760,
+      "title": "02 · Daily Work Entry",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    {
+      "file": "Complaints.dc.html",
+      "x": 3040,
+      "y": 0,
+      "w": 1440,
+      "h": 1900,
+      "title": "03 · Repair & Complaints",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    {
+      "file": "ComplaintDetail.dc.html",
+      "x": 0,
+      "y": 2020,
+      "w": 1440,
+      "h": 1500,
+      "title": "04 · Complaint Detail & Workflow",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    {
+      "file": "Preventive.dc.html",
+      "x": 1520,
+      "y": 2020,
+      "w": 1440,
+      "h": 1280,
+      "title": "05 · Preventive Maintenance",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    {
+      "file": "Vendors.dc.html",
+      "x": 3040,
+      "y": 2020,
+      "w": 1440,
+      "h": 1320,
+      "title": "06 · Vendor Management",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    {
+      "file": "Stock.dc.html",
+      "x": 0,
+      "y": 3640,
+      "w": 1440,
+      "h": 1840,
+      "title": "07 · Spare Parts / Stock",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    {
+      "file": "Reports.dc.html",
+      "x": 1520,
+      "y": 3640,
+      "w": 1440,
+      "h": 2000,
+      "title": "08 · Reports",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    {
+      "file": "Categories.dc.html",
+      "x": 3040,
+      "y": 3640,
+      "w": 1440,
+      "h": 1260,
+      "title": "09 · Maintenance Categories",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    {
+      "file": "SignIn.dc.html",
+      "x": -1848,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "00 · Sign In",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    {
+      "file": "TabletSignIn.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 820,
+      "h": 1180,
+      "title": "00 · Sign In · Tablet",
+      "page": "tablet",
+      "is_interactive": true
+    },
+    {
+      "file": "TabletMain.dc.html",
+      "x": 900,
+      "y": 0,
+      "w": 820,
+      "h": 1180,
+      "title": "01 · Dashboard · Tablet",
+      "page": "tablet",
+      "is_interactive": true
+    },
+    {
+      "file": "TabletWorkEntry.dc.html",
+      "x": 1800,
+      "y": 0,
+      "w": 820,
+      "h": 1180,
+      "title": "02 · Daily Work Entry · Tablet",
+      "page": "tablet",
+      "is_interactive": true
+    },
+    {
+      "file": "TabletComplaints.dc.html",
+      "x": 2700,
+      "y": 0,
+      "w": 820,
+      "h": 1180,
+      "title": "03 · Repair & Complaints · Tablet",
+      "page": "tablet",
+      "is_interactive": true
+    },
+    {
+      "file": "TabletComplaintDetail.dc.html",
+      "x": 3600,
+      "y": 0,
+      "w": 820,
+      "h": 1180,
+      "title": "04 · Complaint Detail & Workflow · Tablet",
+      "page": "tablet",
+      "is_interactive": true
+    },
+    {
+      "file": "TabletPreventive.dc.html",
+      "x": 0,
+      "y": 1300,
+      "w": 820,
+      "h": 1180,
+      "title": "05 · Preventive Maintenance · Tablet",
+      "page": "tablet",
+      "is_interactive": true
+    },
+    {
+      "file": "TabletVendors.dc.html",
+      "x": 900,
+      "y": 1300,
+      "w": 820,
+      "h": 1180,
+      "title": "06 · Vendor Management · Tablet",
+      "page": "tablet",
+      "is_interactive": true
+    },
+    {
+      "file": "TabletStock.dc.html",
+      "x": 1800,
+      "y": 1300,
+      "w": 820,
+      "h": 1180,
+      "title": "07 · Spare Parts / Stock · Tablet",
+      "page": "tablet",
+      "is_interactive": true
+    },
+    {
+      "file": "TabletReports.dc.html",
+      "x": 2700,
+      "y": 1300,
+      "w": 820,
+      "h": 1180,
+      "title": "08 · Reports · Tablet",
+      "page": "tablet",
+      "is_interactive": true
+    },
+    {
+      "file": "TabletCategories.dc.html",
+      "x": 3600,
+      "y": 1300,
+      "w": 820,
+      "h": 1180,
+      "title": "09 · Maintenance Categories · Tablet",
+      "page": "tablet",
+      "is_interactive": true
+    },
+    {
+      "file": "PhoneSignIn.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "00 · Sign In · Phone",
+      "page": "mobile",
+      "is_interactive": true
+    },
+    {
+      "file": "PhoneMain.dc.html",
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "01 · Dashboard · Phone",
+      "page": "mobile",
+      "is_interactive": true
+    },
+    {
+      "file": "PhoneWorkEntry.dc.html",
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "02 · Daily Work Entry · Phone",
+      "page": "mobile",
+      "is_interactive": true
+    },
+    {
+      "file": "PhoneComplaints.dc.html",
+      "x": 1410,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "03 · Repair & Complaints · Phone",
+      "page": "mobile",
+      "is_interactive": true
+    },
+    {
+      "file": "PhoneComplaintDetail.dc.html",
+      "x": 1880,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "04 · Complaint Detail & Workflow · Phone",
+      "page": "mobile",
+      "is_interactive": true
+    },
+    {
+      "file": "PhonePreventive.dc.html",
+      "x": 0,
+      "y": 964,
+      "w": 390,
+      "h": 844,
+      "title": "05 · Preventive Maintenance · Phone",
+      "page": "mobile",
+      "is_interactive": true
+    },
+    {
+      "file": "PhoneVendors.dc.html",
+      "x": 470,
+      "y": 964,
+      "w": 390,
+      "h": 844,
+      "title": "06 · Vendor Management · Phone",
+      "page": "mobile",
+      "is_interactive": true
+    },
+    {
+      "file": "PhoneStock.dc.html",
+      "x": 940,
+      "y": 964,
+      "w": 390,
+      "h": 844,
+      "title": "07 · Spare Parts / Stock · Phone",
+      "page": "mobile",
+      "is_interactive": true
+    },
+    {
+      "file": "PhoneReports.dc.html",
+      "x": 1410,
+      "y": 964,
+      "w": 390,
+      "h": 844,
+      "title": "08 · Reports · Phone",
+      "page": "mobile",
+      "is_interactive": true
+    },
+    {
+      "file": "PhoneCategories.dc.html",
+      "x": 1880,
+      "y": 964,
+      "w": 390,
+      "h": 844,
+      "title": "09 · Maintenance Categories · Phone",
+      "page": "mobile",
+      "is_interactive": true
+    }
+  ],
+  "annotations": [
+    {
+      "id": "title",
+      "x": 0,
+      "y": -300,
+      "w": 240,
+      "maxW": 4480,
+      "text": "Daily Maintenance Management System — clickable mock",
+      "kind": "title1"
+    },
+    {
+      "id": "titleMobile",
+      "x": 0,
+      "y": -300,
+      "w": 240,
+      "maxW": 2270,
+      "text": "Daily Maintenance Management System — Mobile",
+      "kind": "title1",
+      "page": "mobile"
+    },
+    {
+      "id": "titleTablet",
+      "x": 0,
+      "y": -300,
+      "w": 240,
+      "maxW": 4420,
+      "text": "Daily Maintenance Management System — Tablet & iPad",
+      "kind": "title1",
+      "page": "tablet"
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  },
+  "pages": [
+    {
+      "id": "desktop",
+      "name": "Desktop"
+    },
+    {
+      "id": "tablet",
+      "name": "Tablet & iPad"
+    },
+    {
+      "id": "mobile",
+      "name": "Mobile"
+    }
+  ]
+}

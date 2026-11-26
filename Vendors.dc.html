@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Vendor Management</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#F4F5F7}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:#2F5BEA}a:hover{color:#1E40AF}
+@media (max-width: 699px){input,select,textarea{font-size:16px !important}}
+</style>
+</helmet>
+<div style="min-height: {{ shell.minH }}; display: flex; flex-wrap: wrap; align-content: {{ shell.alignContent }}; background: #F4F5F7; color: #161A21; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 14px; line-height: 1.45">
+<div style="flex: {{ shell.navFlex }}; display: flex; flex-direction: column; background: #11161D">
+<dc-import name="Sidebar" active="vendors" mode="{{ mode }}" device="{{ device }}" hint-size="100%,840px"></dc-import>
+</div>
+<main style="flex: 999 1 560px; min-width: 0; padding: {{ shell.mainPad }}">
+<div style="width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px">
+
+<header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<nav aria-label="Breadcrumb" style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: #5B6472">
+<a href="{{ L.Main }}" style="color: #5B6472; text-decoration: none">Dashboard</a>
+<span aria-hidden="true">/</span>
+<span>Resources</span>
+<span aria-hidden="true">/</span>
+<span style="color: #161A21; font-weight: 500">Vendor Management</span>
+</nav>
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 30px; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; color: #11161D">Vendor Management</h1>
+<p style="margin: 0; color: #5B6472">{{ subtitle }}</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" onClick="{{ exportList }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 14px; font-weight: 600; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 20h14"></path></svg>Export</button>
+<button type="button" onClick="{{ openAdd }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid #2F5BEA; border-radius: 10px; background: #2F5BEA; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add vendor</button>
+</div>
+</header>
+
+<sc-if value="{{ hasDue }}" hint-placeholder-val="{{ true }}">
+<section aria-label="Renewal alert" style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 16px 20px; border: 1px solid #F3D48A; border-radius: 14px; background: #FFF8E6">
+<span aria-hidden="true" style="flex: none; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: #FDEBC2; color: #8A5A00"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l9.5 16.5h-19z"></path><path d="M12 10v4.5M12 17.5v.01"></path></svg></span>
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 700; color: #5C3D00">{{ dueTitle }}</span>
+<span style="font-size: 13.5px; color: #5C3D00">{{ dueText }}</span>
+</div>
+<a href="#renewals" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid #E2C27A; border-radius: 10px; background: #FFFFFF; color: #5C3D00; font-weight: 600; text-decoration: none">Review renewals</a>
+</section>
+</sc-if>
+<sc-if value="{{ noDue }}" hint-placeholder-val="{{ false }}">
+<section aria-label="Renewal status" style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 16px 20px; border: 1px solid #B9E1C8; border-radius: 14px; background: #EEF8F2">
+<span aria-hidden="true" style="flex: none; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: #D5EFDF; color: #1C6B3F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+<span style="flex: 1 1 320px; font-weight: 700; color: #1C4D31">All AMC contracts are current. No renewals due this month.</span>
+</section>
+</sc-if>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<sc-for list="{{ types }}" as="t" hint-placeholder-count="3">
+<button type="button" onClick="{{ t.pick }}" aria-pressed="{{ t.on }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid {{ t.border }}; background: {{ t.bg }}; color: {{ t.fg }}">{{ t.label }}<span style="font-weight: 500; color: {{ t.countFg }}">{{ t.count }}</span></button>
+</sc-for>
+<div style="flex: 1 1 260px; max-width: 380px; margin-left: auto; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; color: #5B6472">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+<input type="search" value="{{ q }}" onChange="{{ setQ }}" aria-label="Search vendors" placeholder="Search vendor, contact or category" style="flex: 1 1 auto; min-width: 0; height: 42px; padding: 0; border: 0; background: transparent; color: #161A21; font-size: 14px">
+</div>
+</div>
+
+<section aria-label="Vendors" style="border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; overflow: hidden; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+<div style="overflow-x: auto">
+<div style="min-width: 1082px">
+<div style="display: grid; grid-template-columns: minmax(200px, 1.4fr) 140px 150px 100px 80px 96px 72px 120px; gap: 12px; align-items: center; padding: 10px 20px; background: #F7F8FA; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #5B6472">
+<span>Vendor &amp; contact</span><span>Category</span><span>Contract</span><span>Valid till</span><span>Jobs (Nov)</span><span>Open calls</span><span>SLA met</span><span>Status</span>
+</div>
+<sc-for list="{{ list }}" as="v" hint-placeholder-count="8">
+<div style="display: grid; grid-template-columns: minmax(200px, 1.4fr) 140px 150px 100px 80px 96px 72px 120px; gap: 12px; align-items: center; padding: 10px 20px; min-height: 62px; border-top: 1px solid #EEF0F3">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-weight: 600">{{ v.name }}</span>
+<span style="font-size: 12.5px; color: #5B6472">{{ v.contact }}</span>
+</div>
+<span style="font-size: 13.5px">{{ v.cat }}</span>
+<span style="font-size: 13.5px">{{ v.contract }}</span>
+<span style="font-size: 13.5px; font-weight: {{ v.validWeight }}; color: {{ v.validFg }}">{{ v.valid }}</span>
+<span style="font-size: 13.5px">{{ v.jobs }}</span>
+<div style="display: flex; flex-direction: column; gap: 1px">
+<sc-if value="{{ v.hasOpen }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; font-weight: 600; color: #8A5A00">1 open</span><a href="{{ v.go.ComplaintDetail }}" style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 12px; font-weight: 600; text-decoration: none">{{ v.open }}</a></sc-if>
+<sc-if value="{{ v.noOpen }}" hint-placeholder-val="{{ true }}"><span style="font-size: 13.5px; color: #5B6472">None</span></sc-if>
+</div>
+<span style="font-size: 13.5px; font-weight: 600">{{ v.sla }}</span>
+<span style="justify-self: start; display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; font-size: 12.5px; font-weight: 600; white-space: nowrap; background: {{ v.statusBg }}; color: {{ v.statusFg }}">{{ v.status }}</span>
+</div>
+</sc-for>
+<sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+<div style="padding: 48px 20px; border-top: 1px solid #EEF0F3; text-align: center; color: #5B6472">No vendors match this search.</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ compact }}" hint-placeholder-val="{{ false }}">
+<ul style="margin: 0 0 0 -1px; padding: 0; list-style: none; display: grid; grid-template-columns: {{ ui.cardCols }}">
+<sc-for list="{{ list }}" as="v" hint-placeholder-count="8">
+<li style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-top: 1px solid #EEF0F3; border-left: 1px solid #EEF0F3">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-weight: 600">{{ v.name }}</span>
+<span style="font-size: 12.5px; color: #5B6472">{{ v.contact }}</span>
+</div>
+<span style="flex: none; display: inline-flex; align-items: center; min-height: 24px; padding: 0 9px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; background: {{ v.statusBg }}; color: {{ v.statusFg }}">{{ v.status }}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: #3D4757">
+<span>{{ v.cat }} · {{ v.contract }}</span>
+<span style="font-weight: {{ v.validWeight }}; color: {{ v.validFg }}">Valid till {{ v.valid }}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; font-size: 13px; color: #3D4757">
+<span>{{ v.jobs }} jobs in Nov</span>
+<span>SLA met {{ v.sla }}</span>
+<sc-if value="{{ v.hasOpen }}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 6px"><span style="font-weight: 600; color: #8A5A00">1 open call</span><a href="{{ v.go.ComplaintDetail }}" style="display: inline-flex; align-items: center; min-height: 32px; font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px; font-weight: 600; text-decoration: none">{{ v.open }}</a></span></sc-if>
+</div>
+</li>
+</sc-for>
+</ul>
+<sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+<div style="padding: 40px 20px; border-top: 1px solid #EEF0F3; text-align: center; color: #5B6472">No vendors match this search.</div>
+</sc-if>
+</sc-if>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px">
+
+<section aria-labelledby="vd-visits" style="flex: 1 1 440px; min-width: 0; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; overflow: hidden; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 18px 20px 12px">
+<h2 id="vd-visits" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 17px; font-weight: 600; line-height: 1.3; color: #11161D">Vendor visits this week</h2>
+<a href="{{ L.Preventive }}" style="font-size: 13.5px; font-weight: 600; text-decoration: none">PM schedule</a>
+</div>
+<ul style="margin: 0; padding: 0; list-style: none">
+<li style="display: flex; flex-wrap: wrap; gap: 8px 14px; padding: {{ ui.visitPad }}; border-top: 1px solid #EEF0F3">
+<div style="flex: none; width: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px 0; border-radius: 10px; background: #EEF2FE; color: #2346B8"><span style="font-size: 11px; font-weight: 700; text-transform: uppercase">Tue</span><span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 18px; font-weight: 600; line-height: 1.1">24</span></div>
+<div style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600">Sabar Lift Engineers</span>
+<span style="font-size: 13px; color: #5B6472">Lift L2 breakdown · <a href="{{ L.ComplaintDetail }}" style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-weight: 600; text-decoration: none">CMP-26-0435</a></span>
+</div>
+<span style="flex: none; align-self: center; margin-left: {{ ui.chipMl }}; display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; background: #FDE8DF; color: #A3330A; font-size: 12.5px; font-weight: 600">Breakdown call</span>
+</li>
+<li style="display: flex; flex-wrap: wrap; gap: 8px 14px; padding: {{ ui.visitPad }}; border-top: 1px solid #EEF0F3">
+<div style="flex: none; width: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px 0; border-radius: 10px; background: #EEF2FE; color: #2346B8"><span style="font-size: 11px; font-weight: 700; text-transform: uppercase">Tue</span><span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 18px; font-weight: 600; line-height: 1.1">24</span></div>
+<div style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600">Kesar Cooling Services</span>
+<span style="font-size: 13px; color: #5B6472">HP switch replacement · <a href="{{ L.ComplaintDetail }}" style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-weight: 600; text-decoration: none">CMP-26-0433</a></span>
+</div>
+<span style="flex: none; align-self: center; margin-left: {{ ui.chipMl }}; display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; background: #FDE8DF; color: #A3330A; font-size: 12.5px; font-weight: 600">Breakdown call</span>
+</li>
+<li style="display: flex; flex-wrap: wrap; gap: 8px 14px; padding: {{ ui.visitPad }}; border-top: 1px solid #EEF0F3">
+<div style="flex: none; width: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px 0; border-radius: 10px; background: #EEF2FE; color: #2346B8"><span style="font-size: 11px; font-weight: 700; text-transform: uppercase">Tue</span><span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 18px; font-weight: 600; line-height: 1.1">24</span></div>
+<div style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600">Sabar Lift Engineers</span>
+<span style="font-size: 13px; color: #5B6472">Monthly AMC service, lifts L1 and L2</span>
+</div>
+<span style="flex: none; align-self: center; margin-left: {{ ui.chipMl }}; display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; background: #E8EEFD; color: #2346B8; font-size: 12.5px; font-weight: 600">PM visit</span>
+</li>
+<li style="display: flex; flex-wrap: wrap; gap: 8px 14px; padding: {{ ui.visitPad }}; border-top: 1px solid #EEF0F3">
+<div style="flex: none; width: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px 0; border-radius: 10px; background: #F4F5F7; color: #3D4757"><span style="font-size: 11px; font-weight: 700; text-transform: uppercase">Fri</span><span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 18px; font-weight: 600; line-height: 1.1">27</span></div>
+<div style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600">Jalseva Plumbing Works</span>
+<span style="font-size: 13px; color: #5B6472">Overhead and UG water tank cleaning</span>
+</div>
+<span style="flex: none; align-self: center; margin-left: {{ ui.chipMl }}; display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; background: #E8EEFD; color: #2346B8; font-size: 12.5px; font-weight: 600">PM visit</span>
+</li>
+<li style="display: flex; flex-wrap: wrap; gap: 8px 14px; padding: {{ ui.visitPad }}; border-top: 1px solid #EEF0F3">
+<div style="flex: none; width: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px 0; border-radius: 10px; background: #F4F5F7; color: #3D4757"><span style="font-size: 11px; font-weight: 700; text-transform: uppercase">Sun</span><span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 18px; font-weight: 600; line-height: 1.1">29</span></div>
+<div style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600">Sudarshan Power Systems</span>
+<span style="font-size: 13px; color: #5B6472">UPS 40 kVA battery health test</span>
+</div>
+<span style="flex: none; align-self: center; margin-left: {{ ui.chipMl }}; display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; background: #E8EEFD; color: #2346B8; font-size: 12.5px; font-weight: 600">PM visit</span>
+</li>
+</ul>
+</section>
+
+<section id="renewals" aria-labelledby="vd-renewals" style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 14px; padding: 18px 20px 20px; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<h2 id="vd-renewals" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 17px; font-weight: 600; line-height: 1.3; color: #11161D">AMC renewals</h2>
+<p style="margin: 0; font-size: 13px; color: #5B6472">Contracts ending in the next 30 days</p>
+</div>
+<sc-for list="{{ renewals }}" as="r" hint-placeholder-count="2">
+<article style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid #E3E6EB; border-radius: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600">{{ r.name }}</span>
+<span style="font-size: 13px; color: #5B6472">{{ r.detail }}</span>
+</div>
+<span style="display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; font-size: 12.5px; font-weight: 600; background: {{ r.chipBg }}; color: {{ r.chipFg }}">{{ r.chip }}</span>
+</div>
+<sc-if value="{{ r.pending }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" onClick="{{ r.quote }}" disabled="{{ r.quoted }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; font-size: 14px; font-weight: 600; color: {{ r.quoteFg }}; cursor: {{ r.quoteCursor }}">{{ r.quoteLabel }}</button>
+<button type="button" onClick="{{ r.renew }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid #2F5BEA; border-radius: 10px; background: #2F5BEA; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer">Renew AMC</button>
+</div>
+</sc-if>
+</article>
+</sc-for>
+</section>
+
+</div>
+
+</div>
+</main>
+
+<sc-if value="{{ addOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(17, 22, 29, 0.55)">
+<section role="dialog" aria-modal="true" aria-labelledby="vd-add-title" style="width: 100%; max-width: 540px; max-height: 100%; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; padding: 24px; border-radius: 16px; background: #FFFFFF; box-shadow: 0 24px 64px rgba(17, 22, 29, 0.35)">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<h2 id="vd-add-title" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 20px; font-weight: 600; line-height: 1.25; color: #11161D">Add vendor</h2>
+<p style="margin: 0; font-size: 13px; color: #5B6472">Add a service vendor and its contract.</p>
+</div>
+<button type="button" onClick="{{ closeModal }}" aria-label="Close" style="flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: #5B6472; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="vd-add-name" style="font-size: 13px; font-weight: 600; color: #2A313C">Vendor name <span aria-hidden="true" style="color: #C2410C">*</span></label>
+<input id="vd-add-name" type="text" placeholder="Company name" value="{{ add.name }}" onChange="{{ onAdd.name }}" aria-required="true" style="width: 100%; min-height: 44px; padding: 0 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="vd-add-contact" style="font-size: 13px; font-weight: 600; color: #2A313C">Contact person</label>
+<input id="vd-add-contact" type="text" placeholder="Name" value="{{ add.contact }}" onChange="{{ onAdd.contact }}" style="width: 100%; min-height: 44px; padding: 0 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="vd-add-cat" style="font-size: 13px; font-weight: 600; color: #2A313C">Category</label>
+<select id="vd-add-cat" value="{{ add.cat }}" onChange="{{ onAdd.cat }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+<option>Electrical</option>
+<option>Plumbing</option>
+<option>AC &amp; HVAC</option>
+<option>Civil &amp; Carpentry</option>
+<option>Lift</option>
+<option>Fire Safety</option>
+<option>CCTV &amp; Access Control</option>
+<option>BMS</option>
+<option>Generator &amp; UPS</option>
+<option>Housekeeping &amp; General</option>
+</select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="vd-add-type" style="font-size: 13px; font-weight: 600; color: #2A313C">Contract</label>
+<select id="vd-add-type" value="{{ add.type }}" onChange="{{ onAdd.type }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+<option value="AMC">AMC</option>
+<option value="On-call">On-call rate contract</option>
+</select>
+</div>
+<sc-if value="{{ addIsAmc }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="vd-add-valid" style="font-size: 13px; font-weight: 600; color: #2A313C">AMC valid till</label>
+<input id="vd-add-valid" type="date" value="{{ add.valid }}" onChange="{{ onAdd.valid }}" style="width: 100%; min-height: 44px; padding: 0 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+</div>
+</sc-if>
+</div>
+<sc-if value="{{ hasAddError }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; font-size: 13px; font-weight: 600; color: #A3330A">{{ addError }}</p></sc-if>
+<div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px">
+<button type="button" onClick="{{ closeModal }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 14px; font-weight: 600; cursor: pointer">Cancel</button>
+<button type="button" onClick="{{ submitAdd }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 1px solid #2F5BEA; border-radius: 10px; background: #2F5BEA; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add vendor</button>
+</div>
+</section>
+</div>
+</sc-if>
+
+<div role="status" aria-live="polite" style="position: fixed; right: {{ shell.toastRight }}; bottom: {{ shell.toastBottom }}; z-index: 60; display: flex; flex-direction: column; align-items: flex-end; max-width: calc(100vw - 48px)">
+<sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 16px; border-radius: 12px; background: #11161D; color: #FFFFFF; box-shadow: 0 12px 32px rgba(17, 22, 29, 0.28)">
+<span aria-hidden="true" style="flex: none; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #2E9D5E; color: #FFFFFF"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+<span style="flex: 1 1 auto; font-weight: 500">{{ toastText }}</span>
+<button type="button" onClick="{{ closeToast }}" aria-label="Dismiss message" style="flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: #B8C2CF; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</sc-if>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"device":{"editor":null},"$preview":{"width":1440,"height":1320}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this._onResize = () => this.setState({ vw: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+  }
+  renderVals() {
+    const dev = this.props.device;
+    const device = dev === 'phone' || dev === 'tablet' ? dev : '';
+    const vw = (this.state && this.state.vw) || (typeof window !== 'undefined' ? window.innerWidth : 1440);
+    const mode = device || (vw < 700 ? 'phone' : (vw < 1280 ? 'tablet' : 'desktop'));
+    const pre = device === 'phone' ? 'Phone' : (device === 'tablet' ? 'Tablet' : '');
+    const L = {};
+    ['SignIn', 'Main', 'WorkEntry', 'Complaints', 'ComplaintDetail', 'Preventive', 'Vendors', 'Stock', 'Reports', 'Categories'].forEach((n) => { L[n] = pre + n + '.dc.html'; });
+    const isPhone = mode === 'phone';
+    const isTablet = mode === 'tablet';
+    const shell = {
+      minH: device === 'phone' ? '844px' : (device === 'tablet' ? '1180px' : '100vh'),
+      alignContent: isPhone ? 'flex-start' : 'stretch',
+      navFlex: isPhone ? '1 1 100%' : (isTablet ? '0 0 88px' : '1 1 248px'),
+      mainPad: isPhone ? '20px 16px 104px' : (isTablet ? '24px 24px 48px' : '28px 32px 48px'),
+      toastRight: isPhone ? '12px' : '24px',
+      toastBottom: isPhone ? '84px' : '24px'
+    };
+    const vals = this.pageVals();
+    const ui = this.uiVals ? this.uiVals(mode) : {};
+    const plain = (o) => !!o && typeof o === 'object' && !Array.isArray(o) && Object.getPrototypeOf(o) === Object.prototype;
+    const withGo = (v, depth) => {
+      if (depth > 4) return v;
+      if (Array.isArray(v)) return v.map((it) => (plain(it) ? Object.assign({ go: L, ui: ui }, withGo(it, depth + 1)) : it));
+      if (plain(v)) {
+        const o = {};
+        Object.keys(v).forEach((k) => { o[k] = (Array.isArray(v[k]) || plain(v[k])) ? withGo(v[k], depth + 1) : v[k]; });
+        return o;
+      }
+      return v;
+    };
+    Object.keys(vals).forEach((k) => { if (Array.isArray(vals[k]) || plain(vals[k])) vals[k] = withGo(vals[k], 0); });
+    return Object.assign(vals, { mode, device, L, shell, ui, isPhone, notPhone: !isPhone, isTablet, wide: mode === 'desktop', compact: mode !== 'desktop' });
+  }
+  uiVals(mode) {
+    const phone = mode === 'phone';
+    return {
+      cardCols: mode === 'tablet' ? 'repeat(2, minmax(0, 1fr))' : 'minmax(0, 1fr)',
+      visitPad: phone ? '12px 16px' : '14px 20px',
+      chipMl: phone ? '66px' : '0'
+    };
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    clearTimeout(this._toastTimer);
+  }
+  pageVals() {
+    const s = this.state || {};
+    const type = s.type || 'All';
+    const q = s.q || '';
+    const renewed = s.renewed || {};
+    const quoted = s.quoted || {};
+    const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const fmt = (key) => {
+      const p = (key || '').split('-');
+      return p.length === 3 ? parseInt(p[2], 10) + ' ' + MONTHS[parseInt(p[1], 10) - 1] + ' ' + p[0] : '';
+    };
+    const toast = (text) => {
+      clearTimeout(this._toastTimer);
+      this.setState({ toast: text });
+      this._toastTimer = setTimeout(() => this.setState({ toast: '' }), 4000);
+    };
+    const base = [
+      { name: 'Kesar Cooling Services', contact: 'Jignesh Shah', cat: 'AC & HVAC', type: 'AMC', contract: 'AMC, non-comprehensive', valid: '31 Mar 2027', jobs: 4, open: 'CMP-26-0433', sla: '96%', status: 'Active' },
+      { name: 'Sabar Lift Engineers', contact: 'Dhaval Pandya', cat: 'Lift', type: 'AMC', contract: 'AMC, comprehensive', valid: '30 Nov 2026', renewTo: '30 Nov 2027', days: 6, jobs: 2, open: 'CMP-26-0435', sla: '100%', status: 'Renewal due' },
+      { name: 'Agnirakshak Fire Systems', contact: 'Bhavin Mistry', cat: 'Fire Safety', type: 'AMC', contract: 'AMC, comprehensive', valid: '31 Dec 2026', jobs: 1, open: '', sla: '100%', status: 'Active' },
+      { name: 'Sudarshan Power Systems', contact: 'Paresh Vyas', cat: 'Generator & UPS', type: 'AMC', contract: 'AMC, non-comprehensive', valid: '28 Nov 2026', renewTo: '28 Nov 2027', days: 4, jobs: 1, open: '', sla: '92%', status: 'Renewal due' },
+      { name: 'Netra Security Systems', contact: 'Kunal Thakkar', cat: 'CCTV & Access Control', type: 'AMC', contract: 'AMC, non-comprehensive', valid: '30 Jun 2027', jobs: 2, open: '', sla: '95%', status: 'Active' },
+      { name: 'Sahyog BMS Services', contact: 'Ankit Raval', cat: 'BMS', type: 'AMC', contract: 'AMC, non-comprehensive', valid: '30 Sep 2027', jobs: 1, open: '', sla: '100%', status: 'Active' },
+      { name: 'Jalseva Plumbing Works', contact: 'Hardik Prajapati', cat: 'Plumbing', type: 'On-call', contract: 'On-call rate contract', valid: 'Open-ended', jobs: 3, open: '', sla: '88%', status: 'Active' },
+      { name: 'Vishwakarma Civil Works', contact: 'Manoj Panchal', cat: 'Civil & Carpentry', type: 'On-call', contract: 'On-call rate contract', valid: 'Open-ended', jobs: 2, open: '', sla: '90%', status: 'Active' }
+    ];
+    const vendors = base.concat(s.extra || []).map((v) => {
+      if (v.renewTo && renewed[v.name]) {
+        return Object.assign({}, v, { valid: v.renewTo, status: 'Active' });
+      }
+      return v;
+    });
+    const STATUS = {
+      'Active': ['#E3F4EA', '#1C6B3F'],
+      'Renewal due': ['#FDF3DC', '#8A5A00'],
+      'New': ['#E8EEFD', '#2346B8']
+    };
+    const types = [
+      ['All', 'All vendors'],
+      ['AMC', 'AMC'],
+      ['On-call', 'On-call']
+    ].map(([key, text]) => {
+      const on = key === type;
+      return {
+        label: text,
+        count: key === 'All' ? vendors.length : vendors.filter((v) => v.type === key).length,
+        on,
+        bg: on ? '#11161D' : '#FFFFFF',
+        fg: on ? '#FFFFFF' : '#161A21',
+        border: on ? '#11161D' : '#D5DAE1',
+        countFg: on ? '#B8C2CF' : '#5B6472',
+        pick: () => this.setState({ type: key })
+      };
+    });
+    const needle = q.trim().toLowerCase();
+    const list = vendors.filter((v) =>
+      (type === 'All' || v.type === type) &&
+      (!needle || [v.name, v.contact, v.cat, v.contract].join(' ').toLowerCase().indexOf(needle) !== -1)
+    ).map((v) => {
+      const due = v.status === 'Renewal due';
+      return Object.assign({}, v, {
+        hasOpen: !!v.open,
+        noOpen: !v.open,
+        validFg: due ? '#A3330A' : '#161A21',
+        validWeight: due ? '700' : '400',
+        statusBg: STATUS[v.status][0],
+        statusFg: STATUS[v.status][1]
+      });
+    });
+    const dueBase = base.filter((v) => v.renewTo).sort((a, b) => a.days - b.days);
+    const stillDue = dueBase.filter((v) => !renewed[v.name]);
+    const renewals = dueBase.map((v) => {
+      const done = !!renewed[v.name];
+      const asked = !!quoted[v.name];
+      return {
+        name: v.name,
+        detail: v.cat + ' · ' + v.contract,
+        chip: done ? 'Renewed till ' + v.renewTo : 'Ends ' + v.valid.replace(' 2026', '') + ' · ' + v.days + ' days',
+        chipBg: done ? '#E3F4EA' : (v.days <= 4 ? '#FDE8DF' : '#FDF3DC'),
+        chipFg: done ? '#1C6B3F' : (v.days <= 4 ? '#A3330A' : '#8A5A00'),
+        pending: !done,
+        quoted: asked,
+        quoteLabel: asked ? 'Quote requested' : 'Request quote',
+        quoteFg: asked ? '#5B6472' : '#161A21',
+        quoteCursor: asked ? 'default' : 'pointer',
+        quote: () => {
+          if (asked) return;
+          this.setState({ quoted: Object.assign({}, quoted, { [v.name]: true }) });
+          toast('Quote requested from ' + v.name + '.');
+        },
+        renew: () => {
+          this.setState({ renewed: Object.assign({}, renewed, { [v.name]: true }) });
+          toast(v.name + ' AMC renewed till ' + v.renewTo + '.');
+        }
+      };
+    });
+    const amcActive = vendors.filter((v) => v.type === 'AMC').length;
+    const onCall = vendors.filter((v) => v.type === 'On-call').length;
+
+    const add = Object.assign({ name: '', contact: '', cat: 'Electrical', type: 'AMC', valid: '2027-11-30' }, s.addForm || {});
+    const setAdd = (key) => (e) => this.setState({ addForm: Object.assign({}, add, { [key]: e.target.value }), addError: '' });
+
+    return {
+      subtitle: vendors.length + ' vendors · ' + amcActive + ' AMC contracts · ' + onCall + ' on-call rate contracts',
+      types,
+      list,
+      q,
+      empty: list.length === 0,
+      setQ: (e) => this.setState({ q: e.target.value }),
+      hasDue: stillDue.length > 0,
+      noDue: stillDue.length === 0,
+      dueTitle: stillDue.length + (stillDue.length === 1 ? ' AMC contract expires' : ' AMC contracts expire') + ' this month',
+      dueText: stillDue.map((v) => v.name + ' on ' + v.valid.replace(' 2026', '')).join(' · '),
+      renewals,
+      exportList: () => toast('Exported ' + list.length + ' vendors to Excel.'),
+
+      addOpen: !!s.addOpen,
+      openAdd: () => this.setState({ addOpen: true, addForm: null, addError: '' }),
+      closeModal: () => this.setState({ addOpen: false }),
+      add,
+      addIsAmc: add.type === 'AMC',
+      onAdd: { name: setAdd('name'), contact: setAdd('contact'), cat: setAdd('cat'), type: setAdd('type'), valid: setAdd('valid') },
+      addError: s.addError || '',
+      hasAddError: !!s.addError,
+      submitAdd: () => {
+        const name = add.name.trim();
+        if (!name) {
+          this.setState({ addError: 'Add the vendor name.' });
+          return;
+        }
+        if (add.type === 'AMC' && !add.valid) {
+          this.setState({ addError: 'Pick the date the AMC is valid till.' });
+          return;
+        }
+        const v = {
+          name,
+          contact: add.contact.trim() || 'No contact yet',
+          cat: add.cat,
+          type: add.type,
+          contract: add.type === 'AMC' ? 'AMC, non-comprehensive' : 'On-call rate contract',
+          valid: add.type === 'AMC' ? fmt(add.valid) : 'Open-ended',
+          jobs: 0,
+          open: '',
+          sla: '—',
+          status: 'New'
+        };
+        this.setState({ extra: (s.extra || []).concat([v]), addOpen: false, addForm: null, addError: '' });
+        toast(name + ' added to vendors.');
+      },
+      toastOn: !!s.toast,
+      toastText: s.toast || '',
+      closeToast: () => {
+        clearTimeout(this._toastTimer);
+        this.setState({ toast: '' });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

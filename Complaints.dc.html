@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Repair and Complaints register</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#F4F5F7}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:#2F5BEA}a:hover{color:#1E40AF}
+@media (max-width: 699px){input,select,textarea{font-size:16px !important}}
+</style>
+</helmet>
+<div style="min-height: {{ shell.minH }}; display: flex; flex-wrap: wrap; align-content: {{ shell.alignContent }}; background: #F4F5F7; color: #161A21; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 14px; line-height: 1.45">
+<div style="flex: {{ shell.navFlex }}; display: flex; flex-direction: column; background: #11161D">
+<dc-import name="Sidebar" active="complaints" mode="{{ mode }}" device="{{ device }}" hint-size="100%,840px"></dc-import>
+</div>
+<main style="flex: 999 1 560px; min-width: 0; padding: {{ shell.mainPad }}">
+<div style="width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px">
+
+<header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<nav aria-label="Breadcrumb" style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: #5B6472">
+<a href="{{ L.Main }}" style="color: #5B6472; text-decoration: none">Dashboard</a>
+<span aria-hidden="true">/</span>
+<span>Operations</span>
+<span aria-hidden="true">/</span>
+<span style="color: #161A21; font-weight: 500">Repair &amp; Complaints</span>
+</nav>
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 30px; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; color: #11161D">Repair &amp; Complaints</h1>
+<p style="margin: 0; color: #5B6472">Complaint register for Tuesday, 24 Nov 2026 · 25 logged, 7 open</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" onClick="{{ exportList }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 14px; font-weight: 600; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 20h14"></path></svg>Export</button>
+<a href="{{ L.WorkEntry }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid #2F5BEA; border-radius: 10px; background: #2F5BEA; color: #FFFFFF; font-weight: 600; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Register complaint</a>
+</div>
+</header>
+
+<section aria-label="Filter by workflow stage" style="padding: 12px; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<div style="display: flex; flex-wrap: {{ ui.tabWrap }}; overflow-x: {{ ui.tabScroll }}; scrollbar-width: none; gap: 8px">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+<button type="button" onClick="{{ t.pick }}" aria-pressed="{{ t.on }}" style="flex: {{ ui.tabFlex }}; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 56px; padding: 0 14px; border-radius: 10px; text-align: left; cursor: pointer; border: 1px solid {{ t.border }}; background: {{ t.bg }}; color: {{ t.fg }}">
+<span style="display: flex; flex-direction: column; gap: 1px">
+<span style="font-size: 11.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: {{ t.subFg }}">{{ t.step }}</span>
+<span style="font-size: 14px; font-weight: 600">{{ t.label }}</span>
+</span>
+<span style="min-width: 30px; height: 26px; padding: 0 8px; border-radius: 13px; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; background: {{ t.countBg }}; color: {{ t.countFg }}">{{ t.count }}</span>
+</button>
+</sc-for>
+</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<div style="flex: 2 1 300px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; color: #5B6472">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+<input type="search" value="{{ q }}" onChange="{{ setQ }}" aria-label="Search by complaint no., location, equipment or staff" placeholder="Search complaint no., location, equipment, staff" style="flex: 1 1 auto; min-width: 0; height: 42px; padding: 0; border: 0; background: transparent; color: #161A21; font-size: 14px">
+</div>
+<select aria-label="Department" value="{{ dept }}" onChange="{{ setDept }}" style="flex: 1 1 200px; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+<option value="All">All departments</option>
+<option>Electrical</option>
+<option>Plumbing</option>
+<option>AC &amp; HVAC</option>
+<option>Civil &amp; Carpentry</option>
+<option>Lift</option>
+<option>Fire Safety</option>
+<option>CCTV &amp; Access Control</option>
+<option>BMS</option>
+<option>Generator &amp; UPS</option>
+<option>Housekeeping &amp; General</option>
+</select>
+<select aria-label="Priority" value="{{ prio }}" onChange="{{ setPrio }}" style="flex: 1 1 160px; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+<option value="All">All priorities</option>
+<option>High</option>
+<option>Medium</option>
+<option>Low</option>
+</select>
+<input type="date" aria-label="Work date" value="{{ date }}" onChange="{{ setDate }}" style="flex: 0 1 180px; min-height: 44px; padding: 0 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+<button type="button" onClick="{{ clear }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border: 0; border-radius: 10px; background: transparent; color: #2F5BEA; font-size: 14px; font-weight: 600; cursor: pointer">Clear filters</button>
+</div>
+
+<section aria-label="Complaint register" style="border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; overflow: hidden; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+<div style="overflow-x: auto">
+<div style="min-width: 1110px">
+<div style="display: grid; grid-template-columns: 128px 120px minmax(160px, 1fr) minmax(204px, 1.6fr) 136px 84px 112px 44px; gap: 12px; align-items: center; padding: 10px 20px; background: #F7F8FA; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #5B6472">
+<span>Complaint No.</span><span>Department</span><span>Location</span><span>Equipment / problem</span><span>Assigned staff</span><span>Priority</span><span>Status</span><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">Open</span>
+</div>
+<sc-for list="{{ list }}" as="r" hint-placeholder-count="12">
+<div style="display: grid; grid-template-columns: 128px 120px minmax(160px, 1fr) minmax(204px, 1.6fr) 136px 84px 112px 44px; gap: 12px; align-items: center; padding: 6px 20px; min-height: 58px; border-top: 1px solid #EEF0F3">
+<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3px">
+<a href="{{ r.go.ComplaintDetail }}" style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 13px; font-weight: 600; text-decoration: none">{{ r.no }}</a>
+<div style="display: flex; align-items: center; gap: 6px">
+<span style="font-size: 12px; color: #5B6472">{{ r.time }}</span>
+<sc-if value="{{ r.urgent }}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; min-height: 18px; padding: 0 6px; border-radius: 5px; background: #C2410C; color: #FFFFFF; font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase">Urgent</span></sc-if>
+</div>
+</div>
+<span style="font-size: 13.5px">{{ r.dept }}</span>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-weight: 500">{{ r.area }}</span>
+<span style="font-size: 12.5px; color: #5B6472">{{ r.floor }}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-weight: 500">{{ r.equipment }}</span>
+<span style="font-size: 12.5px; color: #5B6472">{{ r.issue }}</span>
+</div>
+<span style="font-size: 13.5px; color: {{ r.staffFg }}">{{ r.staff }}</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: {{ r.prioFg }}"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: {{ r.prioDot }}"></span>{{ r.priority }}</span>
+<span style="justify-self: start; display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; font-size: 12.5px; font-weight: 600; white-space: nowrap; border: 1px solid {{ r.statusBorder }}; background: {{ r.statusBg }}; color: {{ r.statusFg }}">{{ r.status }}</span>
+<a href="{{ r.go.ComplaintDetail }}" aria-label="{{ r.openLabel }}" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #5B6472"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+</div>
+</sc-for>
+<sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+<div style="padding: 48px 20px; border-top: 1px solid #EEF0F3; text-align: center; color: #5B6472">{{ emptyText }}</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ compact }}" hint-placeholder-val="{{ false }}">
+<ul style="margin: 0 0 0 -1px; padding: 0; list-style: none; display: grid; grid-template-columns: {{ ui.cardCols }}">
+<sc-for list="{{ list }}" as="r" hint-placeholder-count="12">
+<li style="display: flex; border-top: 1px solid #EEF0F3; border-left: 1px solid #EEF0F3">
+<a href="{{ r.go.ComplaintDetail }}" aria-label="{{ r.openLabel }}" style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; color: #161A21; text-decoration: none">
+<span style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 13px; font-weight: 600; color: #2F5BEA">{{ r.no }}</span>
+<span style="font-size: 12px; color: #5B6472">{{ r.time }}</span>
+<sc-if value="{{ r.urgent }}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; min-height: 18px; padding: 0 6px; border-radius: 5px; background: #C2410C; color: #FFFFFF; font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase">Urgent</span></sc-if>
+<span style="margin-left: auto; display: inline-flex; align-items: center; min-height: 24px; padding: 0 9px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; border: 1px solid {{ r.statusBorder }}; background: {{ r.statusBg }}; color: {{ r.statusFg }}">{{ r.status }}</span>
+</span>
+<span style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600">{{ r.equipment }}</span>
+<span style="font-size: 13px; color: #3D4757">{{ r.issue }}</span>
+</span>
+<span style="font-size: 12.5px; color: #5B6472">{{ r.dept }} · {{ r.area }}, {{ r.floor }}</span>
+<span style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; font-size: 13px">
+<span style="color: {{ r.staffFg }}">{{ r.staff }}</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: {{ r.prioFg }}"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: {{ r.prioDot }}"></span>{{ r.priority }} priority</span>
+</span>
+</a>
+</li>
+</sc-for>
+</ul>
+<sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+<div style="padding: 40px 20px; border-top: 1px solid #EEF0F3; text-align: center; color: #5B6472">{{ emptyText }}</div>
+</sc-if>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 14px 20px; border-top: 1px solid #E3E6EB; font-size: 13px; color: #5B6472">
+<span>{{ shownText }}</span>
+<span>Select a complaint number to open its workflow</span>
+</div>
+</section>
+
+</div>
+</main>
+
+<div role="status" aria-live="polite" style="position: fixed; right: {{ shell.toastRight }}; bottom: {{ shell.toastBottom }}; z-index: 60; display: flex; flex-direction: column; align-items: flex-end; max-width: calc(100vw - 48px)">
+<sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 16px; border-radius: 12px; background: #11161D; color: #FFFFFF; box-shadow: 0 12px 32px rgba(17, 22, 29, 0.28)">
+<span aria-hidden="true" style="flex: none; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #2E9D5E; color: #FFFFFF"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+<span style="flex: 1 1 auto; font-weight: 500">{{ toastText }}</span>
+<button type="button" onClick="{{ closeToast }}" aria-label="Dismiss message" style="flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: #B8C2CF; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</sc-if>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"device":{"editor":null},"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this._onResize = () => this.setState({ vw: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+  }
+  renderVals() {
+    const dev = this.props.device;
+    const device = dev === 'phone' || dev === 'tablet' ? dev : '';
+    const vw = (this.state && this.state.vw) || (typeof window !== 'undefined' ? window.innerWidth : 1440);
+    const mode = device || (vw < 700 ? 'phone' : (vw < 1280 ? 'tablet' : 'desktop'));
+    const pre = device === 'phone' ? 'Phone' : (device === 'tablet' ? 'Tablet' : '');
+    const L = {};
+    ['SignIn', 'Main', 'WorkEntry', 'Complaints', 'ComplaintDetail', 'Preventive', 'Vendors', 'Stock', 'Reports', 'Categories'].forEach((n) => { L[n] = pre + n + '.dc.html'; });
+    const isPhone = mode === 'phone';
+    const isTablet = mode === 'tablet';
+    const shell = {
+      minH: device === 'phone' ? '844px' : (device === 'tablet' ? '1180px' : '100vh'),
+      alignContent: isPhone ? 'flex-start' : 'stretch',
+      navFlex: isPhone ? '1 1 100%' : (isTablet ? '0 0 88px' : '1 1 248px'),
+      mainPad: isPhone ? '20px 16px 104px' : (isTablet ? '24px 24px 48px' : '28px 32px 48px'),
+      toastRight: isPhone ? '12px' : '24px',
+      toastBottom: isPhone ? '84px' : '24px'
+    };
+    const vals = this.pageVals();
+    const ui = this.uiVals ? this.uiVals(mode) : {};
+    const plain = (o) => !!o && typeof o === 'object' && !Array.isArray(o) && Object.getPrototypeOf(o) === Object.prototype;
+    const withGo = (v, depth) => {
+      if (depth > 4) return v;
+      if (Array.isArray(v)) return v.map((it) => (plain(it) ? Object.assign({ go: L, ui: ui }, withGo(it, depth + 1)) : it));
+      if (plain(v)) {
+        const o = {};
+        Object.keys(v).forEach((k) => { o[k] = (Array.isArray(v[k]) || plain(v[k])) ? withGo(v[k], depth + 1) : v[k]; });
+        return o;
+      }
+      return v;
+    };
+    Object.keys(vals).forEach((k) => { if (Array.isArray(vals[k]) || plain(vals[k])) vals[k] = withGo(vals[k], 0); });
+    return Object.assign(vals, { mode, device, L, shell, ui, isPhone, notPhone: !isPhone, isTablet, wide: mode === 'desktop', compact: mode !== 'desktop' });
+  }
+  uiVals(mode) {
+    const phone = mode === 'phone';
+    return {
+      tabWrap: phone ? 'nowrap' : 'wrap',
+      tabScroll: phone ? 'auto' : 'visible',
+      tabFlex: phone ? '0 0 auto' : '1 1 150px',
+      cardCols: mode === 'tablet' ? 'repeat(2, minmax(0, 1fr))' : 'minmax(0, 1fr)'
+    };
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    clearTimeout(this._toastTimer);
+  }
+  pageVals() {
+    const s = this.state || {};
+    const date = s.date || '2026-11-24';
+    const stage = s.stage || 'All';
+    const dept = s.dept || 'All';
+    const prio = s.prio || 'All';
+    const q = s.q || '';
+    const STATUS = {
+      'Registered': ['#FFFFFF', '#3D4757', '#CDD3DB'],
+      'Assigned': ['#E8EEFD', '#2346B8', '#E8EEFD'],
+      'In Progress': ['#FDF3DC', '#8A5A00', '#FDF3DC'],
+      'Completed': ['#E3F4EA', '#1C6B3F', '#E3F4EA'],
+      'Verified': ['#DCE3EA', '#1E2A38', '#DCE3EA']
+    };
+    const PRIORITY = {
+      'High': ['#A3330A', '#C2410C'],
+      'Medium': ['#8A5A00', '#D99A0B'],
+      'Low': ['#5B6472', '#98A1AE']
+    };
+    const all = [
+      { no: 'CMP-26-0436', time: '14:40', dept: 'Electrical', floor: '3rd Floor', area: 'Conference Room 3B', equipment: 'Ceiling LED panels', issue: '2 of 6 panels not working', staff: 'Unassigned', priority: 'Medium', status: 'Registered' },
+      { no: 'CMP-26-0435', time: '14:05', dept: 'Lift', floor: 'Ground Floor', area: 'Lift lobby', equipment: 'Lift L2 (passenger)', issue: 'Stuck between 2nd and 3rd floor, no one inside', staff: 'Kalpesh Joshi', priority: 'High', status: 'Assigned', urgent: true },
+      { no: 'CMP-26-0434', time: '13:55', dept: 'Housekeeping & General', floor: 'Ground Floor', area: 'Reception', equipment: 'Notice board', issue: 'Frame loose on the wall', staff: 'Nilesh Chauhan', priority: 'Low', status: 'Completed' },
+      { no: 'CMP-26-0433', time: '13:20', dept: 'AC & HVAC', floor: '5th Floor', area: 'Server Room', equipment: 'PAC-1 precision AC', issue: 'Tripping on high-pressure alarm', staff: 'Vikram Solanki', priority: 'High', status: 'In Progress', urgent: true },
+      { no: 'CMP-26-0432', time: '13:05', dept: 'Electrical', floor: '6th Floor', area: 'Corridor', equipment: 'Emergency light', issue: 'Not charging', staff: 'Ramesh Patel', priority: 'Medium', status: 'Completed' },
+      { no: 'CMP-26-0431', time: '12:45', dept: 'Plumbing', floor: '4th Floor', area: 'Gents washroom', equipment: 'Urinal flush valve', issue: 'Water running continuously', staff: 'Suresh Rathod', priority: 'Medium', status: 'In Progress' },
+      { no: 'CMP-26-0430', time: '12:30', dept: 'Plumbing', floor: '2nd Floor', area: 'Pantry', equipment: 'Sink drain', issue: 'Drain choked', staff: 'Suresh Rathod', priority: 'Medium', status: 'Completed' },
+      { no: 'CMP-26-0429', time: '12:10', dept: 'CCTV & Access Control', floor: 'Basement B1', area: 'Parking', equipment: 'CCTV camera B1-07', issue: 'Offline on NVR since morning', staff: 'Arjun Desai', priority: 'Medium', status: 'In Progress' },
+      { no: 'CMP-26-0428', time: '11:50', dept: 'AC & HVAC', floor: '3rd Floor', area: 'Cabin 305', equipment: 'Split AC 1.5 TR', issue: 'Not cooling, filter clogged', staff: 'Vikram Solanki', priority: 'Medium', status: 'Completed' },
+      { no: 'CMP-26-0427', time: '11:30', dept: 'Civil & Carpentry', floor: '2nd Floor', area: 'Cabin 214', equipment: 'Door closer', issue: 'Leaking oil, door slams', staff: 'Mahesh Parmar', priority: 'Low', status: 'Assigned' },
+      { no: 'CMP-26-0426', time: '11:15', dept: 'Electrical', floor: '4th Floor', area: 'Workstation bay', equipment: 'Raw power points', issue: 'No power at 4 desks, MCB tripped', staff: 'Imran Shaikh', priority: 'High', status: 'Completed' },
+      { no: 'CMP-26-0425', time: '11:00', dept: 'Civil & Carpentry', floor: '5th Floor', area: 'Meeting Room 5A', equipment: 'Ceiling tile', issue: 'Stained and sagging', staff: 'Mahesh Parmar', priority: 'Low', status: 'Completed' },
+      { no: 'CMP-26-0424', time: '10:50', dept: 'Electrical', floor: '1st Floor', area: 'Pantry', equipment: '16 A power socket', issue: 'Socket loose, plug falls out', staff: 'Imran Shaikh', priority: 'Medium', status: 'In Progress' },
+      { no: 'CMP-26-0423', time: '10:35', dept: 'Fire Safety', floor: '4th Floor', area: 'Lift lobby', equipment: 'Fire extinguisher FE-4-02', issue: 'Pressure gauge in red zone', staff: 'Kalpesh Joshi', priority: 'Medium', status: 'Verified' },
+      { no: 'CMP-26-0422', time: '10:20', dept: 'Plumbing', floor: 'Terrace', area: 'Overhead tank', equipment: 'Float valve 25 mm', issue: 'Tank overflowing', staff: 'Suresh Rathod', priority: 'High', status: 'Verified' },
+      { no: 'CMP-26-0421', time: '10:05', dept: 'Electrical', floor: 'Ground Floor', area: 'LT panel room', equipment: 'APFC panel', issue: 'Capacitor bank alarm', staff: 'Ramesh Patel', priority: 'Medium', status: 'Verified' },
+      { no: 'CMP-26-0420', time: '09:50', dept: 'BMS', floor: '5th Floor', area: 'Server Room', equipment: 'BMS controller DDC-3', issue: 'Temperature sensor not updating', staff: 'Arjun Desai', priority: 'Medium', status: 'Verified' },
+      { no: 'CMP-26-0419', time: '09:40', dept: 'AC & HVAC', floor: '1st Floor', area: 'Training Room', equipment: 'Cassette AC', issue: 'Water dripping from the unit', staff: 'Vikram Solanki', priority: 'Medium', status: 'Verified' },
+      { no: 'CMP-26-0418', time: '09:30', dept: 'Electrical', floor: '2nd Floor', area: 'Corridor', equipment: 'LED tube light', issue: 'Tube fused', staff: 'Imran Shaikh', priority: 'Low', status: 'Verified' },
+      { no: 'CMP-26-0417', time: '09:15', dept: 'Generator & UPS', floor: 'Basement B1', area: 'DG room', equipment: 'DG set 250 kVA', issue: 'Low battery voltage on DG panel', staff: 'Kalpesh Joshi', priority: 'Medium', status: 'Verified' },
+      { no: 'CMP-26-0416', time: '09:05', dept: 'CCTV & Access Control', floor: 'Ground Floor', area: 'Main entrance', equipment: 'Access card reader', issue: 'Not reading cards', staff: 'Arjun Desai', priority: 'Medium', status: 'Verified' },
+      { no: 'CMP-26-0415', time: '08:55', dept: 'Plumbing', floor: '3rd Floor', area: 'Ladies washroom', equipment: 'Wash basin tap', issue: 'Tap dripping', staff: 'Suresh Rathod', priority: 'Low', status: 'Verified' },
+      { no: 'CMP-26-0414', time: '08:40', dept: 'Civil & Carpentry', floor: '1st Floor', area: 'Cabin 108', equipment: 'Pedestal drawer lock', issue: 'Lock jammed', staff: 'Mahesh Parmar', priority: 'Low', status: 'Verified' },
+      { no: 'CMP-26-0413', time: '08:25', dept: 'AC & HVAC', floor: 'Ground Floor', area: 'Reception', equipment: 'AHU-1', issue: 'Reception area too warm', staff: 'Vikram Solanki', priority: 'Medium', status: 'Verified' },
+      { no: 'CMP-26-0412', time: '08:10', dept: 'Electrical', floor: 'Basement B1', area: 'Parking', equipment: 'Parking light poles', issue: '2 lights not working', staff: 'Ramesh Patel', priority: 'Low', status: 'Verified' }
+    ];
+    const needle = q.trim().toLowerCase();
+    const list = all.filter((r) =>
+      date === '2026-11-24' &&
+      (stage === 'All' || r.status === stage) &&
+      (dept === 'All' || r.dept === dept) &&
+      (prio === 'All' || r.priority === prio) &&
+      (!needle || [r.no, r.dept, r.floor, r.area, r.equipment, r.issue, r.staff].join(' ').toLowerCase().indexOf(needle) !== -1)
+    ).map((r) => ({
+      ...r,
+      urgent: !!r.urgent,
+      statusBg: STATUS[r.status][0],
+      statusFg: STATUS[r.status][1],
+      statusBorder: STATUS[r.status][2],
+      prioFg: PRIORITY[r.priority][0],
+      prioDot: PRIORITY[r.priority][1],
+      staffFg: r.staff === 'Unassigned' ? '#A3330A' : '#161A21',
+      openLabel: 'Open ' + r.no
+    }));
+    const stages = [
+      ['All', 'All stages', 'All complaints'],
+      ['Registered', 'Step 1', 'Registered'],
+      ['Assigned', 'Step 2', 'Assigned'],
+      ['In Progress', 'Step 3', 'In progress'],
+      ['Completed', 'Step 4', 'Completed'],
+      ['Verified', 'Step 5', 'Verified']
+    ];
+    const tabs = stages.map(([key, step, label]) => {
+      const on = key === stage;
+      const count = key === 'All' ? all.length : all.filter((r) => r.status === key).length;
+      const tint = (key === 'All' || key === 'Registered') ? ['#EEF1F5', '#3D4757'] : STATUS[key];
+      return {
+        step,
+        label,
+        count,
+        on,
+        bg: on ? '#11161D' : '#FFFFFF',
+        fg: on ? '#FFFFFF' : '#161A21',
+        border: on ? '#11161D' : '#E3E6EB',
+        subFg: on ? '#B8C2CF' : '#5B6472',
+        countBg: on ? '#2A3442' : tint[0],
+        countFg: on ? '#FFFFFF' : tint[1],
+        pick: () => this.setState({ stage: key })
+      };
+    });
+    const toast = (text) => {
+      clearTimeout(this._toastTimer);
+      this.setState({ toast: text });
+      this._toastTimer = setTimeout(() => this.setState({ toast: '' }), 4000);
+    };
+    return {
+      tabs,
+      list,
+      q,
+      dept,
+      prio,
+      date,
+      empty: list.length === 0,
+      emptyText: date === '2026-11-24' ? 'No complaints match these filters.' : 'No complaints were logged on this date.',
+      setDate: (e) => this.setState({ date: e.target.value }),
+      exportList: () => toast('Exported ' + list.length + (list.length === 1 ? ' complaint' : ' complaints') + ' to Excel.'),
+      toastOn: !!s.toast,
+      toastText: s.toast || '',
+      closeToast: () => {
+        clearTimeout(this._toastTimer);
+        this.setState({ toast: '' });
+      },
+      shownText: 'Showing ' + list.length + ' of ' + all.length + ' complaints · 24 Nov 2026',
+      setQ: (e) => this.setState({ q: e.target.value }),
+      setDept: (e) => this.setState({ dept: e.target.value }),
+      setPrio: (e) => this.setState({ prio: e.target.value }),
+      clear: () => this.setState({ stage: 'All', dept: 'All', prio: 'All', q: '', date: '2026-11-24' })
+    };
+  }
+}
+</script>
+</body>
+</html>

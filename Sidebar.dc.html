@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sidebar navigation</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="box-sizing: border-box; width: 100%; color: #C3CBD6; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 14px; line-height: 1.4">
+
+<svg aria-hidden="true" width="0" height="0" style="position: absolute; width: 0; height: 0; overflow: hidden">
+<symbol id="dm-i-dashboard" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"></rect><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"></rect><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"></rect><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"></rect></symbol>
+<symbol id="dm-i-entry" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"></rect><path d="M9 4V3h6v1"></path><path d="M8.5 10h7M8.5 14h7M8.5 18h4"></path></symbol>
+<symbol id="dm-i-complaints" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-5.7 5.7a1.9 1.9 0 0 0 2.7 2.7l5.7-5.7a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.3-.3-2.4z"></path></symbol>
+<symbol id="dm-i-preventive" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4M9 15l2 2 4-4"></path></symbol>
+<symbol id="dm-i-vendors" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3 13h18"></path></symbol>
+<symbol id="dm-i-stock" viewBox="0 0 24 24"><path d="M20.5 7.5L12 3 3.5 7.5v9L12 21l8.5-4.5z"></path><path d="M3.5 7.5L12 12l8.5-4.5M12 12v9"></path></symbol>
+<symbol id="dm-i-reports" viewBox="0 0 24 24"><path d="M4 20h16"></path><path d="M7 16v-5M12 16V6M17 16v-8"></path></symbol>
+<symbol id="dm-i-categories" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"></path><path d="M3 13l9 5 9-5"></path></symbol>
+<symbol id="dm-i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"></path><path d="M10 20.5a2 2 0 0 0 4 0"></path></symbol>
+<symbol id="dm-i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></symbol>
+<symbol id="dm-i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></symbol>
+<symbol id="dm-i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></symbol>
+<symbol id="dm-i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></symbol>
+<symbol id="dm-i-alert" viewBox="0 0 24 24"><path d="M12 3.5l9.5 16.5h-19z"></path><path d="M12 10v4.5M12 17.5v.01"></path></symbol>
+</svg>
+
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+<nav aria-label="Main navigation" style="box-sizing: border-box; width: 100%; display: flex; flex-direction: column; gap: 22px; padding: 20px 14px 24px; background: #11161D">
+<div style="display: flex; align-items: center; gap: 12px; padding: 0 2px">
+<span aria-hidden="true" style="flex: none; width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: #F5A524; color: #11161D"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-complaints"></use></svg></span>
+<a href="{{ homeHref }}" style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 1px; text-decoration: none">
+<span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600; line-height: 1.2; color: #FFFFFF">Daily Maintenance</span>
+<span style="font-size: 12px; color: #8B96A6">Management System</span>
+</a>
+</div>
+<div style="position: relative; display: flex; align-items: center; gap: 8px">
+<div style="flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 4px 0 12px; border: 1px solid #2A3442; border-radius: 10px; background: #1A212B; color: #8B96A6">
+<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-search"></use></svg>
+<input type="text" role="searchbox" value="{{ q }}" onChange="{{ setQ }}" aria-label="Search complaints, assets or locations" placeholder="Search complaint, asset, room" style="flex: 1 1 auto; min-width: 0; height: 40px; padding: 0; border: 0; background: transparent; color: #E6EAF0; font-family: inherit; font-size: 14px">
+<sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ clearQ }}" aria-label="Clear search" style="flex: none; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 8px; background: transparent; color: #8B96A6; cursor: pointer"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-close"></use></svg></button></sc-if>
+</div>
+<button type="button" onClick="{{ toggleBell }}" aria-expanded="{{ bellOpen }}" aria-label="Notifications: 2 urgent complaints" style="position: relative; flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0; border: 1px solid {{ bellBorder }}; border-radius: 10px; background: {{ bellBg }}; color: #C3CBD6; cursor: pointer">
+<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-bell"></use></svg>
+<span aria-hidden="true" style="position: absolute; top: 5px; right: 5px; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 9px; background: #C2410C; color: #FFFFFF; font-size: 11px; font-weight: 700; line-height: 17px; text-align: center">2</span>
+</button>
+<sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}">
+<div role="region" aria-label="Search results" style="position: absolute; top: calc(100% + 8px); left: 0; z-index: 40; width: 320px; max-height: 420px; overflow-y: auto; display: flex; flex-direction: column; padding: 6px; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; color: #161A21; box-shadow: 0 16px 40px rgba(17, 22, 29, 0.28)">
+<sc-for list="{{ results }}" as="r" hint-placeholder-count="0">
+<sc-if value="{{ r.isHead }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 8px 10px 4px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5B6472">{{ r.title }}</p></sc-if>
+<sc-if value="{{ r.isItem }}" hint-placeholder-val="{{ true }}"><a href="{{ r.href }}" style="display: flex; flex-direction: column; gap: 1px; padding: 8px 10px; border-radius: 8px; color: #161A21; text-decoration: none"><span style="font-weight: 500"><span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px; font-weight: 600; color: #2F5BEA">{{ r.code }}</span> {{ r.title }}</span><span style="font-size: 12.5px; color: #5B6472">{{ r.sub }}</span></a></sc-if>
+</sc-for>
+<sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 14px 10px; color: #5B6472">No matches for “{{ q }}”.</p></sc-if>
+</div>
+</sc-if>
+</div>
+<div style="display: flex; flex-direction: column; gap: 18px">
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<p style="margin: 0; padding: 0 12px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #8B96A6">{{ g.label }}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 4px">
+<sc-for list="{{ g.items }}" as="it" hint-placeholder-count="2">
+<a href="{{ it.href }}" aria-current="{{ it.current }}" style="flex: 1 1 168px; display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; font-weight: 500; background: {{ it.bg }}; color: {{ it.fg }}">
+<span aria-hidden="true" style="display: flex; color: {{ it.icon }}"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="{{ it.sym }}"></use></svg></span>
+<span style="flex: 1 1 auto">{{ it.label }}</span>
+<sc-if value="{{ it.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="flex: none; min-width: 22px; height: 20px; padding: 0 6px; border-radius: 10px; background: #2A3442; color: #E6EAF0; font-size: 12px; font-weight: 600; line-height: 20px; text-align: center">{{ it.badge }}</span></sc-if>
+</a>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; background: #1A212B">
+<span aria-hidden="true" style="flex: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #2F5BEA; color: #FFFFFF; font-size: 13px; font-weight: 600">HM</span>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column">
+<span style="font-weight: 600; color: #FFFFFF">Hitesh Mehta</span>
+<span style="font-size: 12px; color: #8B96A6">Maintenance Supervisor</span>
+</div>
+</div>
+</nav>
+</sc-if>
+
+<sc-if value="{{ isTablet }}" hint-placeholder-val="{{ false }}">
+<nav aria-label="Main navigation" style="box-sizing: border-box; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 8px 20px; background: #11161D">
+<a href="{{ homeHref }}" aria-label="Daily Maintenance dashboard" style="width: 44px; height: 44px; margin-bottom: 6px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: #F5A524; color: #11161D"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-complaints"></use></svg></a>
+<button type="button" onClick="{{ toggleBell }}" aria-expanded="{{ bellOpen }}" aria-label="Notifications: 2 urgent complaints" style="position: relative; width: 72px; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0; border: 0; border-radius: 12px; background: {{ bellBg }}; color: #C3CBD6; cursor: pointer">
+<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-bell"></use></svg>
+<span style="font-size: 11px; font-weight: 600">Alerts</span>
+<span aria-hidden="true" style="position: absolute; top: 5px; right: 14px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: #C2410C; color: #FFFFFF; font-size: 10.5px; font-weight: 700; line-height: 16px; text-align: center">2</span>
+</button>
+<button type="button" onClick="{{ openMenu }}" style="width: 72px; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0; border: 0; border-radius: 12px; background: transparent; color: #C3CBD6; cursor: pointer">
+<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-search"></use></svg>
+<span style="font-size: 11px; font-weight: 600">Search</span>
+</button>
+<span aria-hidden="true" style="width: 40px; height: 1px; margin: 2px 0; background: #2A3442"></span>
+<sc-for list="{{ items }}" as="it" hint-placeholder-count="8">
+<a href="{{ it.href }}" aria-current="{{ it.current }}" style="position: relative; width: 72px; min-height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; border-radius: 12px; text-decoration: none; background: {{ it.bg }}; color: {{ it.fg }}">
+<span aria-hidden="true" style="display: flex; color: {{ it.icon }}"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="{{ it.sym }}"></use></svg></span>
+<span style="font-size: 11px; font-weight: 600; line-height: 1.15; text-align: center">{{ it.short }}</span>
+<sc-if value="{{ it.hasBadge }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="position: absolute; top: 5px; right: 12px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: #2F5BEA; color: #FFFFFF; font-size: 10.5px; font-weight: 700; line-height: 16px; text-align: center">{{ it.badge }}</span></sc-if>
+</a>
+</sc-for>
+
+<span aria-hidden="true" title="Hitesh Mehta, Maintenance Supervisor" style="margin-top: 10px; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #2F5BEA; color: #FFFFFF; font-size: 13px; font-weight: 600">HM</span>
+</nav>
+</sc-if>
+
+<sc-if value="{{ isPhone }}" hint-placeholder-val="{{ false }}">
+<header style="box-sizing: border-box; width: 100%; display: flex; align-items: center; gap: 4px; min-height: 60px; padding: 8px 8px 8px 12px; background: #11161D">
+<a href="{{ homeHref }}" style="flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 10px; text-decoration: none">
+<span aria-hidden="true" style="flex: none; width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; background: #F5A524; color: #11161D"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-complaints"></use></svg></span>
+<span style="min-width: 0; display: flex; flex-direction: column">
+<span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600; line-height: 1.2; color: #FFFFFF; white-space: nowrap">Daily Maintenance</span>
+<span style="font-size: 12px; color: #8B96A6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ activeLabel }}</span>
+</span>
+</a>
+<button type="button" onClick="{{ openMenu }}" aria-label="Search" style="flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: #C3CBD6; cursor: pointer"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-search"></use></svg></button>
+<button type="button" onClick="{{ toggleBell }}" aria-expanded="{{ bellOpen }}" aria-label="Notifications: 2 urgent complaints" style="position: relative; flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 10px; background: {{ bellBg }}; color: #C3CBD6; cursor: pointer">
+<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-bell"></use></svg>
+<span aria-hidden="true" style="position: absolute; top: 6px; right: 6px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: #C2410C; color: #FFFFFF; font-size: 10.5px; font-weight: 700; line-height: 16px; text-align: center">2</span>
+</button>
+</header>
+<nav aria-label="Main navigation" style="box-sizing: border-box; position: fixed; left: 0; right: 0; bottom: 0; z-index: 35; display: flex; align-items: stretch; padding: 6px 4px 10px; background: #11161D; border-top: 1px solid #2A3442">
+<a href="{{ tab.home.href }}" aria-current="{{ tab.home.current }}" style="flex: 1 1 0; min-width: 0; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border-radius: 10px; text-decoration: none; color: {{ tab.home.fg }}">
+<svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-dashboard"></use></svg>
+<span style="font-size: 11px; font-weight: 600">Home</span>
+</a>
+<a href="{{ tab.complaints.href }}" aria-current="{{ tab.complaints.current }}" style="position: relative; flex: 1 1 0; min-width: 0; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border-radius: 10px; text-decoration: none; color: {{ tab.complaints.fg }}">
+<svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-complaints"></use></svg>
+<span style="font-size: 11px; font-weight: 600">Complaints</span>
+<span aria-hidden="true" style="position: absolute; top: 2px; left: calc(50% + 6px); min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: #2F5BEA; color: #FFFFFF; font-size: 10.5px; font-weight: 700; line-height: 16px; text-align: center">7</span>
+</a>
+<a href="{{ tab.entry.href }}" aria-current="{{ tab.entry.current }}" aria-label="New work entry" style="flex: 1 1 0; min-width: 0; min-height: 52px; display: flex; align-items: center; justify-content: center; text-decoration: none">
+<span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #2F5BEA; color: #FFFFFF; box-shadow: 0 6px 16px rgba(47, 91, 234, 0.45)"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-plus"></use></svg></span>
+</a>
+<a href="{{ tab.preventive.href }}" aria-current="{{ tab.preventive.current }}" style="flex: 1 1 0; min-width: 0; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border-radius: 10px; text-decoration: none; color: {{ tab.preventive.fg }}">
+<svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-preventive"></use></svg>
+<span style="font-size: 11px; font-weight: 600">PM</span>
+</a>
+<button type="button" onClick="{{ openMenu }}" aria-expanded="{{ menuOpen }}" style="flex: 1 1 0; min-width: 0; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 0; border: 0; border-radius: 10px; background: transparent; color: {{ tab.more.fg }}; cursor: pointer">
+<svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-menu"></use></svg>
+<span style="font-size: 11px; font-weight: 600">More</span>
+</button>
+</nav>
+</sc-if>
+
+<sc-if value="{{ bellOpen }}" hint-placeholder-val="{{ false }}">
+<div role="region" aria-label="Urgent complaints" style="position: fixed; z-index: 80; top: {{ pop.top }}; left: {{ pop.left }}; right: {{ pop.right }}; bottom: {{ pop.bottom }}; width: {{ pop.width }}; display: flex; flex-direction: column; padding: 8px; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; color: #161A21; box-shadow: 0 16px 40px rgba(17, 22, 29, 0.28)">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 4px 4px 10px">
+<span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600">Urgent complaints</span>
+<button type="button" onClick="{{ toggleBell }}" aria-label="Close notifications" style="flex: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: #5B6472; cursor: pointer"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-close"></use></svg></button>
+</div>
+<a href="{{ detailHref }}" style="display: flex; align-items: flex-start; gap: 12px; padding: 10px; border-radius: 10px; color: #161A21; text-decoration: none">
+<span aria-hidden="true" style="flex: none; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: #FDE8DF; color: #A3330A"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-alert"></use></svg></span>
+<span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-weight: 600">Lift L2 stuck between floors</span>
+<span style="font-size: 12.5px; color: #5B6472"><span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace">CMP-26-0435</span> · Kalpesh Joshi · 14:05</span>
+</span>
+</a>
+<a href="{{ detailHref }}" style="display: flex; align-items: flex-start; gap: 12px; padding: 10px; border-radius: 10px; color: #161A21; text-decoration: none">
+<span aria-hidden="true" style="flex: none; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: #FDE8DF; color: #A3330A"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-alert"></use></svg></span>
+<span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-weight: 600">PAC-1 tripping in the server room</span>
+<span style="font-size: 12.5px; color: #5B6472"><span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace">CMP-26-0433</span> · Vikram Solanki · 13:20</span>
+</span>
+</a>
+<a href="{{ complaintsHref }}" style="display: flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 4px; border-top: 1px solid #EEF0F3; color: #2F5BEA; font-size: 13.5px; font-weight: 600; text-decoration: none">View all complaints</a>
+</div>
+</sc-if>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 70; display: flex; background: rgba(17, 22, 29, 0.55)">
+<section role="dialog" aria-modal="true" aria-label="Menu and search" style="box-sizing: border-box; width: 340px; max-width: 88vw; height: 100%; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; padding: 14px 14px 24px; background: #11161D">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<span style="display: flex; align-items: center; gap: 10px">
+<span aria-hidden="true" style="flex: none; width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; background: #F5A524; color: #11161D"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-complaints"></use></svg></span>
+<span style="display: flex; flex-direction: column">
+<span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600; line-height: 1.2; color: #FFFFFF">Daily Maintenance</span>
+<span style="font-size: 12px; color: #8B96A6">Management System</span>
+</span>
+</span>
+<button type="button" onClick="{{ closeMenu }}" aria-label="Close menu" style="flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0; border: 1px solid #2A3442; border-radius: 10px; background: transparent; color: #C3CBD6; cursor: pointer"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-close"></use></svg></button>
+</div>
+<div style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 4px 0 12px; border: 1px solid #2A3442; border-radius: 10px; background: #1A212B; color: #8B96A6">
+<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-search"></use></svg>
+<input type="text" role="searchbox" value="{{ q }}" onChange="{{ setQ }}" aria-label="Search complaints, assets or locations" placeholder="Search complaint, asset, room" style="flex: 1 1 auto; min-width: 0; height: 40px; padding: 0; border: 0; background: transparent; color: #E6EAF0; font-family: inherit; font-size: 16px">
+<sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ clearQ }}" aria-label="Clear search" style="flex: none; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 8px; background: transparent; color: #8B96A6; cursor: pointer"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#dm-i-close"></use></svg></button></sc-if>
+</div>
+<sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}">
+<div role="region" aria-label="Search results" style="display: flex; flex-direction: column; padding: 6px; border-radius: 14px; background: #FFFFFF; color: #161A21">
+<sc-for list="{{ results }}" as="r" hint-placeholder-count="0">
+<sc-if value="{{ r.isHead }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 8px 10px 4px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5B6472">{{ r.title }}</p></sc-if>
+<sc-if value="{{ r.isItem }}" hint-placeholder-val="{{ true }}"><a href="{{ r.href }}" style="display: flex; flex-direction: column; gap: 1px; min-height: 44px; justify-content: center; padding: 8px 10px; border-radius: 8px; color: #161A21; text-decoration: none"><span style="font-weight: 500"><span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px; font-weight: 600; color: #2F5BEA">{{ r.code }}</span> {{ r.title }}</span><span style="font-size: 12.5px; color: #5B6472">{{ r.sub }}</span></a></sc-if>
+</sc-for>
+<sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; padding: 14px 10px; color: #5B6472">No matches for “{{ q }}”.</p></sc-if>
+</div>
+</sc-if>
+<sc-if value="{{ noQuery }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="5">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<p style="margin: 0; padding: 0 12px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #8B96A6">{{ g.label }}</p>
+<sc-for list="{{ g.items }}" as="it" hint-placeholder-count="2">
+<a href="{{ it.href }}" aria-current="{{ it.current }}" style="display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 12px; border-radius: 10px; text-decoration: none; font-weight: 500; background: {{ it.bg }}; color: {{ it.fg }}">
+<span aria-hidden="true" style="display: flex; color: {{ it.icon }}"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="{{ it.sym }}"></use></svg></span>
+<span style="flex: 1 1 auto">{{ it.label }}</span>
+<sc-if value="{{ it.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="flex: none; min-width: 22px; height: 20px; padding: 0 6px; border-radius: 10px; background: #2A3442; color: #E6EAF0; font-size: 12px; font-weight: 600; line-height: 20px; text-align: center">{{ it.badge }}</span></sc-if>
+</a>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<div style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; background: #1A212B">
+<span aria-hidden="true" style="flex: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #2F5BEA; color: #FFFFFF; font-size: 13px; font-weight: 600">HM</span>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column">
+<span style="font-weight: 600; color: #FFFFFF">Hitesh Mehta</span>
+<span style="font-size: 12px; color: #8B96A6">Maintenance Supervisor</span>
+</div>
+</div>
+</section>
+<button type="button" onClick="{{ closeMenu }}" aria-label="Close menu" style="flex: 1 1 auto; min-width: 0; padding: 0; border: 0; background: transparent; cursor: pointer"></button>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"active":{"editor":"enum","options":["dashboard","entry","complaints","preventive","vendors","stock","reports","categories"],"default":"dashboard"},"mode":{"editor":"enum","options":["desktop","tablet","phone"],"default":"desktop"},"device":{"editor":null},"$preview":{"width":248,"height":840}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.state || {};
+    const active = this.props.active ?? 'dashboard';
+    const mode = this.props.mode || 'desktop';
+    const device = this.props.device || '';
+    const pre = device === 'phone' ? 'Phone' : (device === 'tablet' ? 'Tablet' : '');
+    const link = (file) => pre + file + '.dc.html';
+
+    const NAV = [
+      { key: 'dashboard', file: 'Main', label: 'Dashboard', short: 'Dashboard', group: 'Overview' },
+      { key: 'entry', file: 'WorkEntry', label: 'Daily Work Entry', short: 'Work entry', group: 'Operations' },
+      { key: 'complaints', file: 'Complaints', label: 'Repair & Complaints', short: 'Complaints', group: 'Operations', badge: '7' },
+      { key: 'preventive', file: 'Preventive', label: 'Preventive Maintenance', short: 'Preventive', group: 'Operations', badge: '3' },
+      { key: 'vendors', file: 'Vendors', label: 'Vendor Management', short: 'Vendors', group: 'Resources' },
+      { key: 'stock', file: 'Stock', label: 'Spare Parts / Stock', short: 'Stock', group: 'Resources', badge: '4' },
+      { key: 'reports', file: 'Reports', label: 'Reports', short: 'Reports', group: 'Insights' },
+      { key: 'categories', file: 'Categories', label: 'Maintenance Categories', short: 'Categories', group: 'Setup' }
+    ];
+    const items = NAV.map((n) => {
+      const on = n.key === active;
+      return {
+        label: n.label,
+        short: n.short,
+        group: n.group,
+        badge: n.badge || '',
+        hasBadge: !!n.badge,
+        href: link(n.file),
+        sym: '#dm-i-' + n.key,
+        current: on ? 'page' : 'false',
+        bg: on ? '#243041' : 'transparent',
+        fg: on ? '#FFFFFF' : '#C3CBD6',
+        icon: on ? '#F5A524' : '#8B96A6'
+      };
+    });
+    const groups = ['Overview', 'Operations', 'Resources', 'Insights', 'Setup'].map((g) => ({ label: g, items: items.filter((i) => i.group === g) }));
+    const activeItem = NAV.find((n) => n.key === active) || NAV[0];
+    const tabFor = (key, file) => {
+      const on = key === active;
+      return { href: link(file), current: on ? 'page' : 'false', fg: on ? '#F5A524' : '#C3CBD6' };
+    };
+    const inTabs = ['dashboard', 'complaints', 'entry', 'preventive'].indexOf(active) !== -1;
+
+    const bellOpen = !!s.bellOpen;
+    const menuOpen = !!s.menuOpen;
+    const q = s.q || '';
+    const needle = q.trim().toLowerCase();
+    const hit = (text) => !!needle && text.toLowerCase().indexOf(needle) !== -1;
+    const PAGE_WORDS = {
+      dashboard: 'dashboard overview home summary',
+      entry: 'daily work entry log job new complaint',
+      complaints: 'repair complaints register complaint list',
+      preventive: 'preventive maintenance pm schedule',
+      vendors: 'vendor management amc vendors contracts',
+      stock: 'spare parts stock store inventory material',
+      reports: 'reports export daily monthly',
+      categories: 'maintenance categories departments setup'
+    };
+    const COMPLAINTS = [
+      ['CMP-26-0436', 'Ceiling LED panels not working', 'Electrical · 3rd Floor, Conference Room 3B'],
+      ['CMP-26-0435', 'Lift L2 stuck between floors', 'Lift · Ground Floor lift lobby'],
+      ['CMP-26-0434', 'Notice board frame loose', 'Housekeeping & General · Reception'],
+      ['CMP-26-0433', 'PAC-1 tripping on high pressure', 'AC & HVAC · 5th Floor, Server Room'],
+      ['CMP-26-0432', 'Emergency light not charging', 'Electrical · 6th Floor corridor'],
+      ['CMP-26-0431', 'Urinal flush valve running', 'Plumbing · 4th Floor, Gents washroom'],
+      ['CMP-26-0430', 'Pantry sink drain choked', 'Plumbing · 2nd Floor, Pantry'],
+      ['CMP-26-0429', 'CCTV camera B1-07 offline', 'CCTV & Access Control · Basement B1 parking'],
+      ['CMP-26-0428', 'Split AC not cooling', 'AC & HVAC · 3rd Floor, Cabin 305'],
+      ['CMP-26-0427', 'Door closer leaking', 'Civil & Carpentry · 2nd Floor, Cabin 214'],
+      ['CMP-26-0426', 'No power at 4 desks', 'Electrical · 4th Floor workstation bay'],
+      ['CMP-26-0425', 'Ceiling tile sagging', 'Civil & Carpentry · 5th Floor, Meeting Room 5A'],
+      ['CMP-26-0424', '16 A socket loose', 'Electrical · 1st Floor, Pantry'],
+      ['CMP-26-0423', 'Fire extinguisher gauge in red', 'Fire Safety · 4th Floor lift lobby'],
+      ['CMP-26-0422', 'Overhead tank overflowing', 'Plumbing · Terrace'],
+      ['CMP-26-0421', 'APFC capacitor bank alarm', 'Electrical · Ground Floor LT panel room'],
+      ['CMP-26-0420', 'BMS temperature sensor stuck', 'BMS · 5th Floor, Server Room'],
+      ['CMP-26-0419', 'Cassette AC dripping', 'AC & HVAC · 1st Floor, Training Room'],
+      ['CMP-26-0418', 'LED tube fused', 'Electrical · 2nd Floor corridor'],
+      ['CMP-26-0417', 'DG battery voltage low', 'Generator & UPS · Basement B1 DG room'],
+      ['CMP-26-0416', 'Card reader not reading cards', 'CCTV & Access Control · Main entrance'],
+      ['CMP-26-0415', 'Wash basin tap dripping', 'Plumbing · 3rd Floor, Ladies washroom'],
+      ['CMP-26-0414', 'Drawer lock jammed', 'Civil & Carpentry · 1st Floor, Cabin 108'],
+      ['CMP-26-0413', 'Reception area too warm', 'AC & HVAC · Ground Floor, AHU-1'],
+      ['CMP-26-0412', 'Parking lights not working', 'Electrical · Basement B1 parking']
+    ];
+    const VENDORS = [
+      ['Kesar Cooling Services', 'AC & HVAC · AMC'],
+      ['Sabar Lift Engineers', 'Lift · AMC'],
+      ['Agnirakshak Fire Systems', 'Fire Safety · AMC'],
+      ['Sudarshan Power Systems', 'Generator & UPS · AMC'],
+      ['Netra Security Systems', 'CCTV & Access Control · AMC'],
+      ['Sahyog BMS Services', 'BMS · AMC'],
+      ['Jalseva Plumbing Works', 'Plumbing · On-call'],
+      ['Vishwakarma Civil Works', 'Civil & Carpentry · On-call']
+    ];
+    const STOCK = [
+      ['MCB 16 A SP, C-curve', 'SP-EL-016'],
+      ['LED panel driver 36 W', 'SP-EL-036'],
+      ['LED tube 20 W', 'SP-EL-104'],
+      ['LED street light 30 W', 'SP-EL-130'],
+      ['SMF battery 6 V 4.5 Ah', 'SP-EL-210'],
+      ['Flush valve washer kit', 'SP-PL-021'],
+      ['Float valve 25 mm', 'SP-PL-031'],
+      ['Pillar tap 15 mm', 'SP-PL-045'],
+      ['Refrigerant R-410A', 'SP-HV-410'],
+      ['Condenser coil cleaner', 'SP-HV-207'],
+      ['AHU pre-filter 24 × 24 in', 'SP-HV-112'],
+      ['ABC extinguisher refill, 6 kg', 'SP-FS-006'],
+      ['Door closer, medium duty', 'SP-CV-032'],
+      ['CCTV dome camera 2 MP', 'SP-CC-008']
+    ];
+    const results = [];
+    const pushGroup = (title, rows) => {
+      if (!rows.length) return;
+      results.push({ isHead: true, isItem: false, title, code: '', sub: '', href: '' });
+      rows.forEach((r) => results.push(Object.assign({ isHead: false, isItem: true, code: '' }, r)));
+    };
+    pushGroup('Screens', NAV.filter((n) => hit(n.label + ' ' + PAGE_WORDS[n.key])).map((n) => ({ title: n.label, sub: n.group, href: link(n.file) })));
+    pushGroup('Complaints', COMPLAINTS.filter((c) => hit(c.join(' '))).slice(0, 4).map(([no, title, sub]) => ({ code: no, title, sub, href: link('ComplaintDetail') })));
+    pushGroup('Vendors', VENDORS.filter((v) => hit(v.join(' '))).slice(0, 3).map(([title, sub]) => ({ title, sub, href: link('Vendors') })));
+    pushGroup('Spare parts', STOCK.filter((p) => hit(p.join(' '))).slice(0, 3).map(([title, sub]) => ({ title, sub, href: link('Stock') })));
+
+    const POPOVER = {
+      desktop: { top: '136px', left: '14px', right: 'auto', bottom: 'auto', width: '320px' },
+      tablet: { top: '66px', left: '96px', right: 'auto', bottom: 'auto', width: '320px' },
+      phone: { top: '64px', left: '8px', right: '8px', bottom: 'auto', width: 'auto' }
+    };
+
+    return {
+      isDesktop: mode === 'desktop',
+      isTablet: mode === 'tablet',
+      isPhone: mode === 'phone',
+      items,
+      groups,
+      activeLabel: activeItem.label,
+      homeHref: link('Main'),
+      detailHref: link('ComplaintDetail'),
+      complaintsHref: link('Complaints'),
+      tab: {
+        home: tabFor('dashboard', 'Main'),
+        complaints: tabFor('complaints', 'Complaints'),
+        entry: tabFor('entry', 'WorkEntry'),
+        preventive: tabFor('preventive', 'Preventive'),
+        more: { fg: inTabs ? '#C3CBD6' : '#F5A524' }
+      },
+      bellOpen,
+      bellBg: bellOpen ? '#243041' : 'transparent',
+      bellBorder: bellOpen ? '#3A4656' : '#2A3442',
+      pop: POPOVER[mode] || POPOVER.desktop,
+      toggleBell: () => this.setState({ bellOpen: !bellOpen, menuOpen: false }),
+      menuOpen,
+      openMenu: () => this.setState({ menuOpen: true, bellOpen: false }),
+      closeMenu: () => this.setState({ menuOpen: false, q: '' }),
+      q,
+      setQ: (e) => this.setState({ q: e.target.value, bellOpen: false }),
+      clearQ: () => this.setState({ q: '' }),
+      hasQuery: !!needle,
+      noQuery: !needle,
+      results,
+      noResults: !!needle && results.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>

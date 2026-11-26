@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Complaint CMP-26-0433</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#F4F5F7}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:#2F5BEA}a:hover{color:#1E40AF}
+@media (max-width: 699px){input,select,textarea{font-size:16px !important}}
+</style>
+</helmet>
+<div style="min-height: {{ shell.minH }}; display: flex; flex-wrap: wrap; align-content: {{ shell.alignContent }}; background: #F4F5F7; color: #161A21; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 14px; line-height: 1.45">
+<div style="flex: {{ shell.navFlex }}; display: flex; flex-direction: column; background: #11161D">
+<dc-import name="Sidebar" active="complaints" mode="{{ mode }}" device="{{ device }}" hint-size="100%,840px"></dc-import>
+</div>
+<main style="flex: 999 1 560px; min-width: 0; padding: {{ shell.mainPad }}">
+<div style="width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px">
+
+<header style="display: flex; flex-direction: column; gap: 12px">
+<a href="{{ L.Complaints }}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13.5px; font-weight: 600; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Repair &amp; Complaints</a>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px; min-width: 0">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 14px; font-weight: 600; color: #3D4757">CMP-26-0433</span>
+<span style="display: inline-flex; align-items: center; min-height: 24px; padding: 0 8px; border-radius: 6px; background: #C2410C; color: #FFFFFF; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase">Urgent</span>
+<span style="display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; background: #FDE8DF; color: #A3330A; font-size: 12.5px; font-weight: 600">High priority</span>
+<span style="display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; font-size: 12.5px; font-weight: 600; border: 1px solid {{ statusBg }}; background: {{ statusBg }}; color: {{ statusFg }}">{{ status }}</span>
+</div>
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 30px; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; color: #11161D">PAC-1 tripping on high-pressure alarm</h1>
+<p style="margin: 0; color: #5B6472">5th Floor · Server Room · AC &amp; HVAC · Logged today at 13:20</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" onClick="{{ printCard }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 14px; font-weight: 600; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3.5h10V9"></path><rect x="3.5" y="9" width="17" height="8" rx="2"></rect><path d="M7 14h10v6.5H7z"></path></svg>Print job card</button>
+<button type="button" onClick="{{ openReassign }}" disabled="{{ closed }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; font-size: 14px; font-weight: 600; color: {{ reassignFg }}; cursor: {{ primaryCursor }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Reassign</button>
+<button type="button" onClick="{{ advance }}" disabled="{{ closed }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 10px; font-size: 14px; font-weight: 600; border: 1px solid {{ primaryBorder }}; background: {{ primaryBg }}; color: {{ primaryFg }}; cursor: {{ primaryCursor }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>{{ primaryLabel }}</button>
+</div>
+</div>
+</header>
+
+<section aria-label="Workflow" style="padding: {{ ui.flowPad }}; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: {{ ui.stepCols }}; gap: {{ ui.stepGap }}">
+<sc-for list="{{ steps }}" as="st" hint-placeholder-count="5">
+<li style="display: flex; flex-direction: {{ st.ui.stepDir }}; gap: {{ st.ui.stepInnerGap }}">
+<div style="display: flex; align-items: center; gap: 10px">
+<span style="box-sizing: border-box; flex: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; border: 2px solid {{ st.ring }}; background: {{ st.fill }}; color: {{ st.ink }}">
+<sc-if value="{{ st.done }}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if>
+<sc-if value="{{ st.notDone }}" hint-placeholder-val="{{ false }}">{{ st.n }}</sc-if>
+</span>
+<span aria-hidden="true" style="flex: 1 1 auto; display: {{ st.ui.stepBar }}; height: 3px; border-radius: 2px; background: {{ st.bar }}"></span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: {{ st.tagFg }}">{{ st.tag }}</span>
+<span style="font-weight: 600; color: {{ st.labelFg }}">{{ st.label }}</span>
+<span style="font-size: 13px; color: #5B6472">{{ st.note }}</span>
+</div>
+</li>
+</sc-for>
+</ol>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px">
+
+<div style="flex: 3 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+
+<section aria-labelledby="cd-details" style="display: flex; flex-direction: column; gap: 18px; padding: 20px 24px 24px; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<h2 id="cd-details" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 17px; font-weight: 600; line-height: 1.3; color: #11161D">Complaint details</h2>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 16px 24px">
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 12.5px; font-weight: 600; color: #5B6472">Work date</dt><dd style="margin: 0; font-weight: 500">24 Nov 2026</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 12.5px; font-weight: 600; color: #5B6472">Complaint No.</dt><dd style="margin: 0; font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-weight: 600">CMP-26-0433</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 12.5px; font-weight: 600; color: #5B6472">Department</dt><dd style="margin: 0; font-weight: 500">AC &amp; HVAC</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 12.5px; font-weight: 600; color: #5B6472">Location</dt><dd style="margin: 0; font-weight: 500">5th Floor · Server Room</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 12.5px; font-weight: 600; color: #5B6472">Equipment</dt><dd style="margin: 0; font-weight: 500">PAC-1 precision AC <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px; color: #5B6472">AST-HV-051</span></dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 12.5px; font-weight: 600; color: #5B6472">Priority</dt><dd style="margin: 0; font-weight: 600; color: #A3330A">High · marked urgent</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 12.5px; font-weight: 600; color: #5B6472">Reported by</dt><dd style="margin: 0; font-weight: 500">Neha Trivedi, IT</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 12.5px; font-weight: 600; color: #5B6472">Assigned staff</dt><dd style="margin: 0; font-weight: 500">{{ assignee }}</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 12.5px; font-weight: 600; color: #5B6472">Start time</dt><dd style="margin: 0; font-weight: 500">13:35</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 12.5px; font-weight: 600; color: #5B6472">Completion time</dt><dd style="margin: 0; font-weight: 500">{{ completionTime }}</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 12.5px; font-weight: 600; color: #5B6472">Time taken</dt><dd style="margin: 0; font-weight: 500">{{ duration }}</dd></div>
+<div style="display: flex; flex-direction: column; gap: 3px"><dt style="font-size: 12.5px; font-weight: 600; color: #5B6472">Status</dt><dd style="margin: 0; font-weight: 600">{{ status }}</dd></div>
+</dl>
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 12px; background: #F7F8FA">
+<span style="font-size: 12.5px; font-weight: 600; color: #5B6472">Complaint details</span>
+<p style="margin: 0; line-height: 1.55">Server room temperature reached 29 °C. PAC-1 trips on the high-pressure alarm within ten minutes of every restart. Racks in row B are running hot.</p>
+</div>
+</section>
+
+<section aria-labelledby="cd-activity" style="display: flex; flex-direction: column; gap: 14px; padding: 20px 24px 6px; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px">
+<h2 id="cd-activity" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 17px; font-weight: 600; line-height: 1.3; color: #11161D">Remarks &amp; activity</h2>
+<span style="font-size: 13px; color: #5B6472">{{ activityCount }}</span>
+</div>
+<div style="display: flex; gap: 10px">
+<label for="cd-remark" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">Add a remark</label>
+<input id="cd-remark" type="text" placeholder="Add a remark to the work log" value="{{ remark }}" onChange="{{ setRemark }}" style="flex: 1 1 auto; min-width: 0; min-height: 44px; padding: 0 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+<button type="button" onClick="{{ postRemark }}" disabled="{{ noRemark }}" style="flex: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 10px; font-size: 14px; font-weight: 600; border: 1px solid {{ postBorder }}; background: {{ postBg }}; color: {{ postFg }}; cursor: {{ postCursor }}">Post</button>
+</div>
+<ol style="margin: 0; padding: 0; list-style: none">
+<sc-for list="{{ activity }}" as="ev" hint-placeholder-count="6">
+<li style="display: flex; gap: 14px; padding: 14px 0; border-top: 1px solid #EEF0F3">
+<span style="flex: none; width: 44px; padding-top: 6px; font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px; font-weight: 600; color: #3D4757">{{ ev.time }}</span>
+<span aria-hidden="true" style="flex: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 700; background: {{ ev.avatarBg }}; color: {{ ev.avatarFg }}">{{ ev.initials }}</span>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600">{{ ev.who }} <span style="font-weight: 400; color: #5B6472">· {{ ev.role }}</span></span>
+<span style="line-height: 1.5">{{ ev.text }}</span>
+</div>
+</li>
+</sc-for>
+</ol>
+</section>
+
+</div>
+
+<div style="flex: 2 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+
+<section aria-labelledby="cd-verify-title" style="display: flex; flex-direction: column; gap: 14px; padding: 20px 22px; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px">
+<h2 id="cd-verify-title" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 17px; font-weight: 600; line-height: 1.3; color: #11161D">Supervisor verification</h2>
+<span style="display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; font-size: 12.5px; font-weight: 600; background: {{ verifyChipBg }}; color: {{ verifyChipFg }}">{{ verifyChip }}</span>
+</div>
+<sc-if value="{{ isWaiting }}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; color: #5B6472; line-height: 1.55">Opens when the technician marks the work completed. The supervisor then checks the job on site and closes the complaint.</p>
+</sc-if>
+<sc-if value="{{ isReview }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-direction: column">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer"><input type="checkbox" style="width: 18px; height: 18px; margin: 0; accent-color: #2F5BEA">Work checked on site</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer"><input type="checkbox" style="width: 18px; height: 18px; margin: 0; accent-color: #2F5BEA">Area cleaned and handed back</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer"><input type="checkbox" style="width: 18px; height: 18px; margin: 0; accent-color: #2F5BEA">User confirmed the fix</label>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="cd-verify" style="font-size: 13px; font-weight: 600; color: #2A313C">Verification remark</label>
+<textarea id="cd-verify" rows="2" placeholder="What did you check?" style="width: 100%; min-height: 72px; padding: 10px 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; line-height: 1.5; color: #161A21; resize: vertical"></textarea>
+</div>
+<button type="button" onClick="{{ advance }}" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 1px solid #2F5BEA; border-radius: 10px; background: #2F5BEA; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Verify &amp; close</button>
+</div>
+</sc-if>
+<sc-if value="{{ isClosed }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: flex-start; gap: 12px; padding: 14px; border-radius: 12px; background: #E3F4EA; color: #1C6B3F">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 700">Verified by Hitesh Mehta at {{ verifiedAt }}</span>
+<span style="color: #1C4D31">PAC-1 stable and the room is back to 22 °C. Complaint closed.</span>
+</div>
+</div>
+</sc-if>
+</section>
+
+<section aria-labelledby="cd-material" style="display: flex; flex-direction: column; gap: 12px; padding: 20px 22px; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px">
+<h2 id="cd-material" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 17px; font-weight: 600; line-height: 1.3; color: #11161D">Material used</h2>
+<a href="{{ L.Stock }}" style="font-size: 13.5px; font-weight: 600; text-decoration: none">Open stock</a>
+</div>
+<ul style="margin: 0; padding: 0; list-style: none">
+<sc-for list="{{ materials }}" as="m" hint-placeholder-count="3">
+<li style="display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid #EEF0F3">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-weight: 600">{{ m.name }}</span>
+<span style="font-size: 12.5px; color: #5B6472"><sc-if value="{{ m.hasCode }}" hint-placeholder-val="{{ true }}"><span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace">{{ m.code }}</span> · </sc-if>{{ m.note }}</span>
+</div>
+<span style="flex: none; font-weight: 600">{{ m.qty }}</span>
+</li>
+</sc-for>
+</ul>
+<button type="button" onClick="{{ openMat }}" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 14px; font-weight: 600; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add material</button>
+</section>
+
+<section aria-labelledby="cd-history" style="display: flex; flex-direction: column; gap: 10px; padding: 20px 22px 8px; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px">
+<h2 id="cd-history" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 17px; font-weight: 600; line-height: 1.3; color: #11161D">Equipment history</h2>
+<a href="{{ L.Reports }}" style="font-size: 13.5px; font-weight: 600; text-decoration: none">Full history</a>
+</div>
+<p style="margin: 0; font-size: 13px; color: #5B6472">PAC-1 precision AC · <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace">AST-HV-051</span></p>
+<ol style="margin: 0; padding: 0; list-style: none">
+<li style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid #EEF0F3">
+<span style="flex: none; width: 52px; font-size: 12.5px; font-weight: 600; color: #3D4757">12 Nov</span>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600">Quarterly preventive service</span>
+<span style="font-size: 13px; color: #5B6472">Kesar Cooling Services · filters and coil check</span>
+</div>
+</li>
+<li style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid #EEF0F3">
+<span style="flex: none; width: 52px; font-size: 12.5px; font-weight: 600; color: #3D4757">28 Oct</span>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600">Low cooling · <span style="font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-weight: 500">CMP-26-0311</span></span>
+<span style="font-size: 13px; color: #5B6472">Gas top-up, 1.5 kg R-410A · Vikram Solanki</span>
+</div>
+</li>
+<li style="display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid #EEF0F3">
+<span style="flex: none; width: 52px; font-size: 12.5px; font-weight: 600; color: #3D4757">03 Oct</span>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600">Filter cleaning</span>
+<span style="font-size: 13px; color: #5B6472">Preventive task · Vikram Solanki</span>
+</div>
+</li>
+</ol>
+</section>
+
+<section aria-labelledby="cd-vendor" style="display: flex; flex-direction: column; gap: 8px; padding: 20px 22px; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px">
+<h2 id="cd-vendor" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 17px; font-weight: 600; line-height: 1.3; color: #11161D">Vendor / AMC</h2>
+<a href="{{ L.Vendors }}" style="font-size: 13.5px; font-weight: 600; text-decoration: none">Vendor list</a>
+</div>
+<span style="font-weight: 600">Kesar Cooling Services</span>
+<span style="font-size: 13px; color: #5B6472">AMC valid till 31 Mar 2027</span>
+<span style="font-size: 13px; color: #5B6472">Called at 14:20 for HP switch replacement</span>
+</section>
+
+</div>
+</div>
+
+</div>
+</main>
+
+<sc-if value="{{ reassignOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(17, 22, 29, 0.55)">
+<section role="dialog" aria-modal="true" aria-labelledby="cd-ra-title" style="width: 100%; max-width: 480px; max-height: 100%; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; padding: 24px; border-radius: 16px; background: #FFFFFF; box-shadow: 0 24px 64px rgba(17, 22, 29, 0.35)">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<h2 id="cd-ra-title" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 20px; font-weight: 600; line-height: 1.25; color: #11161D">Reassign complaint</h2>
+<p style="margin: 0; font-size: 13px; color: #5B6472">Currently with {{ assignee }}.</p>
+</div>
+<button type="button" onClick="{{ closeModal }}" aria-label="Close" style="flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: #5B6472; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="cd-ra-to" style="font-size: 13px; font-weight: 600; color: #2A313C">Assign to</label>
+<select id="cd-ra-to" value="{{ ra.to }}" onChange="{{ onRa.to }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+<option>Ramesh Patel</option>
+<option>Vikram Solanki</option>
+<option>Imran Shaikh</option>
+<option>Suresh Rathod</option>
+<option>Mahesh Parmar</option>
+<option>Arjun Desai</option>
+<option>Kalpesh Joshi</option>
+<option>Nilesh Chauhan</option>
+</select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="cd-ra-why" style="font-size: 13px; font-weight: 600; color: #2A313C">Reason (optional)</label>
+<textarea id="cd-ra-why" rows="2" placeholder="Why is it moving?" value="{{ ra.why }}" onChange="{{ onRa.why }}" style="width: 100%; min-height: 72px; padding: 10px 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; line-height: 1.5; color: #161A21; resize: vertical"></textarea>
+</div>
+<sc-if value="{{ hasRaError }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; font-size: 13px; font-weight: 600; color: #A3330A">{{ raError }}</p></sc-if>
+<div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px">
+<button type="button" onClick="{{ closeModal }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 14px; font-weight: 600; cursor: pointer">Cancel</button>
+<button type="button" onClick="{{ submitReassign }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border: 1px solid #2F5BEA; border-radius: 10px; background: #2F5BEA; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer">Reassign</button>
+</div>
+</section>
+</div>
+</sc-if>
+
+<sc-if value="{{ matOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(17, 22, 29, 0.55)">
+<section role="dialog" aria-modal="true" aria-labelledby="cd-mat-title" style="width: 100%; max-width: 480px; max-height: 100%; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; padding: 24px; border-radius: 16px; background: #FFFFFF; box-shadow: 0 24px 64px rgba(17, 22, 29, 0.35)">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<h2 id="cd-mat-title" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 20px; font-weight: 600; line-height: 1.25; color: #11161D">Add material</h2>
+<p style="margin: 0; font-size: 13px; color: #5B6472">Issued from the main store against CMP-26-0433.</p>
+</div>
+<button type="button" onClick="{{ closeModal }}" aria-label="Close" style="flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: #5B6472; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="cd-mat-item" style="font-size: 13px; font-weight: 600; color: #2A313C">Spare part</label>
+<select id="cd-mat-item" value="{{ mat.code }}" onChange="{{ onMat.code }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+<option value="SP-HV-410">Refrigerant R-410A · SP-HV-410</option>
+<option value="SP-HV-207">Condenser coil cleaner · SP-HV-207</option>
+<option value="SP-HV-112">AHU pre-filter 24 × 24 in · SP-HV-112</option>
+<option value="SP-EL-016">MCB 16 A SP, C-curve · SP-EL-016</option>
+<option value="SP-EL-104">LED tube 20 W · SP-EL-104</option>
+</select>
+<span style="font-size: 12.5px; color: #5B6472">{{ matHint }}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="cd-mat-qty" style="font-size: 13px; font-weight: 600; color: #2A313C">Quantity ({{ matUnit }})</label>
+<input id="cd-mat-qty" type="number" min="1" inputmode="numeric" value="{{ mat.qty }}" onChange="{{ onMat.qty }}" style="width: 100%; min-height: 44px; padding: 0 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+</div>
+<sc-if value="{{ hasMatError }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; font-size: 13px; font-weight: 600; color: #A3330A">{{ matError }}</p></sc-if>
+<div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px">
+<button type="button" onClick="{{ closeModal }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 14px; font-weight: 600; cursor: pointer">Cancel</button>
+<button type="button" onClick="{{ submitMat }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border: 1px solid #2F5BEA; border-radius: 10px; background: #2F5BEA; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer">Add material</button>
+</div>
+</section>
+</div>
+</sc-if>
+
+<div role="status" aria-live="polite" style="position: fixed; right: {{ shell.toastRight }}; bottom: {{ shell.toastBottom }}; z-index: 60; display: flex; flex-direction: column; align-items: flex-end; max-width: calc(100vw - 48px)">
+<sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 16px; border-radius: 12px; background: #11161D; color: #FFFFFF; box-shadow: 0 12px 32px rgba(17, 22, 29, 0.28)">
+<span aria-hidden="true" style="flex: none; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #2E9D5E; color: #FFFFFF"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+<span style="flex: 1 1 auto; font-weight: 500">{{ toastText }}</span>
+<button type="button" onClick="{{ closeToast }}" aria-label="Dismiss message" style="flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: #B8C2CF; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</sc-if>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"device":{"editor":null},"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this._onResize = () => this.setState({ vw: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+  }
+  renderVals() {
+    const dev = this.props.device;
+    const device = dev === 'phone' || dev === 'tablet' ? dev : '';
+    const vw = (this.state && this.state.vw) || (typeof window !== 'undefined' ? window.innerWidth : 1440);
+    const mode = device || (vw < 700 ? 'phone' : (vw < 1280 ? 'tablet' : 'desktop'));
+    const pre = device === 'phone' ? 'Phone' : (device === 'tablet' ? 'Tablet' : '');
+    const L = {};
+    ['SignIn', 'Main', 'WorkEntry', 'Complaints', 'ComplaintDetail', 'Preventive', 'Vendors', 'Stock', 'Reports', 'Categories'].forEach((n) => { L[n] = pre + n + '.dc.html'; });
+    const isPhone = mode === 'phone';
+    const isTablet = mode === 'tablet';
+    const shell = {
+      minH: device === 'phone' ? '844px' : (device === 'tablet' ? '1180px' : '100vh'),
+      alignContent: isPhone ? 'flex-start' : 'stretch',
+      navFlex: isPhone ? '1 1 100%' : (isTablet ? '0 0 88px' : '1 1 248px'),
+      mainPad: isPhone ? '20px 16px 104px' : (isTablet ? '24px 24px 48px' : '24px 32px 48px'),
+      toastRight: isPhone ? '12px' : '24px',
+      toastBottom: isPhone ? '84px' : '24px'
+    };
+    const vals = this.pageVals();
+    const ui = this.uiVals ? this.uiVals(mode) : {};
+    const plain = (o) => !!o && typeof o === 'object' && !Array.isArray(o) && Object.getPrototypeOf(o) === Object.prototype;
+    const withGo = (v, depth) => {
+      if (depth > 4) return v;
+      if (Array.isArray(v)) return v.map((it) => (plain(it) ? Object.assign({ go: L, ui: ui }, withGo(it, depth + 1)) : it));
+      if (plain(v)) {
+        const o = {};
+        Object.keys(v).forEach((k) => { o[k] = (Array.isArray(v[k]) || plain(v[k])) ? withGo(v[k], depth + 1) : v[k]; });
+        return o;
+      }
+      return v;
+    };
+    Object.keys(vals).forEach((k) => { if (Array.isArray(vals[k]) || plain(vals[k])) vals[k] = withGo(vals[k], 0); });
+    return Object.assign(vals, { mode, device, L, shell, ui, isPhone, notPhone: !isPhone, isTablet, wide: mode === 'desktop', compact: mode !== 'desktop' });
+  }
+  uiVals(mode) {
+    const phone = mode === 'phone';
+    return {
+      flowPad: phone ? '18px 16px' : '20px 24px',
+      stepCols: phone ? 'minmax(0, 1fr)' : (mode === 'tablet' ? 'repeat(5, minmax(0, 1fr))' : 'repeat(auto-fit, minmax(min(170px, 100%), 1fr))'),
+      stepGap: phone ? '14px' : (mode === 'tablet' ? '12px' : '16px'),
+      stepDir: phone ? 'row' : 'column',
+      stepInnerGap: phone ? '12px' : '10px',
+      stepBar: phone ? 'none' : 'block'
+    };
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    clearTimeout(this._toastTimer);
+  }
+  pageVals() {
+    const s = this.state || {};
+    const cur = s.cur || 2;
+    const events = s.events || [];
+    const assignee = s.assignee || 'Vikram Solanki';
+    const completedAt = s.completedAt || '';
+    const verifiedAt = s.verifiedAt || '';
+    const modal = s.modal || '';
+    const pad = (n) => (n < 10 ? '0' : '') + n;
+    const nextTime = () => {
+      const mins = 16 * 60 + 2 * (events.length + 1);
+      return pad(Math.floor(mins / 60)) + ':' + pad(mins % 60);
+    };
+    const toMin = (t) => {
+      const m = /^(\d{1,2}):(\d{2})/.exec(t || '');
+      return m ? parseInt(m[1], 10) * 60 + parseInt(m[2], 10) : 0;
+    };
+    const toast = (text) => {
+      clearTimeout(this._toastTimer);
+      this.setState({ toast: text });
+      this._toastTimer = setTimeout(() => this.setState({ toast: '' }), 4000);
+    };
+
+    const STATUS = {
+      'In Progress': ['#FDF3DC', '#8A5A00'],
+      'Completed': ['#E3F4EA', '#1C6B3F'],
+      'Verified': ['#DCE3EA', '#1E2A38']
+    };
+    const status = cur >= 5 ? 'Verified' : (cur === 4 ? 'Completed' : 'In Progress');
+
+    const advance = () => {
+      const t = nextTime();
+      if (cur === 2) {
+        this.setState({
+          cur: 4,
+          completedAt: t,
+          events: [{ time: t, who: assignee, text: 'Work completed. HP switch replaced with Kesar Cooling, coil cleaned and gas topped up. PAC-1 running normally.' }].concat(events)
+        });
+        toast('Work marked completed. It now waits for supervisor verification.');
+      } else if (cur === 4) {
+        this.setState({
+          cur: 5,
+          verifiedAt: t,
+          events: [{ time: t, who: 'Hitesh Mehta', text: 'Verified on site: PAC-1 stable and the room is at 22 °C. Complaint closed.' }].concat(events)
+        });
+        toast('Complaint verified and closed.');
+      }
+    };
+
+    const steps = [
+      ['Complaint registered', '13:20 · Neha Trivedi, IT'],
+      ['Technician assigned', assignee === 'Vikram Solanki' ? '13:24 · Vikram Solanki' : 'Reassigned to ' + assignee],
+      ['Work in progress', cur === 2 ? 'Started 13:35 · on site now' : 'Started 13:35'],
+      ['Work completed', cur >= 4 ? completedAt + ' · ' + assignee : 'Waiting for technician'],
+      ['Supervisor verification', cur >= 5 ? verifiedAt + ' · Hitesh Mehta' : (cur === 4 ? 'Waiting for supervisor' : 'After work is completed')]
+    ].map(([label, note], i) => {
+      const done = i < cur;
+      const current = i === cur;
+      return {
+        label,
+        note,
+        n: String(i + 1),
+        done,
+        notDone: !done,
+        ring: done ? '#1C6B3F' : (current ? '#2F5BEA' : '#CDD3DB'),
+        fill: done ? '#1C6B3F' : '#FFFFFF',
+        ink: done ? '#FFFFFF' : (current ? '#2F5BEA' : '#5B6472'),
+        bar: i === 4 ? 'transparent' : (done ? '#1C6B3F' : '#E3E6EB'),
+        tag: done ? 'Done' : (current ? 'Current step' : 'Pending'),
+        tagFg: done ? '#1C6B3F' : (current ? '#2F5BEA' : '#5B6472'),
+        labelFg: done || current ? '#161A21' : '#5B6472'
+      };
+    });
+
+    const ROLES = {
+      'Vikram Solanki': 'AC & HVAC technician',
+      'Ramesh Patel': 'Electrical technician',
+      'Imran Shaikh': 'Electrical technician',
+      'Suresh Rathod': 'Plumbing technician',
+      'Mahesh Parmar': 'Civil & carpentry technician',
+      'Arjun Desai': 'CCTV, access & BMS technician',
+      'Kalpesh Joshi': 'Lift, fire & DG technician',
+      'Nilesh Chauhan': 'General repairs',
+      'Hitesh Mehta': 'Maintenance Supervisor',
+      'Main store': 'Material issue',
+      'Neha Trivedi': 'IT'
+    };
+    const AVATAR = {
+      'Hitesh Mehta': ['#2F5BEA', '#FFFFFF'],
+      'Main store': ['#FDF3DC', '#8A5A00'],
+      'Neha Trivedi': ['#E8EEFD', '#2346B8']
+    };
+    const base = [
+      { time: '14:20', who: 'Vikram Solanki', text: 'Kesar Cooling informed under the AMC. Their technician is bringing a replacement HP switch, expected by 15:30.' },
+      { time: '14:05', who: 'Vikram Solanki', text: 'Portable spot cooler placed in the server room. Temperature down to 26 °C.' },
+      { time: '13:50', who: 'Main store', text: 'Issued 2 kg refrigerant R-410A and 1 L condenser coil cleaner against this complaint.' },
+      { time: '13:35', who: 'Vikram Solanki', text: 'Work started. Condenser coil is choked and the HP switch keeps cutting out.' },
+      { time: '13:24', who: 'Hitesh Mehta', text: 'Assigned to Vikram Solanki and marked urgent because it is the server room.' },
+      { time: '13:20', who: 'Neha Trivedi', text: 'Complaint registered through the help desk.' }
+    ];
+    const activity = events.concat(base).map((ev) => {
+      const colors = AVATAR[ev.who] || ['#EEF1F5', '#3D4757'];
+      return {
+        time: ev.time,
+        who: ev.who,
+        text: ev.text,
+        role: ROLES[ev.who] || 'Team',
+        avatarBg: colors[0],
+        avatarFg: colors[1],
+        initials: ev.who.split(' ').map((w) => w.charAt(0).toUpperCase()).join('')
+      };
+    });
+
+    const remark = s.remark || '';
+    const noRemark = remark.trim() === '';
+
+    const ra = Object.assign({ to: 'Ramesh Patel', why: '' }, s.raForm || {});
+    const setRa = (key) => (e) => this.setState({ raForm: Object.assign({}, ra, { [key]: e.target.value }), raError: '' });
+
+    const PARTS = {
+      'SP-HV-410': ['Refrigerant R-410A', 'kg', 6],
+      'SP-HV-207': ['Condenser coil cleaner', 'L', 3],
+      'SP-HV-112': ['AHU pre-filter 24 × 24 in', 'nos.', 16],
+      'SP-EL-016': ['MCB 16 A SP, C-curve', 'nos.', 3],
+      'SP-EL-104': ['LED tube 20 W', 'nos.', 46]
+    };
+    const mats = s.mats || [
+      { name: 'Refrigerant R-410A', code: 'SP-HV-410', qty: '2 kg', note: 'issued 13:50' },
+      { name: 'Condenser coil cleaner', code: 'SP-HV-207', qty: '1 L', note: 'issued 13:50' },
+      { name: 'HP pressure switch', code: '', qty: '1 no.', note: 'Supplied by vendor under AMC' }
+    ];
+    const materials = mats.map((m) => Object.assign({}, m, { hasCode: !!m.code }));
+    const mat = Object.assign({ code: 'SP-HV-410', qty: '1' }, s.matForm || {});
+    const part = PARTS[mat.code] || PARTS['SP-HV-410'];
+    const matQty = parseInt(mat.qty, 10);
+    const setMat = (key) => (e) => this.setState({ matForm: Object.assign({}, mat, { [key]: e.target.value }), matError: '' });
+
+    const duration = (() => {
+      if (!completedAt) return 'Running since 13:35';
+      const d = toMin(completedAt) - toMin('13:35');
+      return Math.floor(d / 60) + ' h ' + (d % 60) + ' min';
+    })();
+    const closed = cur >= 5;
+
+    return {
+      steps,
+      advance,
+      status,
+      statusBg: STATUS[status][0],
+      statusFg: STATUS[status][1],
+      assignee,
+      closed,
+      primaryLabel: cur === 2 ? 'Mark work completed' : (cur === 4 ? 'Verify & close' : 'Verified & closed'),
+      primaryBg: closed ? '#E3F4EA' : '#2F5BEA',
+      primaryBorder: closed ? '#B9E1C8' : '#2F5BEA',
+      primaryFg: closed ? '#1C6B3F' : '#FFFFFF',
+      primaryCursor: closed ? 'default' : 'pointer',
+      reassignFg: closed ? '#98A1AE' : '#161A21',
+      completionTime: completedAt || 'Not completed yet',
+      duration,
+      verifiedAt,
+      isWaiting: cur === 2,
+      isReview: cur === 4,
+      isClosed: closed,
+      verifyChip: closed ? 'Verified' : (cur === 4 ? 'Ready to verify' : 'Not started'),
+      verifyChipBg: closed ? '#E3F4EA' : (cur === 4 ? '#E8EEFD' : '#EEF1F5'),
+      verifyChipFg: closed ? '#1C6B3F' : (cur === 4 ? '#2346B8' : '#3D4757'),
+      activity,
+      activityCount: activity.length + ' entries',
+
+      remark,
+      noRemark,
+      postBg: noRemark ? '#F4F5F7' : '#2F5BEA',
+      postBorder: noRemark ? '#E3E6EB' : '#2F5BEA',
+      postFg: noRemark ? '#5B6472' : '#FFFFFF',
+      postCursor: noRemark ? 'default' : 'pointer',
+      setRemark: (e) => this.setState({ remark: e.target.value }),
+      postRemark: () => {
+        if (noRemark) return;
+        this.setState({ remark: '', events: [{ time: nextTime(), who: 'Hitesh Mehta', text: remark.trim() }].concat(events) });
+        toast('Remark added to the work log.');
+      },
+
+      printCard: () => toast('Job card for CMP-26-0433 sent to the printer.'),
+
+      reassignOpen: modal === 'reassign',
+      openReassign: () => {
+        if (closed) return;
+        this.setState({ modal: 'reassign', raForm: null, raError: '' });
+      },
+      ra,
+      onRa: { to: setRa('to'), why: setRa('why') },
+      raError: s.raError || '',
+      hasRaError: !!s.raError,
+      submitReassign: () => {
+        if (ra.to === assignee) {
+          this.setState({ raError: 'This complaint is already with ' + assignee + '. Pick someone else.' });
+          return;
+        }
+        const why = ra.why.trim();
+        const text = 'Reassigned from ' + assignee + ' to ' + ra.to + '.' + (why ? ' Reason: ' + why : '');
+        this.setState({ assignee: ra.to, modal: '', raForm: null, raError: '', events: [{ time: nextTime(), who: 'Hitesh Mehta', text }].concat(events) });
+        toast('Reassigned to ' + ra.to + '.');
+      },
+
+      materials,
+      matOpen: modal === 'mat',
+      openMat: () => this.setState({ modal: 'mat', matForm: null, matError: '' }),
+      mat,
+      matUnit: part[1],
+      matHint: part[2] + ' ' + part[1] + ' in stock',
+      onMat: { code: setMat('code'), qty: setMat('qty') },
+      matError: s.matError || '',
+      hasMatError: !!s.matError,
+      submitMat: () => {
+        if (!(matQty > 0)) {
+          this.setState({ matError: 'Enter a quantity greater than 0.' });
+          return;
+        }
+        if (matQty > part[2]) {
+          this.setState({ matError: 'Only ' + part[2] + ' ' + part[1] + ' in stock.' });
+          return;
+        }
+        const t = nextTime();
+        const unit = part[1] === 'nos.' && matQty === 1 ? 'no.' : part[1];
+        const line = { name: part[0], code: mat.code, qty: matQty + ' ' + unit, note: 'issued ' + t };
+        this.setState({
+          mats: mats.concat([line]),
+          modal: '',
+          matForm: null,
+          matError: '',
+          events: [{ time: t, who: 'Main store', text: 'Issued ' + matQty + ' ' + unit + ' ' + part[0] + ' against this complaint.' }].concat(events)
+        });
+        toast(part[0] + ' added to this complaint.');
+      },
+
+      closeModal: () => this.setState({ modal: '' }),
+      toastOn: !!s.toast,
+      toastText: s.toast || '',
+      closeToast: () => {
+        clearTimeout(this._toastTimer);
+        this.setState({ toast: '' });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

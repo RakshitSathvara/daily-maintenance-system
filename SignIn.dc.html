@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sign in · Daily Maintenance Management System</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#F4F5F7}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:#2F5BEA}a:hover{color:#1E40AF}
+@media (max-width: 699px){input,select,textarea{font-size:16px !important}}
+</style>
+</helmet>
+<div style="min-height: {{ shell.minH }}; display: flex; flex-direction: row-reverse; flex-wrap: wrap; background: #F4F5F7; color: #161A21; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 14px; line-height: 1.45">
+
+<main style="flex: 1 1 480px; min-width: 0; display: flex; align-items: center; justify-content: center; padding: {{ ui.mainPad }}">
+<div style="width: 100%; max-width: 420px">
+<sc-if value="{{ compact }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 36px">
+<span aria-hidden="true" style="flex: none; width: 40px; height: 40px; border-radius: 11px; display: flex; align-items: center; justify-content: center; background: #F5A524; color: #11161D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-5.7 5.7a1.9 1.9 0 0 0 2.7 2.7l5.7-5.7a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.3-.3-2.4z"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 1px">
+<span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 16px; font-weight: 600; line-height: 1.2; color: #11161D">Daily Maintenance</span>
+<span style="font-size: 13px; color: #5B6472">Management System</span>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ isSignin }}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 28px">
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 32px; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; color: #11161D">Sign in</h1>
+<p style="margin: 0; font-size: 15px; color: #5B6472">Use your employee ID or work email to continue.</p>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="si-user" style="font-size: 13px; font-weight: 600; color: #2A313C">Employee ID or work email</label>
+<input id="si-user" type="text" autocomplete="username" placeholder="name@company.com" style="width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 15px; color: #161A21">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="si-pass" style="font-size: 13px; font-weight: 600; color: #2A313C">Password</label>
+<div style="position: relative; display: flex; align-items: center">
+<input id="si-pass" type="{{ pwType }}" autocomplete="current-password" style="width: 100%; min-height: 48px; padding: 0 56px 0 14px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 15px; color: #161A21">
+<button type="button" onClick="{{ togglePw }}" aria-label="Show password" aria-pressed="{{ pwShown }}" style="position: absolute; top: 2px; right: 2px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 8px; background: transparent; color: #5B6472; cursor: pointer">
+<sc-if value="{{ pwHidden }}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></sc-if>
+<sc-if value="{{ pwShown }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"></path><path d="M10.6 5.6c.5-.1.9-.1 1.4-.1 6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2.5 12s3.5 6.5 9.5 6.5c1.6 0 3-.4 4.3-1"></path><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"></path></svg></sc-if>
+</button>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px">
+<label style="display: inline-flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer"><input type="checkbox" style="width: 18px; height: 18px; margin: 0; accent-color: #2F5BEA">Keep me signed in</label>
+<button type="button" onClick="{{ toForgot }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0; border: 0; background: transparent; color: #2F5BEA; font-size: 14px; font-weight: 600; cursor: pointer">Forgot password?</button>
+</div>
+</div>
+
+<a href="{{ L.Main }}" style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 20px; border: 1px solid #2F5BEA; border-radius: 10px; background: #2F5BEA; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none">Sign in<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+
+<p style="margin: 0; padding-top: 20px; border-top: 1px solid #E3E6EB; font-size: 13px; color: #5B6472">Trouble signing in? Ask your maintenance supervisor or the facility admin to reset your access.</p>
+</div>
+</sc-if>
+
+<sc-if value="{{ isForgot }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 32px; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; color: #11161D">Reset your password</h1>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #5B6472">Enter your employee ID or work email and we'll send you a link to set a new password.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="si-reset" style="font-size: 13px; font-weight: 600; color: #2A313C">Employee ID or work email</label>
+<input id="si-reset" type="text" autocomplete="username" placeholder="name@company.com" value="{{ resetId }}" onChange="{{ setResetId }}" style="width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 15px; color: #161A21">
+<sc-if value="{{ hasResetError }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px; font-weight: 600; color: #A3330A">Enter your employee ID or work email.</span></sc-if>
+</div>
+<button type="button" onClick="{{ sendReset }}" style="display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; border: 1px solid #2F5BEA; border-radius: 10px; background: #2F5BEA; color: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">Send reset link</button>
+<button type="button" onClick="{{ toSignin }}" style="align-self: center; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; border: 0; border-radius: 10px; background: transparent; color: #2F5BEA; font-size: 14px; font-weight: 600; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>Back to sign in</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<span aria-hidden="true" style="width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: #E3F4EA; color: #1C6B3F"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3.5 6.5L12 13l8.5-6.5"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 32px; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; color: #11161D">Check your email</h1>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #5B6472">If an account exists for {{ resetId }}, a reset link is on its way.</p>
+</div>
+<button type="button" onClick="{{ toSignin }}" style="display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 15px; font-weight: 600; cursor: pointer">Back to sign in</button>
+</div>
+</sc-if>
+
+</div>
+</main>
+
+<sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+<aside aria-label="About the system" style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 48px; padding: 48px clamp(24px, 4vw, 56px); background-color: #11161D; background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px); background-size: 32px 32px; color: #C3CBD6">
+
+<div style="display: flex; align-items: center; gap: 14px">
+<span aria-hidden="true" style="flex: none; width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: #F5A524; color: #11161D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-5.7 5.7a1.9 1.9 0 0 0 2.7 2.7l5.7-5.7a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.3-.3-2.4z"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 1px">
+<span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 17px; font-weight: 600; line-height: 1.2; color: #FFFFFF">Daily Maintenance</span>
+<span style="font-size: 13px; color: #8B96A6">Management System</span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 24px; max-width: 520px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: clamp(30px, 3vw, 42px); font-weight: 600; line-height: 1.1; letter-spacing: -0.015em; color: #FFFFFF">Every complaint, from registration to sign-off.</h2>
+<p style="margin: 0; font-size: 15.5px; line-height: 1.55; color: #C3CBD6">Log daily work, assign technicians and keep preventive maintenance, vendors and spare parts in one place.</p>
+<ol aria-label="Complaint workflow" style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px">
+<li style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid #3A4656; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #F5A524">1</span><span style="font-weight: 500; color: #E6EAF0">Complaint registered</span></li>
+<li style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid #3A4656; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #F5A524">2</span><span style="font-weight: 500; color: #E6EAF0">Technician assigned</span></li>
+<li style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid #3A4656; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #F5A524">3</span><span style="font-weight: 500; color: #E6EAF0">Work in progress</span></li>
+<li style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid #3A4656; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #F5A524">4</span><span style="font-weight: 500; color: #E6EAF0">Work completed</span></li>
+<li style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid #3A4656; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #F5A524">5</span><span style="font-weight: 500; color: #E6EAF0">Supervisor verification</span></li>
+</ol>
+</div>
+
+<p style="margin: 0; font-size: 13px; color: #8B96A6">[Facility name] · Maintenance department</p>
+
+</aside>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"device":{"editor":null},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+  }
+  componentDidMount() {
+    this._onResize = () => this.setState({ vw: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+  }
+  renderVals() {
+    const dev = this.props.device;
+    const device = dev === 'phone' || dev === 'tablet' ? dev : '';
+    const vw = (this.state && this.state.vw) || (typeof window !== 'undefined' ? window.innerWidth : 1440);
+    const mode = device || (vw < 700 ? 'phone' : (vw < 1280 ? 'tablet' : 'desktop'));
+    const pre = device === 'phone' ? 'Phone' : (device === 'tablet' ? 'Tablet' : '');
+    const L = {};
+    ['SignIn', 'Main', 'WorkEntry', 'Complaints', 'ComplaintDetail', 'Preventive', 'Vendors', 'Stock', 'Reports', 'Categories'].forEach((n) => { L[n] = pre + n + '.dc.html'; });
+    const isPhone = mode === 'phone';
+    const isTablet = mode === 'tablet';
+    const shell = {
+      minH: device === 'phone' ? '844px' : (device === 'tablet' ? '1180px' : '100vh'),
+      alignContent: isPhone ? 'flex-start' : 'stretch',
+      navFlex: isPhone ? '1 1 100%' : (isTablet ? '0 0 88px' : '1 1 248px'),
+      mainPad: isPhone ? '20px 16px 104px' : (isTablet ? '24px 24px 48px' : '28px 32px 48px'),
+      toastRight: isPhone ? '12px' : '24px',
+      toastBottom: isPhone ? '84px' : '24px'
+    };
+    const vals = this.pageVals();
+    const ui = this.uiVals ? this.uiVals(mode) : {};
+    const plain = (o) => !!o && typeof o === 'object' && !Array.isArray(o) && Object.getPrototypeOf(o) === Object.prototype;
+    const withGo = (v, depth) => {
+      if (depth > 4) return v;
+      if (Array.isArray(v)) return v.map((it) => (plain(it) ? Object.assign({ go: L, ui: ui }, withGo(it, depth + 1)) : it));
+      if (plain(v)) {
+        const o = {};
+        Object.keys(v).forEach((k) => { o[k] = (Array.isArray(v[k]) || plain(v[k])) ? withGo(v[k], depth + 1) : v[k]; });
+        return o;
+      }
+      return v;
+    };
+    Object.keys(vals).forEach((k) => { if (Array.isArray(vals[k]) || plain(vals[k])) vals[k] = withGo(vals[k], 0); });
+    return Object.assign(vals, { mode, device, L, shell, ui, isPhone, notPhone: !isPhone, isTablet, wide: mode === 'desktop', compact: mode !== 'desktop' });
+  }
+  uiVals(mode) {
+    return {
+      mainPad: mode === 'phone' ? '40px 20px' : '56px 32px'
+    };
+  }
+  pageVals() {
+    const s = this.state || {};
+    const shown = !!s.pwShown;
+    const mode = s.mode || 'signin';
+    const resetId = s.resetId || '';
+    return {
+      pwType: shown ? 'text' : 'password',
+      pwShown: shown,
+      pwHidden: !shown,
+      togglePw: () => this.setState({ pwShown: !shown }),
+      isSignin: mode === 'signin',
+      isForgot: mode === 'forgot',
+      isSent: mode === 'sent',
+      toForgot: () => this.setState({ mode: 'forgot', resetError: false }),
+      toSignin: () => this.setState({ mode: 'signin', resetError: false }),
+      resetId,
+      setResetId: (e) => this.setState({ resetId: e.target.value, resetError: false }),
+      hasResetError: !!s.resetError,
+      sendReset: () => {
+        if (!resetId.trim()) {
+          this.setState({ resetError: true });
+          return;
+        }
+        this.setState({ mode: 'sent', resetError: false });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

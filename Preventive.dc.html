@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Preventive Maintenance schedule</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#F4F5F7}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:#2F5BEA}a:hover{color:#1E40AF}
+@media (max-width: 699px){input,select,textarea{font-size:16px !important}}
+</style>
+</helmet>
+<div style="min-height: {{ shell.minH }}; display: flex; flex-wrap: wrap; align-content: {{ shell.alignContent }}; background: #F4F5F7; color: #161A21; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 14px; line-height: 1.45">
+<div style="flex: {{ shell.navFlex }}; display: flex; flex-direction: column; background: #11161D">
+<dc-import name="Sidebar" active="preventive" mode="{{ mode }}" device="{{ device }}" hint-size="100%,840px"></dc-import>
+</div>
+<main style="flex: 999 1 560px; min-width: 0; padding: {{ shell.mainPad }}">
+<div style="width: 100%; max-width: 1280px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px">
+
+<header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<nav aria-label="Breadcrumb" style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: #5B6472">
+<a href="{{ L.Main }}" style="color: #5B6472; text-decoration: none">Dashboard</a>
+<span aria-hidden="true">/</span>
+<span>Operations</span>
+<span aria-hidden="true">/</span>
+<span style="color: #161A21; font-weight: 500">Preventive Maintenance</span>
+</nav>
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 30px; font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; color: #11161D">Preventive Maintenance</h1>
+<p style="margin: 0; color: #5B6472">Schedule for the week of 23–29 Nov 2026</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" onClick="{{ exportSchedule }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 14px; font-weight: 600; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 20h14"></path></svg>Export schedule</button>
+<button type="button" onClick="{{ openAdd }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid #2F5BEA; border-radius: 10px; background: #2F5BEA; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add PM task</button>
+</div>
+</header>
+
+<section aria-label="Schedule summary" style="display: grid; grid-template-columns: {{ ui.sumCols }}; gap: {{ ui.sumGap }}">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: {{ ui.sumPad }}; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<span style="font-weight: 600; color: #3D4757">Due today</span>
+<span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 34px; font-weight: 600; line-height: 1.05">{{ dueToday }}</span>
+<span style="font-size: 13px; color: #5B6472">{{ dueTodayNote }}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding: {{ ui.sumPad }}; border: 1px solid #F6C7AC; border-radius: 14px; background: #FFF4ED">
+<span style="font-weight: 600; color: #8F2D08">Overdue</span>
+<span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 34px; font-weight: 600; line-height: 1.05; color: #C2410C">{{ overdue }}</span>
+<span style="font-size: 13px; color: #8F2D08">{{ overdueNote }}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding: {{ ui.sumPad }}; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<span style="font-weight: 600; color: #3D4757">This week</span>
+<span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 34px; font-weight: 600; line-height: 1.05">{{ weekCount }}</span>
+<span style="font-size: 13px; color: #5B6472">{{ weekNote }}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding: {{ ui.sumPad }}; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<span style="font-weight: 600; color: #3D4757">November compliance</span>
+<span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 34px; font-weight: 600; line-height: 1.05">74%</span>
+<span style="font-size: 13px; color: #5B6472">31 of 42 planned tasks done</span>
+</div>
+</section>
+
+<section aria-labelledby="pm-week" style="display: flex; flex-direction: column; gap: 14px; padding: 18px 20px 20px; border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<h2 id="pm-week" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 17px; font-weight: 600; line-height: 1.3; color: #11161D">Week of 23–29 Nov</h2>
+<p style="margin: 0; font-size: 13px; color: #5B6472">Pick a day to filter the task list.</p>
+</div>
+<button type="button" onClick="{{ showAll }}" aria-pressed="{{ allOn }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid {{ allBorder }}; background: {{ allBg }}; color: {{ allFg }}">All tasks</button>
+</div>
+<div style="display: grid; grid-template-columns: {{ ui.weekCols }}; overflow-x: {{ ui.weekScroll }}; scrollbar-width: none; gap: 8px">
+<sc-for list="{{ days }}" as="d" hint-placeholder-count="7">
+<button type="button" onClick="{{ d.pick }}" aria-pressed="{{ d.on }}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-height: 84px; padding: 12px 14px; border-radius: 12px; text-align: left; cursor: pointer; border: 1px solid {{ d.border }}; background: {{ d.bg }}; color: {{ d.fg }}">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: {{ d.subFg }}">{{ d.dow }}</span>
+<span style="font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 22px; font-weight: 600; line-height: 1">{{ d.date }}</span>
+<span style="font-size: 12.5px; font-weight: 600; color: {{ d.countFg }}">{{ d.label }}</span>
+</button>
+</sc-for>
+</div>
+</section>
+
+<section aria-labelledby="pm-table" style="border: 1px solid #E3E6EB; border-radius: 14px; background: #FFFFFF; overflow: hidden; box-shadow: 0 1px 2px rgba(17, 22, 29, 0.04)">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; padding: 18px 20px">
+<h2 id="pm-table" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 17px; font-weight: 600; line-height: 1.3; color: #11161D">{{ tableTitle }}</h2>
+<span style="font-size: 13px; color: #5B6472">{{ tableCount }}</span>
+</div>
+<sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+<div style="overflow-x: auto">
+<div style="min-width: 1116px">
+<div style="display: grid; grid-template-columns: minmax(220px, 1.6fr) 140px 96px 84px 84px minmax(160px, 1fr) 104px 104px; gap: 12px; align-items: center; padding: 10px 20px; border-top: 1px solid #EEF0F3; background: #F7F8FA; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #5B6472">
+<span>Asset &amp; task</span><span>Category</span><span>Frequency</span><span>Last done</span><span>Scheduled</span><span>Assigned to</span><span>Status</span><span>Action</span>
+</div>
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="10">
+<div style="display: grid; grid-template-columns: minmax(220px, 1.6fr) 140px 96px 84px 84px minmax(160px, 1fr) 104px 104px; gap: 12px; align-items: center; padding: 8px 20px; min-height: 62px; border-top: 1px solid #EEF0F3">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-weight: 600">{{ r.asset }}</span>
+<span style="font-size: 12.5px; color: #5B6472">{{ r.detail }}</span>
+</div>
+<span style="font-size: 13.5px">{{ r.cat }}</span>
+<span style="font-size: 13.5px">{{ r.freq }}</span>
+<span style="font-size: 13.5px; color: #5B6472">{{ r.last }}</span>
+<span style="font-size: 13.5px; font-weight: 600; color: {{ r.schedFg }}">{{ r.sched }}</span>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-size: 13.5px">{{ r.who }}</span>
+<sc-if value="{{ r.vendor }}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: #5B6472">Vendor visit</span></sc-if>
+</div>
+<span style="justify-self: start; display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px; border-radius: 999px; font-size: 12.5px; font-weight: 600; white-space: nowrap; background: {{ r.statusBg }}; color: {{ r.statusFg }}">{{ r.status }}</span>
+<div style="display: flex">
+<sc-if value="{{ r.actionable }}" hint-placeholder-val="{{ false }}"><a href="{{ r.go.WorkEntry }}" style="display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 12px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap">Log work</a></sc-if>
+<sc-if value="{{ r.notActionable }}" hint-placeholder-val="{{ true }}"><span style="font-size: 13px; color: #5B6472">—</span></sc-if>
+</div>
+</div>
+</sc-for>
+<sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+<div style="padding: 48px 20px; border-top: 1px solid #EEF0F3; text-align: center; color: #5B6472">No preventive tasks are scheduled on this day.</div>
+</sc-if>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ compact }}" hint-placeholder-val="{{ false }}">
+<ul style="margin: 0 0 0 -1px; padding: 0; list-style: none; display: grid; grid-template-columns: {{ ui.cardCols }}">
+<sc-for list="{{ rows }}" as="r" hint-placeholder-count="10">
+<li style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-top: 1px solid #EEF0F3; border-left: 1px solid #EEF0F3">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-weight: 600">{{ r.asset }}</span>
+<span style="font-size: 12.5px; color: #5B6472">{{ r.detail }}</span>
+</div>
+<span style="flex: none; display: inline-flex; align-items: center; min-height: 24px; padding: 0 9px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; background: {{ r.statusBg }}; color: {{ r.statusFg }}">{{ r.status }}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: #3D4757">
+<span>{{ r.cat }} · {{ r.freq }}</span>
+<span>Last done {{ r.last }}</span>
+<span style="font-weight: 600; color: {{ r.schedFg }}">Scheduled {{ r.sched }}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px">
+<span style="font-size: 13.5px">{{ r.who }}<sc-if value="{{ r.vendor }}" hint-placeholder-val="{{ false }}"><span style="color: #5B6472"> · Vendor visit</span></sc-if></span>
+<sc-if value="{{ r.actionable }}" hint-placeholder-val="{{ false }}"><a href="{{ r.go.WorkEntry }}" style="display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 12px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap">Log work</a></sc-if>
+</div>
+</li>
+</sc-for>
+</ul>
+<sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+<div style="padding: 40px 20px; border-top: 1px solid #EEF0F3; text-align: center; color: #5B6472">No preventive tasks are scheduled on this day.</div>
+</sc-if>
+</sc-if>
+</section>
+
+</div>
+</main>
+
+<sc-if value="{{ addOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(17, 22, 29, 0.55)">
+<section role="dialog" aria-modal="true" aria-labelledby="pm-add-title" style="width: 100%; max-width: 560px; max-height: 100%; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; padding: 24px; border-radius: 16px; background: #FFFFFF; box-shadow: 0 24px 64px rgba(17, 22, 29, 0.35)">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<h2 id="pm-add-title" style="margin: 0; font-family: 'Space Grotesk', Inter, system-ui, sans-serif; font-size: 20px; font-weight: 600; line-height: 1.25; color: #11161D">Add PM task</h2>
+<p style="margin: 0; font-size: 13px; color: #5B6472">Schedule a recurring check for an asset.</p>
+</div>
+<button type="button" onClick="{{ closeModal }}" aria-label="Close" style="flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: #5B6472; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="pm-add-asset" style="font-size: 13px; font-weight: 600; color: #2A313C">Asset <span aria-hidden="true" style="color: #C2410C">*</span></label>
+<input id="pm-add-asset" type="text" placeholder="e.g. Fire pump set" value="{{ add.asset }}" onChange="{{ onAdd.asset }}" aria-required="true" style="width: 100%; min-height: 44px; padding: 0 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="pm-add-where" style="font-size: 13px; font-weight: 600; color: #2A313C">Location</label>
+<input id="pm-add-where" type="text" placeholder="e.g. Basement B1 pump room" value="{{ add.where }}" onChange="{{ onAdd.where }}" style="width: 100%; min-height: 44px; padding: 0 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+</div>
+<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px">
+<label for="pm-add-task" style="font-size: 13px; font-weight: 600; color: #2A313C">Task <span aria-hidden="true" style="color: #C2410C">*</span></label>
+<input id="pm-add-task" type="text" placeholder="What needs to be checked or serviced" value="{{ add.task }}" onChange="{{ onAdd.task }}" aria-required="true" style="width: 100%; min-height: 44px; padding: 0 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="pm-add-cat" style="font-size: 13px; font-weight: 600; color: #2A313C">Category</label>
+<select id="pm-add-cat" value="{{ add.cat }}" onChange="{{ onAdd.cat }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+<option>Electrical</option>
+<option>Plumbing</option>
+<option>AC &amp; HVAC</option>
+<option>Civil &amp; Carpentry</option>
+<option>Lift</option>
+<option>Fire Safety</option>
+<option>CCTV &amp; Access Control</option>
+<option>BMS</option>
+<option>Generator &amp; UPS</option>
+<option>Housekeeping &amp; General</option>
+</select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="pm-add-freq" style="font-size: 13px; font-weight: 600; color: #2A313C">Frequency</label>
+<select id="pm-add-freq" value="{{ add.freq }}" onChange="{{ onAdd.freq }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+<option>Weekly</option>
+<option>Fortnightly</option>
+<option>Monthly</option>
+<option>Quarterly</option>
+<option>Half-yearly</option>
+<option>Yearly</option>
+</select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="pm-add-date" style="font-size: 13px; font-weight: 600; color: #2A313C">First scheduled on</label>
+<input id="pm-add-date" type="date" value="{{ add.date }}" onChange="{{ onAdd.date }}" style="width: 100%; min-height: 44px; padding: 0 12px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="pm-add-who" style="font-size: 13px; font-weight: 600; color: #2A313C">Assigned to</label>
+<select id="pm-add-who" value="{{ add.who }}" onChange="{{ onAdd.who }}" style="width: 100%; min-height: 44px; padding: 0 10px; border: 1px solid #CDD3DB; border-radius: 10px; background: #FFFFFF; font-size: 14px; color: #161A21">
+<option>Ramesh Patel</option>
+<option>Imran Shaikh</option>
+<option>Suresh Rathod</option>
+<option>Vikram Solanki</option>
+<option>Mahesh Parmar</option>
+<option>Arjun Desai</option>
+<option>Kalpesh Joshi</option>
+<option>Nilesh Chauhan</option>
+<option>Kesar Cooling Services</option>
+<option>Sabar Lift Engineers</option>
+<option>Agnirakshak Fire Systems</option>
+<option>Sudarshan Power Systems</option>
+<option>Netra Security Systems</option>
+<option>Sahyog BMS Services</option>
+<option>Jalseva Plumbing Works</option>
+</select>
+</div>
+</div>
+<sc-if value="{{ hasAddError }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; font-size: 13px; font-weight: 600; color: #A3330A">{{ addError }}</p></sc-if>
+<div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px">
+<button type="button" onClick="{{ closeModal }}" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid #D5DAE1; border-radius: 10px; background: #FFFFFF; color: #161A21; font-size: 14px; font-weight: 600; cursor: pointer">Cancel</button>
+<button type="button" onClick="{{ submitAdd }}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 1px solid #2F5BEA; border-radius: 10px; background: #2F5BEA; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add task</button>
+</div>
+</section>
+</div>
+</sc-if>
+
+<div role="status" aria-live="polite" style="position: fixed; right: {{ shell.toastRight }}; bottom: {{ shell.toastBottom }}; z-index: 60; display: flex; flex-direction: column; align-items: flex-end; max-width: calc(100vw - 48px)">
+<sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 16px; border-radius: 12px; background: #11161D; color: #FFFFFF; box-shadow: 0 12px 32px rgba(17, 22, 29, 0.28)">
+<span aria-hidden="true" style="flex: none; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #2E9D5E; color: #FFFFFF"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+<span style="flex: 1 1 auto; font-weight: 500">{{ toastText }}</span>
+<button type="button" onClick="{{ closeToast }}" aria-label="Dismiss message" style="flex: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: #B8C2CF; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</sc-if>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"device":{"editor":null},"$preview":{"width":1440,"height":1280}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this._onResize = () => this.setState({ vw: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+  }
+  renderVals() {
+    const dev = this.props.device;
+    const device = dev === 'phone' || dev === 'tablet' ? dev : '';
+    const vw = (this.state && this.state.vw) || (typeof window !== 'undefined' ? window.innerWidth : 1440);
+    const mode = device || (vw < 700 ? 'phone' : (vw < 1280 ? 'tablet' : 'desktop'));
+    const pre = device === 'phone' ? 'Phone' : (device === 'tablet' ? 'Tablet' : '');
+    const L = {};
+    ['SignIn', 'Main', 'WorkEntry', 'Complaints', 'ComplaintDetail', 'Preventive', 'Vendors', 'Stock', 'Reports', 'Categories'].forEach((n) => { L[n] = pre + n + '.dc.html'; });
+    const isPhone = mode === 'phone';
+    const isTablet = mode === 'tablet';
+    const shell = {
+      minH: device === 'phone' ? '844px' : (device === 'tablet' ? '1180px' : '100vh'),
+      alignContent: isPhone ? 'flex-start' : 'stretch',
+      navFlex: isPhone ? '1 1 100%' : (isTablet ? '0 0 88px' : '1 1 248px'),
+      mainPad: isPhone ? '20px 16px 104px' : (isTablet ? '24px 24px 48px' : '28px 32px 48px'),
+      toastRight: isPhone ? '12px' : '24px',
+      toastBottom: isPhone ? '84px' : '24px'
+    };
+    const vals = this.pageVals();
+    const ui = this.uiVals ? this.uiVals(mode) : {};
+    const plain = (o) => !!o && typeof o === 'object' && !Array.isArray(o) && Object.getPrototypeOf(o) === Object.prototype;
+    const withGo = (v, depth) => {
+      if (depth > 4) return v;
+      if (Array.isArray(v)) return v.map((it) => (plain(it) ? Object.assign({ go: L, ui: ui }, withGo(it, depth + 1)) : it));
+      if (plain(v)) {
+        const o = {};
+        Object.keys(v).forEach((k) => { o[k] = (Array.isArray(v[k]) || plain(v[k])) ? withGo(v[k], depth + 1) : v[k]; });
+        return o;
+      }
+      return v;
+    };
+    Object.keys(vals).forEach((k) => { if (Array.isArray(vals[k]) || plain(vals[k])) vals[k] = withGo(vals[k], 0); });
+    return Object.assign(vals, { mode, device, L, shell, ui, isPhone, notPhone: !isPhone, isTablet, wide: mode === 'desktop', compact: mode !== 'desktop' });
+  }
+  uiVals(mode) {
+    const phone = mode === 'phone';
+    const tablet = mode === 'tablet';
+    return {
+      sumCols: phone ? 'repeat(2, minmax(0, 1fr))' : 'repeat(auto-fit, minmax(min(220px, 100%), 1fr))',
+      sumGap: phone ? '12px' : '16px',
+      sumPad: phone ? '14px 16px' : '18px 20px',
+      weekCols: phone ? 'repeat(7, 92px)' : (tablet ? 'repeat(7, minmax(0, 1fr))' : 'repeat(auto-fit, minmax(min(120px, 100%), 1fr))'),
+      weekScroll: phone ? 'auto' : 'visible',
+      cardCols: tablet ? 'repeat(2, minmax(0, 1fr))' : 'minmax(0, 1fr)'
+    };
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    clearTimeout(this._toastTimer);
+  }
+  pageVals() {
+    const s = this.state || {};
+    const day = s.day || 'all';
+    const TODAY = '2026-11-24';
+    const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const label = (key) => {
+      const p = (key || '').split('-');
+      return p.length === 3 ? parseInt(p[2], 10) + ' ' + MONTHS[parseInt(p[1], 10) - 1] : '—';
+    };
+    const VENDORS = ['Kesar Cooling Services', 'Sabar Lift Engineers', 'Agnirakshak Fire Systems', 'Sudarshan Power Systems', 'Netra Security Systems', 'Sahyog BMS Services', 'Jalseva Plumbing Works'];
+    const STATUS = {
+      'Due today': ['#FDF3DC', '#8A5A00'],
+      'Overdue': ['#FDE8DF', '#A3330A'],
+      'Upcoming': ['#E8EEFD', '#2346B8'],
+      'Done': ['#E3F4EA', '#1C6B3F']
+    };
+    const toast = (text) => {
+      clearTimeout(this._toastTimer);
+      this.setState({ toast: text });
+      this._toastTimer = setTimeout(() => this.setState({ toast: '' }), 4000);
+    };
+    const base = [
+      { asset: 'DG set 250 kVA', short: 'DG set', task: 'No-load run, battery and fuel check', where: 'Basement B1 DG room', cat: 'Generator & UPS', freq: 'Weekly', last: '17 Nov', key: '2026-11-24', who: 'Kalpesh Joshi', done: false },
+      { asset: 'Lift L1 and L2', short: 'lifts', task: 'Monthly AMC service', where: 'Lift machine room', cat: 'Lift', freq: 'Monthly', last: '24 Oct', key: '2026-11-24', who: 'Sabar Lift Engineers', done: false },
+      { asset: 'AHU-1 to AHU-4', short: 'AHU filters', task: 'Pre-filter cleaning', where: 'Terrace AHU area', cat: 'AC & HVAC', freq: 'Fortnightly', last: '10 Nov', key: '2026-11-24', who: 'Vikram Solanki', done: false },
+      { asset: 'Fire extinguishers', short: 'Fire extinguisher check', task: 'Pressure, seal and tag check', where: 'All floors', cat: 'Fire Safety', freq: 'Monthly', last: '20 Oct', key: '2026-11-20', who: 'Kalpesh Joshi', done: false },
+      { asset: 'Main LT panel', short: 'LT panel', task: 'Thermal scan and torque check', where: 'Ground Floor LT room', cat: 'Electrical', freq: 'Quarterly', last: '26 Aug', key: '2026-11-26', who: 'Ramesh Patel', done: false },
+      { asset: 'Overhead and UG water tanks', short: 'water tanks', task: 'Cleaning and disinfection', where: 'Terrace and basement', cat: 'Plumbing', freq: 'Half-yearly', last: '27 May', key: '2026-11-27', who: 'Jalseva Plumbing Works', done: false },
+      { asset: 'CCTV NVR and cameras', short: 'CCTV', task: 'Footage backup and lens cleaning', where: 'Security room', cat: 'CCTV & Access Control', freq: 'Monthly', last: '28 Oct', key: '2026-11-28', who: 'Arjun Desai', done: false },
+      { asset: 'UPS 40 kVA', short: 'UPS', task: 'Battery health test', where: 'Basement B1 UPS room', cat: 'Generator & UPS', freq: 'Quarterly', last: '29 Aug', key: '2026-11-29', who: 'Sudarshan Power Systems', done: false },
+      { asset: 'Water pumps P-1 and P-2', short: 'water pumps', task: 'Gland, bearing and vibration check', where: 'Basement B1 pump room', cat: 'Plumbing', freq: 'Monthly', last: '23 Nov', key: '2026-11-23', who: 'Suresh Rathod', done: true },
+      { asset: 'BMS controllers DDC-1 to DDC-4', short: 'BMS', task: 'Sensor calibration check', where: 'All floors', cat: 'BMS', freq: 'Quarterly', last: '22 Nov', key: '2026-11-22', who: 'Arjun Desai', done: true }
+    ];
+    const tasks = base.concat(s.extra || []).map((t) => {
+      const status = t.done ? 'Done' : (t.key === TODAY ? 'Due today' : (t.key < TODAY ? 'Overdue' : 'Upcoming'));
+      return Object.assign({}, t, { status, sched: label(t.key) });
+    });
+    const dayDefs = [
+      ['2026-11-23', 'Mon', '23'],
+      ['2026-11-24', 'Tue', '24'],
+      ['2026-11-25', 'Wed', '25'],
+      ['2026-11-26', 'Thu', '26'],
+      ['2026-11-27', 'Fri', '27'],
+      ['2026-11-28', 'Sat', '28'],
+      ['2026-11-29', 'Sun', '29']
+    ];
+    const days = dayDefs.map(([key, dow, date]) => {
+      const items = tasks.filter((t) => t.key === key);
+      const doneCount = items.filter((t) => t.status === 'Done').length;
+      const dueCount = items.length - doneCount;
+      const isToday = key === TODAY;
+      const on = day === key;
+      let text = items.length === 0 ? 'No tasks' : (dueCount > 0 ? dueCount + ' due' : doneCount + ' done');
+      if (isToday) text = 'Today · ' + text;
+      return {
+        dow,
+        date,
+        label: text,
+        on,
+        bg: on ? '#11161D' : (isToday ? '#EEF2FE' : '#FFFFFF'),
+        fg: on ? '#FFFFFF' : '#161A21',
+        border: on ? '#11161D' : (isToday ? '#2F5BEA' : '#E3E6EB'),
+        subFg: on ? '#B8C2CF' : '#5B6472',
+        countFg: on ? '#FFFFFF' : (dueCount > 0 ? (isToday ? '#2346B8' : '#3D4757') : '#5B6472'),
+        pick: () => this.setState({ day: key })
+      };
+    });
+    const picked = dayDefs.find((d) => d[0] === day);
+    const rows = (day === 'all' ? tasks : tasks.filter((t) => t.key === day)).map((t) => ({
+      asset: t.asset,
+      detail: t.task + (t.where ? ' · ' + t.where : ''),
+      cat: t.cat,
+      freq: t.freq,
+      last: t.last,
+      sched: t.sched,
+      who: t.who,
+      vendor: VENDORS.indexOf(t.who) !== -1,
+      status: t.status,
+      statusBg: STATUS[t.status][0],
+      statusFg: STATUS[t.status][1],
+      schedFg: t.status === 'Overdue' ? '#A3330A' : '#161A21',
+      actionable: t.status === 'Due today' || t.status === 'Overdue',
+      notActionable: !(t.status === 'Due today' || t.status === 'Overdue')
+    }));
+    const dueList = tasks.filter((t) => t.status === 'Due today');
+    const overList = tasks.filter((t) => t.status === 'Overdue');
+    const weekList = tasks.filter((t) => t.key >= '2026-11-23' && t.key <= '2026-11-29');
+    const weekDone = weekList.filter((t) => t.status === 'Done').length;
+    const allOn = day === 'all';
+
+    const add = Object.assign({ asset: '', where: '', task: '', cat: 'Electrical', freq: 'Weekly', date: '2026-11-25', who: 'Ramesh Patel' }, s.addForm || {});
+    const setAdd = (key) => (e) => this.setState({ addForm: Object.assign({}, add, { [key]: e.target.value }), addError: '' });
+
+    return {
+      days,
+      rows,
+      empty: rows.length === 0,
+      tableTitle: allOn ? 'All scheduled tasks' : 'Tasks on ' + picked[1] + ' ' + picked[2] + ' Nov',
+      tableCount: rows.length + (rows.length === 1 ? ' task' : ' tasks'),
+      dueToday: dueList.length,
+      dueTodayNote: dueList.length ? dueList.map((t) => t.short).join(', ') : 'Nothing due today',
+      overdue: overList.length,
+      overdueNote: overList.length ? overList[0].short + ', due ' + overList[0].sched + (overList.length > 1 ? ' and more' : '') : 'Nothing overdue',
+      weekCount: weekList.length,
+      weekNote: weekDone + ' done · ' + (weekList.length - weekDone) + ' to go',
+      allOn,
+      allBg: allOn ? '#11161D' : '#FFFFFF',
+      allFg: allOn ? '#FFFFFF' : '#161A21',
+      allBorder: allOn ? '#11161D' : '#D5DAE1',
+      showAll: () => this.setState({ day: 'all' }),
+      exportSchedule: () => toast('Exported the PM schedule for 23–29 Nov to Excel.'),
+
+      addOpen: !!s.addOpen,
+      openAdd: () => this.setState({ addOpen: true, addForm: null, addError: '' }),
+      closeModal: () => this.setState({ addOpen: false }),
+      add,
+      onAdd: { asset: setAdd('asset'), where: setAdd('where'), task: setAdd('task'), cat: setAdd('cat'), freq: setAdd('freq'), date: setAdd('date'), who: setAdd('who') },
+      addError: s.addError || '',
+      hasAddError: !!s.addError,
+      submitAdd: () => {
+        if (!add.asset.trim() || !add.task.trim()) {
+          this.setState({ addError: 'Add the asset and the task.' });
+          return;
+        }
+        if (!add.date) {
+          this.setState({ addError: 'Pick the first scheduled date.' });
+          return;
+        }
+        const t = { asset: add.asset.trim(), short: add.asset.trim(), task: add.task.trim(), where: add.where.trim(), cat: add.cat, freq: add.freq, last: '—', key: add.date, who: add.who, done: false };
+        this.setState({ extra: (s.extra || []).concat([t]), addOpen: false, addForm: null, addError: '' });
+        toast('PM task added for ' + t.asset + ' on ' + label(add.date) + '.');
+      },
+      toastOn: !!s.toast,
+      toastText: s.toast || '',
+      closeToast: () => {
+        clearTimeout(this._toastTimer);
+        this.setState({ toast: '' });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
